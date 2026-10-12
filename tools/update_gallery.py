@@ -1,9 +1,11 @@
-"""Rebuild the "Free fonts" list in index.html.
+"""Rebuild the Google Fonts part of the font library in index.html.
 
 Takes every Google Font that ships an extended-Cyrillic subset, downloads the
 files Google actually serves, and keeps only the families whose character map
-contains every Mongolian Cyrillic letter (А–Я а–я Ё ё Ө ө Ү ү). The result is
-written between the GALLERY START/END markers in index.html, most popular first.
+contains every Mongolian Cyrillic letter (А–Я а–я Ё ё Ө ө Ү ү). Each family's
+license comes from the folder it lives in on github.com/google/fonts (ofl/,
+apache/, ufl/). The result is written between the GALLERY START/END markers in
+index.html, most popular first.
 
 Usage:  pip install fonttools brotli
         python tools/update_gallery.py
@@ -22,6 +24,7 @@ from fontTools.ttLib import TTFont
 UA = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/124 Safari/537.36"}
 MN = list(range(0x410, 0x450)) + [0x401, 0x451, 0x4E8, 0x4E9, 0x4AE, 0x4AF]
 CATS = {"Sans Serif": "S", "Serif": "R", "Display": "D", "Handwriting": "H", "Monospace": "M"}
+LICENSE_DIRS = {"ofl": "O", "apache": "A", "ufl": "U"}
 INDEX = Path(__file__).resolve().parent.parent / "index.html"
 
 
@@ -59,6 +62,18 @@ def check(fam):
     }
 
 
+def license_map():
+    """family slug -> O/A/U, from the top-level license folders of google/fonts."""
+    api = "https://api.github.com/repos/google/fonts/git/trees/"
+    root = json.loads(get(api + "main"))["tree"]
+    out = {}
+    for entry in root:
+        if entry["path"] in LICENSE_DIRS:
+            for sub in json.loads(get(api + entry["sha"]))["tree"]:
+                out[sub["path"]] = LICENSE_DIRS[entry["path"]]
+    return out
+
+
 def main():
     raw = get("https://fonts.google.com/metadata/fonts").decode()
     meta = json.loads(raw[4:] if raw.startswith(")]}'") else raw)["familyMetadataList"]
@@ -69,7 +84,14 @@ def main():
     ok = sorted((r for r in results if r["ok"]), key=lambda r: r["pop"])
     print(f"{len(ok)} contain every Mongolian letter; {len(results) - len(ok)} do not.")
 
-    rows = ",\n".join("  " + json.dumps([r["family"], r["q"], r["cat"], int(r["tug"]), r["axes"]], ensure_ascii=False) for r in ok)
+    licenses = license_map()
+    for r in ok:
+        r["lic"] = licenses.get(re.sub(r"[^a-z0-9]", "", r["family"].lower()))
+    unknown = [r["family"] for r in ok if not r["lic"]]
+    if unknown:
+        sys.exit(f"No license folder found for: {', '.join(unknown)}")
+
+    rows = ",\n".join("  " + json.dumps([r["family"], r["q"], r["cat"], int(r["tug"]), r["axes"], r["lic"]], ensure_ascii=False) for r in ok)
     block = f"// ==GALLERY START==\nconst GALLERY_DATA = [\n{rows},\n];\n// ==GALLERY END=="
     html = INDEX.read_text(encoding="utf-8")
     new, n = re.subn(r"// ==GALLERY START==.*?// ==GALLERY END==", lambda _: block, html, flags=re.S)

@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Фонт Шүүгч — Монгол үсэгтэй фонт олох</title>
-<meta name="description" content="Компьютер дээрх аль фонт Ө ө Ү ү үсгийг бүрэн агуулдгийг шалгана. Монгол үсгийг бүрэн дэмждэг үнэгүй фонтууд.">
+<meta name="description" content="Компьютер дээрх аль фонт Ө ө Ү ү үсгийг бүрэн агуулж, сурталчилгаанд хууль ёсоор ашиглаж болохыг шалгана. Монгол үсэгтэй үнэгүй фонтын сан.">
 <link rel="canonical" href="https://kizaialt.github.io/mn-font-finder/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Фонт Шүүгч — Монгол үсэгтэй фонт олох">
-<meta property="og:description" content="Компьютер дээрх аль фонт Ө ө Ү ү үсгийг бүрэн агуулдгийг шалгаж, Монгол үсгийг бүрэн дэмждэг үнэгүй фонтуудыг санал болгоно.">
+<meta property="og:description" content="Аль фонт Ө ө Ү ү үсэгтэй, аль нь сурталчилгаанд хууль ёсоор ашиглаж болохыг шалгана. Монгол үсэгтэй, арилжааны хэрэглээнд үнэгүй фонтын сан.">
 <meta property="og:url" content="https://kizaialt.github.io/mn-font-finder/">
 <meta property="og:image" content="https://kizaialt.github.io/mn-font-finder/og.png">
 <meta property="og:image:width" content="1200">
@@ -34,6 +34,8 @@
   --warn-bg: #fcefdc;
   --bad: #b0262c;
   --bad-bg: #f9e3e2;
+  --info: #2450a6;
+  --info-bg: #e5ecfa;
   --star: #d99a00;
   --accent: #141416;
   --accent-ink: #ffffff;
@@ -57,6 +59,8 @@
     --warn-bg: #3a2a12;
     --bad: #f37d81;
     --bad-bg: #3d1b1d;
+    --info: #8db1ff;
+    --info-bg: #1b2740;
     --star: #f2b630;
     --accent: #f1f0ec;
     --accent-ink: #111113;
@@ -84,7 +88,7 @@ a { color: inherit; }
 .brand { display: flex; align-items: center; gap: 14px; margin: 0 0 10px; }
 .brand svg { flex: none; }
 h1 { font-size: clamp(28px, 3.6vw, 42px); line-height: 1.05; letter-spacing: -0.02em; margin: 0; font-weight: 700; }
-.sub { margin: 0; color: var(--ink-2); max-width: 60ch; }
+.sub { margin: 0; color: var(--ink-2); max-width: 62ch; }
 .sub strong { color: var(--ink); font-weight: 600; }
 .top-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
 .lang { display: inline-flex; gap: 2px; padding: 2px; border: 1px solid var(--line-2); border-radius: 999px; }
@@ -127,7 +131,7 @@ h1 { font-size: clamp(28px, 3.6vw, 42px); line-height: 1.05; letter-spacing: -0.
 .chk input { accent-color: var(--ink); width: 16px; height: 16px; margin: 0; }
 .range { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); }
 .range input { accent-color: var(--ink); width: 120px; }
-.tb-status { display: flex; gap: 8px 16px; align-items: center; flex-wrap: wrap; font-size: 13px; color: var(--ink-3); min-height: 20px; }
+.tb-status { display: flex; gap: 4px 16px; align-items: center; flex-wrap: wrap; font-size: 13px; color: var(--ink-3); min-height: 20px; }
 .tb-status .spacer { flex: 1; }
 .link { border: 0; background: none; padding: 0; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; font-size: inherit; font-weight: 600; }
 
@@ -146,6 +150,22 @@ code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-siz
 .banner h2 { font-size: 17px; margin: 0; }
 .banner p { margin: 2px 0 0; color: var(--ink-2); font-size: 14px; }
 .banner .acts { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* License guide */
+.guide { padding-top: 28px; padding-bottom: 56px; max-width: 1100px; }
+.guide h2 { font-size: clamp(22px, 2.6vw, 30px); letter-spacing: -0.01em; margin: 0 0 8px; }
+.guide .lead { color: var(--ink-2); font-size: 17px; margin: 0 0 24px; max-width: 64ch; }
+.rules { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 12px; }
+.rule { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+.rule h3 { display: flex; align-items: center; gap: 10px; margin: 0 0 8px; font-size: 15px; text-transform: none; letter-spacing: 0; color: var(--ink); }
+.rule h3 span { flex: none; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 999px; font-size: 13px; }
+.rule.ok h3 span { background: var(--ok-bg); color: var(--ok); }
+.rule.info h3 span { background: var(--info-bg); color: var(--info); }
+.rule.bad h3 span { background: var(--bad-bg); color: var(--bad); }
+.rule p { margin: 0; color: var(--ink-2); font-size: 14px; }
+.guide .sub-h { font-size: 16px; text-transform: none; letter-spacing: 0; color: var(--ink); margin: 32px 0 6px; }
+.guide p { max-width: 72ch; }
+.guide .fine { color: var(--ink-3); font-size: 13px; margin-top: 24px; }
 
 /* Grid + cards */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 14px; padding-top: 20px; padding-bottom: 56px; }
@@ -171,8 +191,8 @@ button.name:hover { text-decoration: underline; text-underline-offset: 3px; }
 }
 .spec.click { cursor: pointer; }
 .grid.list .spec { -webkit-line-clamp: 2; }
-.spec.na { font-size: 14px; color: var(--ink-3); }
-.ghost .spec { font-size: 15px; line-height: 1.5; color: var(--ink-3); -webkit-line-clamp: unset; }
+.spec.na, .ghost .spec, .spec.text { font-size: 15px; line-height: 1.5; color: var(--ink-3); -webkit-line-clamp: unset; }
+.spec.text { color: var(--ink-2); }
 .miss { color: var(--bad); text-decoration: underline wavy var(--bad); text-decoration-skip-ink: none; text-underline-offset: .15em; text-decoration-thickness: 2px; }
 .card-f { display: flex; align-items: center; gap: 8px; justify-content: space-between; }
 .badges { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
@@ -180,7 +200,9 @@ button.name:hover { text-decoration: underline; text-underline-offset: 3px; }
 .badge.ok { background: var(--ok-bg); color: var(--ok); }
 .badge.warn { background: var(--warn-bg); color: var(--warn); }
 .badge.bad { background: var(--bad-bg); color: var(--bad); }
+.badge.info { background: var(--info-bg); color: var(--info); }
 .badge.have { background: transparent; box-shadow: inset 0 0 0 1px var(--ok); color: var(--ok); }
+.badge.lic-free { background: transparent; box-shadow: inset 0 0 0 1px var(--ok); color: var(--ok); }
 .copy, .get { border: 0; background: none; font-size: 12px; color: var(--ink-3); padding: 4px 6px; border-radius: 6px; white-space: nowrap; flex: none; text-decoration: none; }
 .copy:hover, .get:hover { color: var(--ink); background: var(--muted-bg); }
 .get { color: var(--ink); font-weight: 600; box-shadow: inset 0 0 0 1px var(--line-2); padding: 4px 9px; }
@@ -205,6 +227,12 @@ dialog::backdrop { background: rgb(10 10 12 / .5); }
 .axis input { accent-color: var(--ink); width: 100%; }
 .axis output { font-variant-numeric: tabular-nums; text-align: right; color: var(--ink); }
 h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); margin: 24px 0 10px; font-weight: 600; }
+.lic-verdict { display: flex; gap: 10px; align-items: flex-start; margin: 0 0 12px; }
+.lic-verdict p { margin: 0; color: var(--ink); }
+.lic-fields { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 0; font-size: 13px; }
+.lic-fields dt { color: var(--ink-3); }
+.lic-fields dd { margin: 0; color: var(--ink-2); overflow-wrap: anywhere; }
+.lic-note { color: var(--ink-3); font-size: 12px; margin: 10px 0 0; }
 .abc { display: grid; grid-template-columns: repeat(auto-fill, minmax(52px, 1fr)); gap: 4px; }
 .cell { aspect-ratio: 1; display: grid; place-items: center; font-size: 28px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--line); position: relative; }
 .cell.bad-cell { background: var(--bad-bg); border-color: transparent; color: var(--bad); }
@@ -234,6 +262,8 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
   .styles li { grid-template-columns: 1fr auto; }
   .st-spec { grid-column: 1 / -1; }
   .d-head { flex-direction: column; }
+  .lic-fields { grid-template-columns: 1fr; }
+  .lic-fields dd { margin-bottom: 6px; }
 }
 </style>
 </head>
@@ -263,11 +293,12 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
   <div class="wrap">
     <nav class="tabs" id="tabs" role="tablist">
       <button class="tab" role="tab" type="button" data-tab="mine"><span data-i18n="tabMine"></span><b id="cMine"></b></button>
-      <button class="tab" role="tab" type="button" data-tab="free"><span data-i18n="tabFree"></span><b id="cFree"></b></button>
+      <button class="tab" role="tab" type="button" data-tab="lib"><span data-i18n="tabLib"></span><b id="cLib"></b></button>
+      <button class="tab" role="tab" type="button" data-tab="guide"><span data-i18n="tabGuide"></span></button>
       <button class="tab" role="tab" type="button" data-tab="short"><span class="star-ic" aria-hidden="true">★</span><span data-i18n="tabShort"></span><b id="cShort"></b></button>
       <button class="tab" role="tab" type="button" data-tab="shared" hidden><span data-i18n="tabShared"></span><b id="cShared"></b></button>
     </nav>
-    <div class="tb">
+    <div class="tb" data-views="mine lib short shared">
       <div class="tb-row">
         <input id="sample" class="sample" type="text" spellcheck="false" data-i18n-aria="sampleAria">
         <div class="presets" role="group">
@@ -285,7 +316,19 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
           <button type="button" data-f="none" data-i18n-title="segNoneT"><span data-i18n="segNone"></span><b></b></button>
           <button type="button" data-f="all"><span data-i18n="segAll"></span><b></b></button>
         </div>
-        <div class="seg" id="catSeg" role="group" data-views="free">
+        <div class="seg" id="licSeg" role="group" data-views="mine">
+          <button type="button" data-l="all"><span data-i18n="licSegAll"></span><b></b></button>
+          <button type="button" data-l="ads" data-i18n-title="licSegAdsT"><span data-i18n="licSegAds"></span><b></b></button>
+          <button type="button" data-l="rights"><span data-i18n="licSegRights"></span><b></b></button>
+          <button type="button" data-l="personal"><span data-i18n="licSegPersonal"></span><b></b></button>
+          <button type="button" data-l="unknown"><span data-i18n="licSegUnknown"></span><b></b></button>
+        </div>
+        <div class="seg" id="kindSeg" role="group" data-views="lib">
+          <button type="button" data-k="free"><span data-i18n="libFree"></span><b></b></button>
+          <button type="button" data-k="windows"><span data-i18n="libWin"></span><b></b></button>
+          <button type="button" data-k="paid"><span data-i18n="libPaid"></span></button>
+        </div>
+        <div class="seg" id="catSeg" role="group" data-views="lib">
           <button type="button" data-c="all"><span data-i18n="catAll"></span><b></b></button>
           <button type="button" data-c="S"><span data-i18n="catS"></span><b></b></button>
           <button type="button" data-c="R"><span data-i18n="catR"></span><b></b></button>
@@ -294,12 +337,13 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
           <button type="button" data-c="M"><span data-i18n="catM"></span><b></b></button>
         </div>
         <input id="search" class="search" type="search" data-i18n-ph="searchPh" data-i18n-aria="searchPh">
-        <label class="chk" data-views="mine free"><input id="fTug" type="checkbox"> <span data-i18n="hasTug"></span></label>
-        <label class="chk" data-views="mine free"><input id="fVar" type="checkbox"> <span data-i18n="variable"></span></label>
-        <label class="chk" id="hideInstLabel" data-views="free"><input id="fHide" type="checkbox"> <span data-i18n="hideInstalled"></span></label>
+        <label class="chk" data-views="mine lib"><input id="fTug" type="checkbox"> <span data-i18n="hasTug"></span></label>
+        <label class="chk" data-views="mine lib"><input id="fVar" type="checkbox"> <span data-i18n="variable"></span></label>
+        <label class="chk" id="hideInstLabel" data-views="lib"><input id="fHide" type="checkbox"> <span data-i18n="hideInstalled"></span></label>
       </div>
       <div class="tb-status">
         <span id="status" aria-live="polite"></span>
+        <span id="status2"></span>
         <span class="spacer"></span>
         <button id="copyNames" class="link" type="button" data-views="short" data-i18n="copyNames"></button>
         <button id="copyLink" class="link" type="button" data-views="short" data-i18n="copyLink"></button>
@@ -334,6 +378,8 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
   </div>
 </section>
 
+<section id="guide" class="guide wrap" data-views="guide" data-i18n-html="guideHtml"></section>
+
 <main id="grid" class="grid wrap"></main>
 <p id="empty" class="empty wrap" hidden></p>
 
@@ -357,6 +403,8 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
     </div>
     <div id="dSpec" class="d-spec"></div>
     <div id="dAxes" class="axes" hidden></div>
+    <h3 data-i18n="licenseH"></h3>
+    <div id="dLic"></div>
     <h3 data-i18n="alphabet"></h3>
     <div id="dAbc" class="abc"></div>
     <h3 data-i18n="stylesH"></h3>
@@ -531,211 +579,299 @@ function analyze(buf, wantPs) {
     }
   }
   if (!t) t = tableDir(dv, offs[0]);
+  const os2 = t["OS/2"];
   const info = {
     ps: nameStr(dv, t, 6),
+    fullName: nameStr(dv, t, 4),
     nameFamily: nameStr(dv, t, 16) || nameStr(dv, t, 1),
     nameStyle: nameStr(dv, t, 17) || nameStr(dv, t, 2),
     axes: axesOf(dv, t),
+    copyright: nameStr(dv, t, 0),
+    trademark: nameStr(dv, t, 7),
+    manufacturer: nameStr(dv, t, 8),
+    designer: nameStr(dv, t, 9),
+    license: nameStr(dv, t, 13),
+    licenseUrl: nameStr(dv, t, 14),
+    fsType: os2 && os2.len >= 10 ? dv.getUint16(os2.off + 8) : 0,
   };
   const has = cmapLookup(dv, t);
   if (!has) return { ...info, has: null, status: "unknown", missing: [], tugrik: false, bichig: false };
   return { ...info, has, ...classify(has) };
 }
+
+// What the font file itself says about its license. A hint, not legal advice.
+const WINDOWS_FAMILIES = new Set(["Arial", "Arial Black", "Bahnschrift", "Calibri", "Cambria", "Cambria Math", "Candara", "Cascadia Code", "Cascadia Mono", "Comic Sans MS", "Consolas", "Constantia", "Corbel", "Courier New", "Ebrima", "Franklin Gothic Medium", "Gabriola", "Gadugi", "Georgia", "Impact", "Ink Free", "Javanese Text", "Leelawadee UI", "Lucida Console", "Lucida Sans Unicode", "Malgun Gothic", "Microsoft Himalaya", "Microsoft JhengHei", "Microsoft JhengHei UI", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Sans Serif", "Microsoft Tai Le", "Microsoft YaHei", "Microsoft YaHei UI", "Microsoft Yi Baiti", "MingLiU-ExtB", "Mongolian Baiti", "MS Gothic", "MS PGothic", "MS UI Gothic", "MV Boli", "Myanmar Text", "Nirmala UI", "Palatino Linotype", "Segoe Fluent Icons", "Segoe MDL2 Assets", "Segoe Print", "Segoe Script", "Segoe UI", "Segoe UI Emoji", "Segoe UI Historic", "Segoe UI Symbol", "Segoe UI Variable", "SimSun", "NSimSun", "Sitka", "Sylfaen", "Symbol", "Tahoma", "Times New Roman", "Trebuchet MS", "Verdana", "Webdings", "Wingdings", "Yu Gothic", "Yu Gothic UI", "Arial Nova", "Georgia Pro", "Gill Sans Nova", "Neue Haas Grotesk Text Pro", "Rockwell Nova", "Verdana Pro", "Marlett", "HoloLens MDL2 Assets"].map(s => s.toLowerCase()));
+const OPEN_LICENSES = [
+  [/open font licen[cs]e|scripts\.sil\.org\/ofl|openfontlicense\.org|\bOFL\b/i, "OFL"],
+  [/apache licen[cs]e|apache\.org\/licenses/i, "Apache"],
+  [/ubuntu font licen[cs]e/i, "Ubuntu Font Licence"],
+  [/bitstream vera|dejavu/i, "DejaVu"],
+  [/gust font licen[cs]e/i, "GUST"],
+];
+// Weaker signals: commercial fonts sometimes mention these for a bundled component
+// (Microsoft's own fonts say a part is "based on the MIT license").
+const WEAK_OPEN = [
+  [/\bMIT licen[cs]e|opensource\.org\/licenses\/mit/i, "MIT"],
+  [/creativecommons\.org\/publicdomain|\bCC0\b|public domain/i, "Public domain"],
+  [/GNU General Public|\bGPL\b/i, "GPL"],
+];
+const EULA_LIKE = /\bEULA\b|end[\s-]user licen[cs]e|as permitted by|licensed,? not sold|licen[cs]e agreement/i;
+const STRONG_PERSONAL = /non[\s_-]?commercial|not (be )?(free )?for commercial|personal[\s_-]*use[\s_-]*only|for personal use only|commercial use (is )?(not allowed|prohibited|requires)|by-nc|demo version|trial version/i;
+const WEAK_PERSONAL = /personal[\s_-]*use|for personal/i;
+const COMMERCIAL_OK = /BOTH_USES|free (to use )?(in|for) (personal and )?commercial|commercial use (is )?(allowed|permitted|ok|free)|free for any use/i;
+// "free for personal and commercial use" / "commercial or non commercial" grant both, so they must not trip the non-commercial rule.
+const BOTH_USES = /(personal|non[\s_-]?commercial)\s*(and|or|&|\/)\s*commercial|commercial\s*(and|or|&|\/)\s*(personal|non[\s_-]?commercial)/gi;
+const FOUNDRY = /monotype|linotype|adobe|\bITC\b|international typeface|\bURW\b|paratype|fontfabric|typetype|hoefler|font bureau|emigre|berthold|fontsmith|dalton maag|commercial type|klim|grilli|typotheque|positype|latinotype|bitstream|agfa|ascender|fontshop|licensed,? not sold|end[\s-]user licen[cs]e|\bEULA\b|all rights reserved/i;
+const isDemoName = s => /(?<![a-z])(demo|trial)(?![a-z])/i.test(s) || /[a-z](Demo|Trial|DEMO|TRIAL)(?![a-z])/.test(s);
+
+function licenseOf(info, names) {
+  const nameText = names.filter(Boolean).join(" | ");
+  const licText = [info.license, info.licenseUrl, info.copyright].join(" | ");
+  const allText = [info.copyright, info.trademark, info.manufacturer, info.license, info.licenseUrl].join(" | ").replace(BOTH_USES, " BOTH_USES ");
+  if (STRONG_PERSONAL.test(nameText) || STRONG_PERSONAL.test(allText) || isDemoName(nameText)) return { kind: "personal" };
+  for (const [re, name] of OPEN_LICENSES) if (re.test(licText)) return { kind: "free", name };
+  if (names.some(n => n && WINDOWS_FAMILIES.has(n.toLowerCase()))) return { kind: "windows" };
+  if (!EULA_LIKE.test(licText)) for (const [re, name] of WEAK_OPEN) if (re.test(licText)) return { kind: "free", name };
+  if (COMMERCIAL_OK.test(allText)) return { kind: "free", name: "author" };
+  if (WEAK_PERSONAL.test(nameText) || WEAK_PERSONAL.test(allText)) return { kind: "personal" };
+  if (FOUNDRY.test(allText)) {
+    const owner = (info.manufacturer || info.copyright.replace(/copyright|\(c\)|©|\d{4}(\s*[-–,]\s*\d{4})*|all rights reserved\.?/gi, "")).replace(/\s+/g, " ").replace(/^[\s.,;-]+|[\s.,;-]+$/g, "");
+    return { kind: "rights", owner: owner.slice(0, 60) };
+  }
+  return { kind: "unknown" };
+}
 // ==PARSER END==
 
 // Free Google Fonts verified to contain every Mongolian Cyrillic letter.
-// Generated by tools/update_gallery.py — [family, css2 query, category, has ₮, axes]
+// Generated by tools/update_gallery.py — [family, css2 query, category, has ₮, axes, license O/A/U]
 // ==GALLERY START==
 const GALLERY_DATA = [
-  ["Roboto", "Roboto", "S", 0, "wdth wght"],
-  ["Open Sans", "Open+Sans", "S", 0, "wdth wght"],
-  ["Google Sans", "Google+Sans", "S", 1, "GRAD opsz wght"],
-  ["Inter", "Inter", "S", 1, "opsz wght"],
-  ["Montserrat", "Montserrat", "S", 1, "wght"],
-  ["Oswald", "Oswald", "S", 1, "wght"],
-  ["Arimo", "Arimo", "S", 1, "wght"],
-  ["Roboto Condensed", "Roboto+Condensed", "S", 0, "wght"],
-  ["Roboto Mono", "Roboto+Mono", "M", 0, "wght"],
-  ["Noto Sans", "Noto+Sans", "S", 1, "wdth wght"],
-  ["Raleway", "Raleway", "S", 1, "wght"],
-  ["Manrope", "Manrope", "S", 1, "wght"],
-  ["Nunito", "Nunito", "S", 1, "wght"],
-  ["Nunito Sans", "Nunito+Sans", "S", 1, "YTLC opsz wdth wght"],
-  ["Spectral", "Spectral", "R", 0, ""],
-  ["Roboto Slab", "Roboto+Slab", "R", 0, "wght"],
-  ["Rubik", "Rubik", "S", 1, "wght"],
-  ["Merriweather", "Merriweather", "R", 1, "opsz wdth wght"],
-  ["Ubuntu", "Ubuntu", "S", 1, ""],
-  ["Lora", "Lora", "R", 1, "wght"],
-  ["PT Sans", "PT+Sans", "S", 0, ""],
-  ["JetBrains Mono", "JetBrains+Mono", "M", 1, "wght"],
-  ["Mulish", "Mulish", "S", 1, "wght"],
-  ["Source Sans 3", "Source+Sans+3", "S", 1, "wght"],
-  ["IBM Plex Sans", "IBM+Plex+Sans", "S", 1, "wdth wght"],
-  ["Fira Sans", "Fira+Sans", "S", 0, ""],
-  ["Noto Serif", "Noto+Serif", "R", 1, "wdth wght"],
-  ["Cormorant Garamond", "Cormorant+Garamond", "R", 1, "wght"],
-  ["PT Serif", "PT+Serif", "R", 0, ""],
-  ["Inter Tight", "Inter+Tight", "S", 1, "wght"],
-  ["IBM Plex Mono", "IBM+Plex+Mono", "M", 1, ""],
-  ["EB Garamond", "EB+Garamond", "R", 1, "wght"],
-  ["Libre Franklin", "Libre+Franklin", "S", 1, "wght"],
-  ["Source Code Pro", "Source+Code+Pro", "M", 1, "wght"],
-  ["Geist", "Geist", "S", 0, "wght"],
-  ["Caveat", "Caveat", "H", 1, "wght"],
-  ["Bitter", "Bitter", "R", 1, "wght"],
-  ["Roboto Flex", "Roboto+Flex", "S", 0, "GRAD XOPQ XTRA YOPQ YTAS YTDE YTFI YTLC YTUC opsz slnt wdth wght"],
-  ["Source Serif 4", "Source+Serif+4", "R", 1, "opsz wght"],
-  ["M PLUS Rounded 1c", "M+PLUS+Rounded+1c", "S", 0, ""],
-  ["Exo 2", "Exo+2", "S", 0, "wght"],
-  ["Pacifico", "Pacifico", "H", 1, ""],
-  ["Geist Mono", "Geist+Mono", "M", 0, "wght"],
-  ["Lobster", "Lobster", "D", 1, ""],
-  ["Overpass", "Overpass", "S", 1, "wght"],
-  ["PT Sans Narrow", "PT+Sans+Narrow", "S", 0, ""],
-  ["Comfortaa", "Comfortaa", "D", 1, "wght"],
-  ["M PLUS 1p", "M+PLUS+1p", "S", 0, ""],
-  ["Play", "Play", "S", 1, ""],
-  ["Roboto Serif", "Roboto+Serif", "R", 0, "GRAD opsz wdth wght"],
-  ["Cormorant", "Cormorant", "R", 1, "wght"],
-  ["Onest", "Onest", "S", 0, "wght"],
-  ["Geologica", "Geologica", "S", 1, "CRSV SHRP slnt wght"],
-  ["Gothic A1", "Gothic+A1", "S", 1, ""],
-  ["IBM Plex Serif", "IBM+Plex+Serif", "R", 1, ""],
-  ["Vollkorn", "Vollkorn", "R", 1, "wght"],
-  ["News Cycle", "News+Cycle", "S", 0, ""],
-  ["Alegreya Sans", "Alegreya+Sans", "S", 1, ""],
-  ["Fira Sans Condensed", "Fira+Sans+Condensed", "S", 0, ""],
-  ["Prata", "Prata", "R", 0, ""],
-  ["Literata", "Literata", "R", 1, "opsz wght"],
-  ["Playfair", "Playfair", "R", 0, "opsz wdth wght"],
-  ["Press Start 2P", "Press+Start+2P", "D", 1, ""],
-  ["Alegreya", "Alegreya", "R", 1, "wght"],
-  ["Tinos", "Tinos", "R", 1, ""],
-  ["Noto Sans Display", "Noto+Sans+Display", "S", 1, "wdth wght"],
-  ["Montserrat Alternates", "Montserrat+Alternates", "S", 1, ""],
-  ["Fira Code", "Fira+Code", "M", 0, "wght"],
-  ["Golos Text", "Golos+Text", "S", 0, "wght"],
-  ["Old Standard TT", "Old+Standard+TT", "R", 1, ""],
-  ["Arsenal", "Arsenal", "S", 1, ""],
-  ["Noto Sans Mono", "Noto+Sans+Mono", "S", 1, "wdth wght"],
-  ["Philosopher", "Philosopher", "S", 1, ""],
-  ["Commissioner", "Commissioner", "S", 1, "FLAR VOLM slnt wght"],
-  ["PT Sans Caption", "PT+Sans+Caption", "S", 0, ""],
-  ["Ubuntu Condensed", "Ubuntu+Condensed", "S", 1, ""],
-  ["Forum", "Forum", "D", 0, ""],
-  ["Istok Web", "Istok+Web", "S", 0, ""],
-  ["Balsamiq Sans", "Balsamiq+Sans", "D", 0, ""],
-  ["Didact Gothic", "Didact+Gothic", "S", 1, ""],
-  ["PT Mono", "PT+Mono", "M", 0, ""],
-  ["Advent Pro", "Advent+Pro", "S", 1, "wdth wght"],
-  ["Ubuntu Mono", "Ubuntu+Mono", "M", 1, ""],
-  ["Yeseva One", "Yeseva+One", "D", 1, ""],
-  ["Cormorant Infant", "Cormorant+Infant", "R", 1, "wght"],
-  ["Noto Serif Display", "Noto+Serif+Display", "R", 1, "wdth wght"],
-  ["Cuprum", "Cuprum", "S", 1, "wght"],
-  ["Alegreya Sans SC", "Alegreya+Sans+SC", "S", 1, ""],
-  ["Carlito", "Carlito", "S", 1, ""],
-  ["Fira Mono", "Fira+Mono", "M", 0, ""],
-  ["Fira Sans Extra Condensed", "Fira+Sans+Extra+Condensed", "S", 0, ""],
-  ["Bad Script", "Bad+Script", "H", 1, ""],
-  ["Alice", "Alice", "R", 1, ""],
-  ["Cousine", "Cousine", "M", 1, ""],
-  ["Pangolin", "Pangolin", "H", 1, ""],
-  ["Cormorant Unicase", "Cormorant+Unicase", "R", 1, ""],
-  ["Andika", "Andika", "S", 1, ""],
-  ["Tektur", "Tektur", "D", 1, "wdth wght"],
-  ["Charis SIL", "Charis+SIL", "R", 1, ""],
-  ["Playpen Sans", "Playpen+Sans", "H", 1, "wght"],
-  ["Overpass Mono", "Overpass+Mono", "M", 1, "wght"],
-  ["PT Serif Caption", "PT+Serif+Caption", "R", 0, ""],
-  ["TikTok Sans", "TikTok+Sans", "S", 1, "opsz slnt wdth wght"],
-  ["Ubuntu Sans", "Ubuntu+Sans", "S", 1, "wdth wght"],
-  ["Cormorant SC", "Cormorant+SC", "R", 1, ""],
-  ["Podkova", "Podkova", "R", 1, "wght"],
-  ["Alegreya SC", "Alegreya+SC", "R", 1, ""],
-  ["Brygada 1918", "Brygada+1918", "R", 0, "wght"],
-  ["Gabriela", "Gabriela", "R", 0, ""],
-  ["Shantell Sans", "Shantell+Sans", "D", 1, "BNCE INFM SPAC wght"],
-  ["Chiron GoRound TC", "Chiron+GoRound+TC", "S", 1, "wght"],
-  ["Marmelad", "Marmelad", "S", 1, ""],
-  ["Flow Circular", "Flow+Circular", "D", 0, ""],
-  ["Ysabeau Office", "Ysabeau+Office", "S", 0, "wght"],
-  ["Kablammo", "Kablammo", "D", 1, "MORF"],
-  ["Libertinus Serif", "Libertinus+Serif", "R", 0, ""],
-  ["Scada", "Scada", "S", 1, ""],
-  ["Rubik Glitch", "Rubik+Glitch", "D", 1, ""],
-  ["Spectral SC", "Spectral+SC", "R", 0, ""],
-  ["Rubik Doodle Shadow", "Rubik+Doodle+Shadow", "D", 1, ""],
-  ["Piazzolla", "Piazzolla", "R", 1, "opsz wght"],
-  ["Rubik Dirt", "Rubik+Dirt", "D", 1, ""],
-  ["Nata Sans", "Nata+Sans", "S", 1, "wght"],
-  ["Vollkorn SC", "Vollkorn+SC", "R", 1, ""],
-  ["Kurale", "Kurale", "R", 1, ""],
-  ["Gentium Book Plus", "Gentium+Book+Plus", "R", 1, ""],
-  ["Orelega One", "Orelega+One", "D", 0, ""],
-  ["Viaoda Libre", "Viaoda+Libre", "D", 0, ""],
-  ["Libertinus Sans", "Libertinus+Sans", "S", 0, ""],
-  ["LXGW WenKai TC", "LXGW+WenKai+TC", "H", 1, ""],
-  ["Moderustic", "Moderustic", "S", 0, "wght"],
-  ["Ysabeau SC", "Ysabeau+SC", "S", 0, "wght"],
-  ["Science Gothic", "Science+Gothic", "S", 1, "CTRS slnt wdth wght"],
-  ["Rubik Spray Paint", "Rubik+Spray+Paint", "D", 1, ""],
-  ["Rubik Bubbles", "Rubik+Bubbles", "D", 1, ""],
-  ["LXGW WenKai Mono TC", "LXGW+WenKai+Mono+TC", "M", 1, ""],
-  ["Gentium Plus", "Gentium+Plus", "R", 1, ""],
-  ["Victor Mono", "Victor+Mono", "M", 0, "wght"],
-  ["Montserrat Underline", "Montserrat+Underline", "S", 1, "wght"],
-  ["Ysabeau", "Ysabeau", "S", 0, "wght"],
-  ["Climate Crisis", "Climate+Crisis", "D", 0, "YEAR"],
-  ["Tiny5", "Tiny5", "S", 1, ""],
-  ["Rubik Wet Paint", "Rubik+Wet+Paint", "D", 1, ""],
-  ["SN Pro", "SN+Pro", "S", 1, "wght"],
-  ["LXGW Marker Gothic", "LXGW+Marker+Gothic", "S", 0, ""],
-  ["Pliant", "Pliant", "S", 1, "wdth wght"],
-  ["Ysabeau Infant", "Ysabeau+Infant", "S", 0, "wght"],
-  ["Handjet", "Handjet", "D", 0, "ELGR ELSH wght"],
-  ["Flow Rounded", "Flow+Rounded", "D", 0, ""],
-  ["Finlandica Text", "Finlandica+Text", "S", 0, "wght"],
-  ["Rubik Scribble", "Rubik+Scribble", "D", 1, ""],
-  ["Rubik Maps", "Rubik+Maps", "D", 1, ""],
-  ["Akt", "Akt", "S", 0, "wght"],
-  ["Cascadia Code", "Cascadia+Code", "S", 1, "wght"],
-  ["Rubik Moonrocks", "Rubik+Moonrocks", "D", 1, ""],
-  ["Cascadia Mono", "Cascadia+Mono", "S", 1, "wght"],
-  ["Ubuntu Sans Mono", "Ubuntu+Sans+Mono", "M", 1, "wght"],
-  ["Chiron Hei HK", "Chiron+Hei+HK", "S", 1, "wght"],
-  ["Chiron Sung HK", "Chiron+Sung+HK", "R", 1, "wght"],
-  ["Arsenal SC", "Arsenal+SC", "S", 1, ""],
-  ["Tuffy", "Tuffy", "S", 1, ""],
-  ["Oi", "Oi", "D", 1, ""],
-  ["Iosevka Charon Mono", "Iosevka+Charon+Mono", "M", 1, ""],
-  ["Rubik Distressed", "Rubik+Distressed", "D", 1, ""],
-  ["Rubik Iso", "Rubik+Iso", "D", 1, ""],
-  ["Lunasima", "Lunasima", "S", 1, ""],
-  ["Rubik Microbe", "Rubik+Microbe", "D", 1, ""],
-  ["Rubik Vinyl", "Rubik+Vinyl", "D", 1, ""],
-  ["Rubik Gemstones", "Rubik+Gemstones", "D", 1, ""],
-  ["Rubik Burned", "Rubik+Burned", "D", 1, ""],
-  ["Iosevka Charon", "Iosevka+Charon", "M", 1, ""],
-  ["Rubik Marker Hatch", "Rubik+Marker+Hatch", "D", 1, ""],
-  ["Rubik Puddles", "Rubik+Puddles", "D", 1, ""],
-  ["Rubik 80s Fade", "Rubik+80s+Fade", "D", 1, ""],
-  ["Rubik Beastly", "Rubik+Beastly", "D", 1, ""],
-  ["Lilex", "Lilex", "M", 1, "wght"],
-  ["Rubik Glitch Pop", "Rubik+Glitch+Pop", "D", 1, ""],
-  ["Flow Block", "Flow+Block", "D", 0, ""],
-  ["Ponomar", "Ponomar", "D", 0, ""],
-  ["Rubik Broken Fax", "Rubik+Broken+Fax", "D", 1, ""],
-  ["Rubik Pixels", "Rubik+Pixels", "D", 1, ""],
-  ["Libertinus Serif Display", "Libertinus+Serif+Display", "D", 0, ""],
-  ["Finlandica Headline", "Finlandica+Headline", "S", 0, "wght"],
-  ["Rubik Maze", "Rubik+Maze", "D", 1, ""],
-  ["Rubik Doodle Triangles", "Rubik+Doodle+Triangles", "D", 1, ""],
-  ["Rubik Lines", "Rubik+Lines", "D", 1, ""],
-  ["Rubik Storm", "Rubik+Storm", "D", 1, ""],
+  ["Inter", "Inter", "S", 1, "opsz wght", "O"],
+  ["Roboto", "Roboto", "S", 0, "wdth wght", "O"],
+  ["Montserrat", "Montserrat", "S", 1, "wght", "O"],
+  ["Open Sans", "Open+Sans", "S", 0, "wdth wght", "O"],
+  ["Google Sans", "Google+Sans", "S", 1, "GRAD opsz wght", "O"],
+  ["Oswald", "Oswald", "S", 1, "wght", "O"],
+  ["Noto Sans", "Noto+Sans", "S", 1, "wdth wght", "O"],
+  ["Arimo", "Arimo", "S", 1, "wght", "O"],
+  ["Raleway", "Raleway", "S", 1, "wght", "O"],
+  ["Nunito", "Nunito", "S", 1, "wght", "O"],
+  ["Roboto Condensed", "Roboto+Condensed", "S", 0, "wght", "O"],
+  ["Nunito Sans", "Nunito+Sans", "S", 1, "YTLC opsz wdth wght", "O"],
+  ["Roboto Mono", "Roboto+Mono", "M", 0, "wght", "O"],
+  ["Rubik", "Rubik", "S", 1, "wght", "O"],
+  ["Manrope", "Manrope", "S", 1, "wght", "O"],
+  ["JetBrains Mono", "JetBrains+Mono", "M", 1, "wght", "O"],
+  ["Noto Serif", "Noto+Serif", "R", 1, "wdth wght", "O"],
+  ["Roboto Slab", "Roboto+Slab", "R", 0, "wght", "A"],
+  ["PT Serif", "PT+Serif", "R", 0, "", "O"],
+  ["Merriweather", "Merriweather", "R", 1, "opsz wdth wght", "O"],
+  ["Ubuntu", "Ubuntu", "S", 1, "", "U"],
+  ["IBM Plex Mono", "IBM+Plex+Mono", "M", 1, "", "O"],
+  ["EB Garamond", "EB+Garamond", "R", 1, "wght", "O"],
+  ["Libre Franklin", "Libre+Franklin", "S", 1, "wght", "O"],
+  ["Lora", "Lora", "R", 1, "wght", "O"],
+  ["PT Sans", "PT+Sans", "S", 0, "", "O"],
+  ["Mulish", "Mulish", "S", 1, "wght", "O"],
+  ["Source Sans 3", "Source+Sans+3", "S", 1, "wght", "O"],
+  ["IBM Plex Sans", "IBM+Plex+Sans", "S", 1, "wdth wght", "O"],
+  ["Roboto Flex", "Roboto+Flex", "S", 0, "GRAD XOPQ XTRA YOPQ YTAS YTDE YTFI YTLC YTUC opsz slnt wdth wght", "O"],
+  ["Source Serif 4", "Source+Serif+4", "R", 1, "opsz wght", "O"],
+  ["Fira Sans", "Fira+Sans", "S", 0, "", "O"],
+  ["M PLUS Rounded 1c", "M+PLUS+Rounded+1c", "S", 0, "", "O"],
+  ["Cormorant Garamond", "Cormorant+Garamond", "R", 1, "wght", "O"],
+  ["Bitter", "Bitter", "R", 1, "wght", "O"],
+  ["Pacifico", "Pacifico", "H", 1, "", "O"],
+  ["Lobster", "Lobster", "D", 1, "", "O"],
+  ["Inter Tight", "Inter+Tight", "S", 1, "wght", "O"],
+  ["Play", "Play", "S", 1, "", "O"],
+  ["Source Code Pro", "Source+Code+Pro", "M", 1, "wght", "O"],
+  ["Spectral", "Spectral", "R", 0, "", "O"],
+  ["IBM Plex Serif", "IBM+Plex+Serif", "R", 1, "", "O"],
+  ["Geist", "Geist", "S", 0, "wght", "O"],
+  ["Caveat", "Caveat", "H", 1, "wght", "O"],
+  ["Alegreya Sans", "Alegreya+Sans", "S", 1, "", "O"],
+  ["Fira Sans Condensed", "Fira+Sans+Condensed", "S", 0, "", "O"],
+  ["Overpass", "Overpass", "S", 1, "wght", "O"],
+  ["Alegreya", "Alegreya", "R", 1, "wght", "O"],
+  ["Comfortaa", "Comfortaa", "D", 1, "wght", "O"],
+  ["Exo 2", "Exo+2", "S", 0, "wght", "O"],
+  ["Noto Sans Display", "Noto+Sans+Display", "S", 1, "wdth wght", "O"],
+  ["Geist Mono", "Geist+Mono", "M", 0, "wght", "O"],
+  ["PT Sans Narrow", "PT+Sans+Narrow", "S", 0, "", "O"],
+  ["Press Start 2P", "Press+Start+2P", "D", 1, "", "O"],
+  ["Fira Code", "Fira+Code", "M", 0, "wght", "O"],
+  ["Golos Text", "Golos+Text", "S", 0, "wght", "O"],
+  ["Cormorant", "Cormorant", "R", 1, "wght", "O"],
+  ["M PLUS 1p", "M+PLUS+1p", "S", 0, "", "O"],
+  ["Noto Sans Mono", "Noto+Sans+Mono", "S", 1, "wdth wght", "O"],
+  ["Philosopher", "Philosopher", "S", 1, "", "O"],
+  ["PT Sans Caption", "PT+Sans+Caption", "S", 0, "", "O"],
+  ["Forum", "Forum", "D", 0, "", "O"],
+  ["Istok Web", "Istok+Web", "S", 0, "", "O"],
+  ["Roboto Serif", "Roboto+Serif", "R", 0, "GRAD opsz wdth wght", "O"],
+  ["Vollkorn", "Vollkorn", "R", 1, "wght", "O"],
+  ["Didact Gothic", "Didact+Gothic", "S", 1, "", "O"],
+  ["PT Mono", "PT+Mono", "M", 0, "", "O"],
+  ["Onest", "Onest", "S", 0, "wght", "O"],
+  ["Geologica", "Geologica", "S", 1, "CRSV SHRP slnt wght", "O"],
+  ["Ubuntu Mono", "Ubuntu+Mono", "M", 1, "", "U"],
+  ["Yeseva One", "Yeseva+One", "D", 1, "", "O"],
+  ["Arsenal", "Arsenal", "S", 1, "", "O"],
+  ["News Cycle", "News+Cycle", "S", 0, "", "O"],
+  ["Noto Serif Display", "Noto+Serif+Display", "R", 1, "wdth wght", "O"],
+  ["Cuprum", "Cuprum", "S", 1, "wght", "O"],
+  ["Prata", "Prata", "R", 0, "", "O"],
+  ["Literata", "Literata", "R", 1, "opsz wght", "O"],
+  ["Carlito", "Carlito", "S", 1, "", "O"],
+  ["Fira Mono", "Fira+Mono", "M", 0, "", "O"],
+  ["Playfair", "Playfair", "R", 0, "opsz wdth wght", "O"],
+  ["Fira Sans Extra Condensed", "Fira+Sans+Extra+Condensed", "S", 0, "", "O"],
+  ["Bad Script", "Bad+Script", "H", 1, "", "O"],
+  ["Tinos", "Tinos", "R", 1, "", "O"],
+  ["Montserrat Alternates", "Montserrat+Alternates", "S", 1, "", "O"],
+  ["Gothic A1", "Gothic+A1", "S", 1, "", "O"],
+  ["Old Standard TT", "Old+Standard+TT", "R", 1, "", "O"],
+  ["Commissioner", "Commissioner", "S", 1, "FLAR VOLM slnt wght", "O"],
+  ["Ubuntu Condensed", "Ubuntu+Condensed", "S", 1, "", "U"],
+  ["Overpass Mono", "Overpass+Mono", "M", 1, "wght", "O"],
+  ["Advent Pro", "Advent+Pro", "S", 1, "wdth wght", "O"],
+  ["TikTok Sans", "TikTok+Sans", "S", 1, "opsz slnt wdth wght", "O"],
+  ["Ubuntu Sans", "Ubuntu+Sans", "S", 1, "wdth wght", "U"],
+  ["Cormorant SC", "Cormorant+SC", "R", 1, "", "O"],
+  ["Podkova", "Podkova", "R", 1, "wght", "O"],
+  ["Brygada 1918", "Brygada+1918", "R", 0, "wght", "O"],
+  ["Gabriela", "Gabriela", "R", 0, "", "O"],
+  ["Chiron GoRound TC", "Chiron+GoRound+TC", "S", 1, "wght", "O"],
+  ["Flow Circular", "Flow+Circular", "D", 0, "", "O"],
+  ["Kablammo", "Kablammo", "D", 1, "MORF", "O"],
+  ["Libertinus Serif", "Libertinus+Serif", "R", 0, "", "O"],
+  ["Alegreya Sans SC", "Alegreya+Sans+SC", "S", 1, "", "O"],
+  ["Balsamiq Sans", "Balsamiq+Sans", "D", 0, "", "O"],
+  ["Alice", "Alice", "R", 1, "", "O"],
+  ["Cormorant Infant", "Cormorant+Infant", "R", 1, "wght", "O"],
+  ["Rubik Doodle Shadow", "Rubik+Doodle+Shadow", "D", 1, "", "O"],
+  ["Cormorant Unicase", "Cormorant+Unicase", "R", 1, "", "O"],
+  ["Andika", "Andika", "S", 1, "", "O"],
+  ["Cousine", "Cousine", "M", 1, "", "O"],
+  ["Piazzolla", "Piazzolla", "R", 1, "opsz wght", "O"],
+  ["Pangolin", "Pangolin", "H", 1, "", "O"],
+  ["Nata Sans", "Nata+Sans", "S", 1, "wght", "O"],
+  ["Vollkorn SC", "Vollkorn+SC", "R", 1, "", "O"],
+  ["Tektur", "Tektur", "D", 1, "wdth wght", "O"],
+  ["Gentium Book Plus", "Gentium+Book+Plus", "R", 1, "", "O"],
+  ["Charis SIL", "Charis+SIL", "R", 1, "", "O"],
+  ["Viaoda Libre", "Viaoda+Libre", "D", 0, "", "O"],
+  ["Moderustic", "Moderustic", "S", 0, "wght", "O"],
+  ["Playpen Sans", "Playpen+Sans", "H", 1, "wght", "O"],
+  ["Rubik Glitch", "Rubik+Glitch", "D", 1, "", "O"],
+  ["Rubik Spray Paint", "Rubik+Spray+Paint", "D", 1, "", "O"],
+  ["Shantell Sans", "Shantell+Sans", "D", 1, "BNCE INFM SPAC wght", "O"],
+  ["PT Serif Caption", "PT+Serif+Caption", "R", 0, "", "O"],
+  ["Ysabeau", "Ysabeau", "S", 0, "wght", "O"],
+  ["Alegreya SC", "Alegreya+SC", "R", 1, "", "O"],
+  ["SN Pro", "SN+Pro", "S", 1, "wght", "O"],
+  ["Ysabeau Infant", "Ysabeau+Infant", "S", 0, "wght", "O"],
+  ["Marmelad", "Marmelad", "S", 1, "", "O"],
+  ["Finlandica Text", "Finlandica+Text", "S", 0, "wght", "O"],
+  ["Ysabeau Office", "Ysabeau+Office", "S", 0, "wght", "O"],
+  ["Cascadia Code", "Cascadia+Code", "S", 1, "wght", "O"],
+  ["Ubuntu Sans Mono", "Ubuntu+Sans+Mono", "M", 1, "wght", "U"],
+  ["Scada", "Scada", "S", 1, "", "O"],
+  ["LXGW WenKai Mono TC", "LXGW+WenKai+Mono+TC", "M", 1, "", "O"],
+  ["Climate Crisis", "Climate+Crisis", "D", 0, "YEAR", "O"],
+  ["Rubik Dirt", "Rubik+Dirt", "D", 1, "", "O"],
+  ["Spectral SC", "Spectral+SC", "R", 0, "", "O"],
+  ["Rubik Vinyl", "Rubik+Vinyl", "D", 1, "", "O"],
+  ["Iosevka Charon", "Iosevka+Charon", "M", 1, "", "O"],
+  ["Rubik Beastly", "Rubik+Beastly", "D", 1, "", "O"],
+  ["Lilex", "Lilex", "M", 1, "wght", "O"],
+  ["Flow Block", "Flow+Block", "D", 0, "", "O"],
+  ["Flow Rounded", "Flow+Rounded", "D", 0, "", "O"],
+  ["Rubik Doodle Triangles", "Rubik+Doodle+Triangles", "D", 1, "", "O"],
+  ["Rubik Lines", "Rubik+Lines", "D", 1, "", "O"],
+  ["Rubik Storm", "Rubik+Storm", "D", 1, "", "O"],
+  ["Kurale", "Kurale", "R", 1, "", "O"],
+  ["Science Gothic", "Science+Gothic", "S", 1, "CTRS slnt wdth wght", "O"],
+  ["Orelega One", "Orelega+One", "D", 0, "", "O"],
+  ["Libertinus Sans", "Libertinus+Sans", "S", 0, "", "O"],
+  ["LXGW WenKai TC", "LXGW+WenKai+TC", "H", 1, "", "O"],
+  ["Ysabeau SC", "Ysabeau+SC", "S", 0, "wght", "O"],
+  ["Tiny5", "Tiny5", "S", 1, "", "O"],
+  ["Rubik Maps", "Rubik+Maps", "D", 1, "", "O"],
+  ["Rubik Bubbles", "Rubik+Bubbles", "D", 1, "", "O"],
+  ["Handjet", "Handjet", "D", 0, "ELGR ELSH wght", "O"],
+  ["Gentium Plus", "Gentium+Plus", "R", 1, "", "O"],
+  ["Victor Mono", "Victor+Mono", "M", 0, "wght", "O"],
+  ["Akt", "Akt", "S", 0, "wght", "O"],
+  ["Montserrat Underline", "Montserrat+Underline", "S", 1, "wght", "O"],
+  ["Rubik Wet Paint", "Rubik+Wet+Paint", "D", 1, "", "O"],
+  ["Pliant", "Pliant", "S", 1, "wdth wght", "O"],
+  ["Rubik Scribble", "Rubik+Scribble", "D", 1, "", "O"],
+  ["Rubik Moonrocks", "Rubik+Moonrocks", "D", 1, "", "O"],
+  ["Lunasima", "Lunasima", "S", 1, "", "O"],
+  ["Rubik Microbe", "Rubik+Microbe", "D", 1, "", "O"],
+  ["Cascadia Mono", "Cascadia+Mono", "S", 1, "wght", "O"],
+  ["Rubik Burned", "Rubik+Burned", "D", 1, "", "O"],
+  ["Chiron Hei HK", "Chiron+Hei+HK", "S", 1, "wght", "O"],
+  ["Chiron Sung HK", "Chiron+Sung+HK", "R", 1, "wght", "O"],
+  ["Rubik 80s Fade", "Rubik+80s+Fade", "D", 1, "", "O"],
+  ["Arsenal SC", "Arsenal+SC", "S", 1, "", "O"],
+  ["Tuffy", "Tuffy", "S", 1, "", "O"],
+  ["Oi", "Oi", "D", 1, "", "O"],
+  ["Iosevka Charon Mono", "Iosevka+Charon+Mono", "M", 1, "", "O"],
+  ["Rubik Distressed", "Rubik+Distressed", "D", 1, "", "O"],
+  ["Rubik Iso", "Rubik+Iso", "D", 1, "", "O"],
+  ["Rubik Gemstones", "Rubik+Gemstones", "D", 1, "", "O"],
+  ["Rubik Marker Hatch", "Rubik+Marker+Hatch", "D", 1, "", "O"],
+  ["Rubik Puddles", "Rubik+Puddles", "D", 1, "", "O"],
+  ["Rubik Glitch Pop", "Rubik+Glitch+Pop", "D", 1, "", "O"],
+  ["LXGW Marker Gothic", "LXGW+Marker+Gothic", "S", 0, "", "O"],
+  ["Ponomar", "Ponomar", "D", 0, "", "O"],
+  ["Rubik Broken Fax", "Rubik+Broken+Fax", "D", 1, "", "O"],
+  ["Rubik Pixels", "Rubik+Pixels", "D", 1, "", "O"],
+  ["Libertinus Serif Display", "Libertinus+Serif+Display", "D", 0, "", "O"],
+  ["Finlandica Headline", "Finlandica+Headline", "S", 0, "wght", "O"],
+  ["Rubik Maze", "Rubik+Maze", "D", 1, "", "O"],
 ];
 // ==GALLERY END==
+
+// Other free fonts, checked by hand from their official releases (Oct 2026).
+// [family, category, has ₮, license, homepage, preview file on a CDN or ""]
+const EXTRA_FREE = [
+  ["DejaVu Sans", "S", 1, "DejaVu", "https://dejavu-fonts.github.io/", "https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans.ttf"],
+  ["DejaVu Serif", "R", 0, "DejaVu", "https://dejavu-fonts.github.io/", "https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSerif.ttf"],
+  ["DejaVu Sans Mono", "M", 1, "DejaVu", "https://dejavu-fonts.github.io/", "https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSansMono.ttf"],
+  ["Liberation Sans", "S", 1, "OFL", "https://github.com/liberationfonts/liberation-fonts", ""],
+  ["Liberation Serif", "R", 1, "OFL", "https://github.com/liberationfonts/liberation-fonts", ""],
+  ["Liberation Mono", "M", 1, "OFL", "https://github.com/liberationfonts/liberation-fonts", ""],
+];
+
+// Fonts that ship with Windows 11 and pass the full Mongolian check (every style).
+// [family, category, has ₮, variable, Microsoft page]
+const WINDOWS_LIB = [
+  ["Arial", "S", 1, 0, "https://learn.microsoft.com/en-us/typography/font-list/arial"],
+  ["Bahnschrift", "S", 1, 1, "https://learn.microsoft.com/en-us/typography/font-list/bahnschrift"],
+  ["Calibri", "S", 1, 0, "https://learn.microsoft.com/en-us/typography/font-list/calibri"],
+  ["Cambria", "R", 1, 0, "https://learn.microsoft.com/en-us/typography/font-list/cambria"],
+  ["Cascadia Code", "M", 1, 1, "https://learn.microsoft.com/en-us/windows/terminal/cascadia-code"],
+  ["Cascadia Mono", "M", 1, 1, "https://learn.microsoft.com/en-us/windows/terminal/cascadia-code"],
+  ["Consolas", "M", 1, 0, "https://learn.microsoft.com/en-us/typography/font-list/consolas"],
+  ["Courier New", "M", 1, 0, "https://learn.microsoft.com/en-us/typography/font-list/courier-new"],
+  ["Microsoft Sans Serif", "S", 1, 0, "https://learn.microsoft.com/en-us/typography/font-list/microsoft-sans-serif"],
+  ["Palatino Linotype", "R", 0, 0, "https://learn.microsoft.com/en-us/typography/font-list/palatino-linotype"],
+  ["Segoe UI", "S", 1, 0, "https://learn.microsoft.com/en-us/typography/font-list/segoe-ui"],
+  ["Segoe UI Variable", "S", 1, 1, "https://learn.microsoft.com/en-us/windows/apps/design/style/typography"],
+  ["Tahoma", "S", 1, 0, "https://learn.microsoft.com/en-us/typography/font-list/tahoma"],
+  ["Times New Roman", "R", 1, 0, "https://learn.microsoft.com/en-us/typography/font-list/times-new-roman"],
+  ["Verdana", "S", 1, 0, "https://learn.microsoft.com/en-us/typography/font-list/verdana"],
+];
+
+// Paid sources. Not verified by us: the seller's own description.
+const PAID_LIB = [
+  { family: "TypeType", url: "https://typetype.org/fonts/mongolian/", textKey: "paidTypeType" },
+];
+const SUGGEST_URL = "https://github.com/Kizaialt/mn-font-finder/issues/new?title=" + encodeURIComponent("Font suggestion: ") + "&body=" + encodeURIComponent("Font name:\nDesigner / foundry:\nWhere to get it (link):\nLicense (free / paid / terms):\n");
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -744,33 +880,42 @@ const store = {
   set(k, v) { try { localStorage.setItem("mnff:" + k, JSON.stringify(v)); } catch { /* storage unavailable */ } },
 };
 
+const MS_FAQ = "https://learn.microsoft.com/en-us/typography/fonts/font-faq";
+const OFL_URL = "https://openfontlicense.org/";
 const I18N = {
   mn: {
     docTitle: "Фонт Шүүгч — Монгол үсэгтэй фонт олох",
-    docDesc: n => `Компьютер дээрх аль фонт Ө ө Ү ү үсгийг бүрэн агуулдгийг шалгана. Монгол үсгийг бүрэн дэмждэг ${n} үнэгүй фонт.`,
+    docDesc: n => `Компьютер дээрх аль фонт Ө ө Ү ү үсгийг бүрэн агуулж, сурталчилгаанд хууль ёсоор ашиглаж болохыг шалгана. Монгол үсэгтэй, арилжааны хэрэглээнд үнэгүй ${n} фонт.`,
     brand: "Фонт Шүүгч",
-    tagline: "Таны компьютерт суусан фонтуудаас <strong>Ө ө Ү ү</strong> үсгийг бүрэн агуулсныг нь олж харуулна. Ингэснээр нэг ч үсэг өөр фонтоор солигдохгүй.",
+    tagline: "Таны компьютерт суусан фонтуудаас <strong>Ө ө Ү ү</strong> үсгийг бүрэн агуулсныг нь олж, сурталчилгаанд хууль ёсоор ашиглаж болох эсэхийг харуулна.",
     scan: "Фонтоо шалгах", rescan: "Дахин шалгах", checkFiles: "Фонт файл шалгах",
-    tabMine: "Миний фонтууд", tabFree: "Үнэгүй фонтууд", tabShort: "Жагсаалт", tabShared: "Ирсэн жагсаалт",
+    tabMine: "Миний фонтууд", tabLib: "Фонтын сан", tabGuide: "Лицензийн заавар", tabShort: "Жагсаалт", tabShared: "Ирсэн жагсаалт",
     intro1: "<strong>Фонтоо шалгах</strong> товчийг дарна уу. Chrome эсвэл Edge хөтөч таны фонтын жагсаалтыг унших зөвшөөрлийг нэг удаа асууна.",
     privacy: "Бүх шалгалт таны хөтөч дотор явагдана. Фонтууд тань хаашаа ч илгээгдэхгүй.",
     intro2: "Фонтоо суулгахаасаа өмнө шалгах бол <code>.ttf</code>, <code>.otf</code>, <code>.ttc</code> файлаа энэ хуудас руу чирж оруулаарай.",
-    intro3: n => `Тохирох фонт цөөн байна уу? <button type="button" class="link" data-go="free">Үнэгүй фонтууд</button> хэсэгт Монгол үсгийг бүрэн дэмждэг ${n} фонт бий.`,
+    intro3: n => `Тохирох фонт цөөн байна уу? <button type="button" class="link" data-go="lib">Фонтын сан</button> хэсэгт Монгол үсэг бүрэн, арилжааны хэрэглээнд үнэгүй ${n} фонт бий.`,
     sampleAria: "Жишээ текст", presetSentence: "Өгүүлбэр", presetCaps: "ТОМ ҮСЭГ", presetAbc: "Цагаан толгой", size: "Хэмжээ",
     segMn: "Монгол үсэгтэй", segRu: "Дутуу", segNone: "Кириллгүй", segAll: "Бүгд",
     segMnT: "Ө ө Ү ү зэрэг Монгол кирилл үсэг бүгд бий",
     segRuT: "Орос кирилл үсэг бий ч Ө, Ү эсвэл Ё дутуу",
     segNoneT: "Кирилл үсэг байхгүй",
+    licSegAll: "Бүх лиценз", licSegAds: "Сурталчилгаанд OK", licSegAdsT: "Нээлттэй лицензтэй эсвэл Windows-тай ирдэг фонт",
+    licSegRights: "Лиценз шаардлагатай", licSegPersonal: "Хувийн/Demo", licSegUnknown: "Тодорхойгүй",
+    libFree: "Үнэгүй", libWin: "Windows-тай ирдэг", libPaid: "Төлбөртэй",
     catAll: "Бүгд", catS: "Sans serif", catR: "Serif", catD: "Чимэглэлийн", catH: "Гар бичмэл", catM: "Monospace",
     searchPh: "Фонт хайх", hasTug: "₮ тэмдэгтэй", variable: "Variable", hideInstalled: "Суусныг нуух",
     copyNames: "Нэрсийг хуулах", copyLink: "Хуваалцах холбоос хуулах", addAll: "Миний жагсаалтад нэмэх", closeShared: "Хаах",
-    alphabet: "Монгол цагаан толгой", stylesH: "Хэв маяг", copyName: "Нэр хуулах", copyCss: "CSS хуулах", close: "Хаах",
+    alphabet: "Монгол цагаан толгой", stylesH: "Хэв маяг", licenseH: "Лиценз", copyName: "Нэр хуулах", copyCss: "CSS хуулах", close: "Хаах",
     drop: ".ttf, .otf, .ttc файлаа энд тавьж шалгаарай",
-    footer: "Үнэгүй хэрэгсэл. Фонтууд тань таны компьютерээс гарахгүй, бүх шалгалт хөтөч дотор явагдана. Үнэгүй фонтын жишээг Google Fonts-оос ачаална. Компьютер дээрх Chrome эсвэл Edge хөтөчид хамгийн сайн ажиллана.",
+    footer: "Үнэгүй хэрэгсэл. Фонтууд тань таны компьютерээс гарахгүй, бүх шалгалт хөтөч дотор явагдана. Үнэгүй фонтын жишээг Google Fonts болон jsDelivr-ээс ачаална. Лицензийн мэдээлэл нь ерөнхий чиглүүлэг, хуулийн зөвлөгөө биш. Компьютер дээрх Chrome эсвэл Edge хөтөчид хамгийн сайн ажиллана.",
     styles: n => `${n} хэв маяг`,
     status: (all, mn, shown) => `${all} фонт · ${mn} нь Монгол үсэгтэй · ${shown} харагдаж байна`,
     scanning: (d, total) => `Фонт шалгаж байна… ${d} / ${total}`,
-    freeStatus: (n, have) => `Монгол үсгийг бүрэн шалгасан ${n} үнэгүй фонт, Google Fonts-оос` + (have === null ? "" : ` · ${have} нь танд суусан`),
+    checkingStyles: (d, total) => `· Хэв маяг бүрийг шалгаж байна… ${d} / ${total}`,
+    libFreeStatus: (n, have) => `Монгол үсэг бүрэн, арилжааны хэрэглээнд үнэгүй ${n} фонт. Зар, лого, хэвлэл, вэбэд ашиглаж болно.` + (have === null ? "" : ` · ${have} нь танд суусан`),
+    libWinStatus: n => `Windows-тай хамт ирдэг, Монгол үсэг бүрэн ${n} фонт. Зар, лого, хэвлэл, видеод болно; вэб сайтад байршуулах, бусдад өгөхийг хориглоно.`,
+    notWindows: " Таны төхөөрөмж Windows биш тул зарим нь харагдахгүй байж магадгүй.",
+    libPaidStatus: "Худалдаж авах боломжтой эх сурвалж. Эдгээрийг бид шалгаагүй, худалдагчийн мэдээлэл.",
     shortStatus: n => `Жагсаалтад ${n} фонт`,
     sharedTitle: n => `Танд ${n} фонттой жагсаалт ирлээ`,
     sharedScan: "Аль нь танд суусныг харахын тулд фонтоо шалгаарай.",
@@ -780,14 +925,30 @@ const I18N = {
     emptyQ: "Хайлтад тохирох фонт алга.",
     ok: "Ө ө Ү ү ✓", okT: "Монгол кирилл үсэг бүгд бий",
     missing: c => `Дутуу: ${c}`, missingT: "Эдгээр үсэг өөр фонтоор харагдана",
+    badStyles: (n, total) => `${n}/${total} хэв маягт Ө/Ү дутуу`, badStylesT: list => `Дутуу хэв маяг: ${list}`,
     noCyr: "Кириллгүй", unreadable: "Уншиж чадсангүй",
     tugT: "₮ тэмдэгтэй", varT: "Variable фонт: дэлгэрэнгүйг нээж гулсуурыг туршаарай",
     bichig: "Монгол бичиг", bichigT: "Монгол бичгийг мөн дэмжинэ",
     file: n => `Файл · ${n}`, fileT: "Суулгаагүй, файлаас шалгасан",
     installed: "Суусан ✓", installedT: "Энэ фонт таны компьютерт суусан байна",
+    licFree: n => `Үнэгүй · ${n}`, licAuthor: "Үнэгүй (зохиогчийн мэдэгдэл)", licFreeT: "Зар, лого, хэвлэл, вэбэд үнэгүй ашиглаж болно",
+    licWin: "Windows", licWinT: "Зар, лого, хэвлэлд болно; вэб, апп-д үгүй",
+    licRights: "Лиценз шаардлагатай", licRightsT: o => `Зохиогчийн эрхтэй${o ? " (" + o + ")" : ""}. Лиценз авсан бол ашиглаж болно.`,
+    licPersonal: "Хувийн хэрэглээнд л", licPersonalT: "Зар сурталчилгаанд ашиглахгүй",
+    licUnknown: "Лиценз тодорхойгүй", licUnknownT: "Файлд лицензийн мэдээлэл алга",
+    vFree: n => `Нээлттэй лиценз (${n}): зар, лого, хэвлэл, видео, вэбэд үнэгүй ашиглаж болно.`,
+    vAuthor: "Зохиогч арилжааны хэрэглээнд үнэгүй гэж файлдаа бичсэн байна. Татсан эх сурвалжаас нь баталгаажуулаарай.",
+    vWin: "Windows-тай ирдэг фонт: зар, лого, хэвлэл, видеод ашиглаж болно. Вэб сайтад байршуулах, бусдад өгөх, апп-д оруулахыг хориглоно.",
+    vRights: o => `Зохиогчийн эрхтэй${o ? " (" + o + ")" : ""}. Лиценз худалдаж авсан эсвэл зохиогч зөвшөөрсөн бол ашиглаж болно.`,
+    vPersonal: "Файлд хувийн хэрэглээнд, demo эсвэл trial гэж бичсэн байна. Зар сурталчилгаа, захиалгат ажилд ашиглахгүй.",
+    vUnknown: "Файлд лицензийн мэдээлэл алга. Фонтыг хаанаас татсанаа шалгаарай.",
+    licNote: "Фонтын файлд бичигдсэн мэдээлэлд үндэслэв. Хуулийн зөвлөгөө биш.",
+    fCopyright: "Зохиогчийн эрх", fManufacturer: "Үйлдвэрлэгч", fDesigner: "Дизайнер", fLicense: "Лиценз", fLicenseUrl: "Лицензийн холбоос", fEmbed: "Документод оруулах",
+    fs0: "Суулгаж болно", fs2: "Хориглосон", fs4: "Хэвлэх, харах", fs8: "Засах боломжтой",
     missSpan: "Энэ үсэг фонтод байхгүй тул компьютер өөр фонтоор орлуулж байна.",
     cellMiss: ch => `${ch} үсэг энэ фонтод алга`,
     previewNA: "Урьдчилан харах боломжгүй",
+    notInstalledPreview: "Энэ компьютерт суугаагүй тул харагдахгүй.",
     checking: "Шалгаж байна…", stOk: "✓ Монгол үсэгтэй",
     starAdd: n => `Жагсаалтад нэмэх: ${n}`, starRemove: n => `Жагсаалтаас хасах: ${n}`,
     copiedName: n => `“${n}” хуулагдлаа`, copiedCss: "CSS хуулагдлаа", copiedNames: n => `${n} фонтын нэр хуулагдлаа`,
@@ -797,40 +958,65 @@ const I18N = {
     skipped: ".ttf, .otf, .ttc биш файлуудыг алгаслаа",
     addedFiles: n => `${n} файл нэмэгдлээ. Жагсаалтын эхэнд харагдана.`,
     cantRead: n => `${n} файлыг уншиж чадсангүй`,
-    getFont: "Татах ↗", getFontT: "Google Fonts дээр нээх",
+    getFont: "Татах ↗", getFontT: "Албан ёсны эх сурвалжаас татах", info: "Мэдээлэл ↗", view: "Үзэх ↗", suggest: "Санал илгээх ↗",
+    foundry: "Фонтын компани", notVerified: "Шалгаагүй · худалдагчийн мэдээлэл",
+    paidTypeType: "Олон улсын фонтын компани. Сайтын Mongolian ангилалд 25 гаруй фонт байгаа бөгөөд бүгд Монгол цагаан толгойтой гэж бичсэн. Үнэгүй туршилтын хувилбартай.",
+    submitTitle: "Та Монгол фонт бүтээсэн үү?",
+    submitText: "Фонтоо энд нэмүүлэхийг хүсвэл санал илгээгээрэй. Лиценз, худалдаж авах холбоосоо хавсаргаарай. Бид файлыг нь шалгаад нэмнэ.",
     notHere: "Таны компьютерт алга.",
-    notInFree: "Үнэгүй жагсаалтад байхгүй. Илгээсэн хүнээс хаанаас авахыг асуугаарай.",
+    notInFree: "Фонтын санд байхгүй. Илгээсэн хүнээс хаанаас авахыг асуугаарай.",
     noteUnsupported: "Энэ хөтөч суусан фонтуудыг уншиж чадахгүй. Компьютер дээрээ Chrome эсвэл Edge хөтчөөр нээгээрэй (Firefox, Safari, Brave болон утсан дээр ажиллахгүй). Фонт файлаа чирж оруулж шалгах боломжтой хэвээр.",
     noteDenied: "Фонт унших зөвшөөрөл хаалттай байна. Хаягийн мөрний зүүн талд байгаа дүрс дээр дарж Fonts-ыг зөвшөөрөөд дахин шалгаарай.",
     noteError: m => "Фонтын жагсаалтыг уншиж чадсангүй" + (m ? ": " + m : "."),
     axes: { wght: "Зузаан", wdth: "Өргөн", slnt: "Налуу", ital: "Italic", opsz: "Оптик хэмжээ", YEAR: "Он" },
+    guideHtml: `<h2>Фонтоо сурталчилгаанд хууль ёсоор ашиглах</h2>
+<p class="lead">Фонт бол программ шиг лицензтэй бүтээл. Үнэгүй татсан гэдэг нь зар сурталчилгаанд ашиглаж болно гэсэн үг биш.</p>
+<div class="rules">
+<article class="rule ok"><h3><span>✓</span> Нээлттэй лицензтэй фонт</h3><p><b>OFL, Apache, Ubuntu Font Licence, DejaVu.</b> Зар, лого, хэвлэл, видео, вэб, апп, бүгдэд үнэгүй. Фонтын файлыг дангаар нь зарж болохгүй, бусдад дамжуулбал лицензийн файлыг хамт өгнө. <button type="button" class="link" data-go="lib">Фонтын сан</button>-гийн «Үнэгүй» хэсгийн бүх фонт ийм.</p></article>
+<article class="rule ok"><h3><span>✓</span> Windows-тай ирдэг фонт</h3><p>Зар, лого, постер, хэвлэмэл бүтээгдэхүүн, видеоны бичвэрт ашиглаж болно. Харин фонтын файлыг бусдад өгөх, вэб сайтдаа байршуулах, апп-д оруулахыг хориглоно. «Home &amp; Student» зэрэг арилжааны бус хувилбарын программаар хийсэн ажилд энэ эрх хамаарахгүй.</p></article>
+<article class="rule info"><h3><span>✓</span> Төлбөртэй фонт</h3><p>Лицензийн төрлөө шалгаарай: desktop (хэвлэл, зураг), web, app тус тусдаа зарагддаг. Хэдэн хүн, хэдэн компьютерт ашиглахыг ч лицензэд заадаг.</p></article>
+<article class="rule bad"><h3><span>✗</span> «Personal use», «Demo», «Trial» фонт</h3><p>Зөвхөн хувийн хэрэглээнд. Зар, лого, захиалгат ажилд ашиглахыг хориглоно. Үнэгүй фонтын сайтаас татсан гоё фонтуудын ихэнх нь ийм байдаг.</p></article>
+<article class="rule bad"><h3><span>✗</span> Олон зуун фонттой багц, архив</h3><p>500, 1000 гаруй фонттой архив, Google Drive-ын багц, файл худалдааны сайтаас авсан фонтууд ихэвчлэн лицензгүй. Архивыг мөнгөөр авсан ч фонтын лиценз авсан гэсэн үг биш.</p></article>
+<article class="rule bad"><h3><span>✗</span> Нэрийг нь өөрчилсөн хуулбар</h3><p>Arial, Times New Roman зэрэг фонтод Монгол үсэг нэмж, нэрийг нь сольсон хуулбарыг ашиглах эрхгүй. Windows-ын фонтыг өөрчлөхийг Microsoft зөвшөөрдөггүй.</p></article>
+<article class="rule bad"><h3><span>✗</span> Хуучин кодчиллын фонт</h3><p>Юникодоос өмнөх зарим фонт Ө, Ү-г өөр тэмдэгтийн байранд суулгасан байдаг. Ийм фонтоор бичсэн текст өөр фонт руу шилжихэд эвдэрнэ. Фонт Шүүгч ийм фонтыг «Дутуу» гэж харуулна.</p></article>
+</div>
+<h3 class="sub-h">Өөрийн фонтуудаа шалгах</h3>
+<p><button type="button" class="link" data-go="mine">Миний фонтууд</button> хэсэгт фонт бүрийн файлд бичигдсэн лицензийн мэдээллийг уншиж «Сурталчилгаанд OK», «Лиценз шаардлагатай», «Хувийн/Demo», «Тодорхойгүй» гэж ангилна. Энэ нь файлд бичигдсэн мэдээлэл төдий тул эргэлзээтэй бол фонтыг татсан эх сурвалжаас нь лицензийг шалгаарай.</p>
+<p class="fine">Энэ бол ерөнхий мэдээлэл, хуулийн зөвлөгөө биш. Эх сурвалж: <a href="${MS_FAQ}" target="_blank" rel="noopener">Microsoft Font FAQ</a>, <a href="${OFL_URL}" target="_blank" rel="noopener">SIL Open Font License</a>.</p>`,
   },
   en: {
     docTitle: "Mongolian Font Finder",
-    docDesc: n => `Finds the fonts on your computer that really contain Ө ө Ү ү, plus ${n} free fonts verified for every Mongolian letter.`,
+    docDesc: n => `Finds the fonts on your computer that really contain Ө ө Ү ү and can legally go in your ads, plus ${n} free fonts verified for every Mongolian letter.`,
     brand: "Mongolian Font Finder",
-    tagline: "Finds the fonts on your computer that really contain <strong>Ө ө Ү ү</strong>, so no letter quietly falls back to a different font.",
+    tagline: "Finds the fonts on your computer that really contain <strong>Ө ө Ү ү</strong>, and shows whether you can legally use them in ads.",
     scan: "Scan my fonts", rescan: "Rescan", checkFiles: "Check font files",
-    tabMine: "My fonts", tabFree: "Free fonts", tabShort: "Shortlist", tabShared: "Shared list",
+    tabMine: "My fonts", tabLib: "Font library", tabGuide: "License guide", tabShort: "Shortlist", tabShared: "Shared list",
     intro1: "Press <strong>Scan my fonts</strong>. Chrome or Edge asks once for permission to read your font list.",
     privacy: "Everything runs inside your browser. Your fonts are never uploaded.",
     intro2: "To check fonts before installing them, drop <code>.ttf</code>, <code>.otf</code> or <code>.ttc</code> files anywhere on this page.",
-    intro3: n => `Short on fonts? The <button type="button" class="link" data-go="free">Free fonts</button> tab lists ${n} free fonts verified to have every Mongolian letter.`,
+    intro3: n => `Short on fonts? The <button type="button" class="link" data-go="lib">Font library</button> has ${n} fonts with every Mongolian letter that are free for commercial use.`,
     sampleAria: "Sample text", presetSentence: "Sentence", presetCaps: "CAPS", presetAbc: "Alphabet", size: "Size",
     segMn: "Mongolian ready", segRu: "Partial", segNone: "No Cyrillic", segAll: "All",
     segMnT: "Every Mongolian Cyrillic letter, including Ө ө Ү ү",
     segRuT: "Has Russian Cyrillic but is missing Ө, Ү or Ё",
     segNoneT: "No usable Cyrillic",
+    licSegAll: "Any license", licSegAds: "OK for ads", licSegAdsT: "Open-license fonts and fonts that come with Windows",
+    licSegRights: "License required", licSegPersonal: "Personal/Demo", licSegUnknown: "Unknown",
+    libFree: "Free", libWin: "Comes with Windows", libPaid: "Paid",
     catAll: "All", catS: "Sans serif", catR: "Serif", catD: "Display", catH: "Handwriting", catM: "Monospace",
     searchPh: "Search fonts", hasTug: "Has ₮", variable: "Variable", hideInstalled: "Hide installed",
     copyNames: "Copy names", copyLink: "Copy share link", addAll: "Add to my shortlist", closeShared: "Close",
-    alphabet: "Mongolian alphabet", stylesH: "Styles", copyName: "Copy name", copyCss: "Copy CSS", close: "Close",
+    alphabet: "Mongolian alphabet", stylesH: "Styles", licenseH: "License", copyName: "Copy name", copyCss: "Copy CSS", close: "Close",
     drop: "Drop .ttf / .otf / .ttc files to check them",
-    footer: "Free tool. Your fonts never leave your computer; every check runs in your browser. Free-font previews load from Google Fonts. Works best in Chrome or Edge on a computer.",
+    footer: "Free tool. Your fonts never leave your computer; every check runs in your browser. Free-font previews load from Google Fonts and jsDelivr. License information is general guidance, not legal advice. Works best in Chrome or Edge on a computer.",
     styles: n => `${n} style${n === 1 ? "" : "s"}`,
     status: (all, mn, shown) => `${all} font families · ${mn} ready for Mongolian · showing ${shown}`,
     scanning: (d, total) => `Checking fonts… ${d} / ${total}`,
-    freeStatus: (n, have) => `${n} free fonts verified for every Mongolian letter, from Google Fonts` + (have === null ? "" : ` · ${have} already installed`),
+    checkingStyles: (d, total) => `· Checking every style… ${d} / ${total}`,
+    libFreeStatus: (n, have) => `${n} fonts with every Mongolian letter, free for commercial use: ads, logos, print and web.` + (have === null ? "" : ` · ${have} already installed`),
+    libWinStatus: n => `${n} fonts that come with Windows and have every Mongolian letter. OK for ads, logos, print and video; not for hosting on websites or giving to others.`,
+    notWindows: " You're not on Windows, so some may not display.",
+    libPaidStatus: "Places to buy fonts with Mongolian support. Not verified by us: this is the seller's own description.",
     shortStatus: n => `${n} font${n === 1 ? "" : "s"} in your shortlist`,
     sharedTitle: n => `Someone shared a list of ${n} font${n === 1 ? "" : "s"}`,
     sharedScan: "Scan your fonts to see which ones you already have.",
@@ -840,14 +1026,30 @@ const I18N = {
     emptyQ: "No fonts match your search.",
     ok: "Ө ө Ү ү ✓", okT: "Has every Mongolian Cyrillic letter",
     missing: c => `Missing ${c}`, missingT: "These letters will show in a fallback font",
+    badStyles: (n, total) => `Ө/Ү missing in ${n} of ${total} styles`, badStylesT: list => `Missing in: ${list}`,
     noCyr: "No Cyrillic", unreadable: "Couldn't read file",
     tugT: "Has the tögrög sign ₮", varT: "Variable font: open it to try the sliders",
     bichig: "Mongolian script", bichigT: "Also covers traditional Mongolian script",
     file: n => `File · ${n}`, fileT: "Checked from a file, not installed",
     installed: "Installed ✓", installedT: "This font is installed on your computer",
+    licFree: n => `Free · ${n}`, licAuthor: "Free (author's note)", licFreeT: "Free for ads, logos, print and web",
+    licWin: "Windows", licWinT: "OK for ads, logos and print; not for websites or apps",
+    licRights: "License required", licRightsT: o => `Copyrighted${o ? " (" + o + ")" : ""}. Use it if you have a license.`,
+    licPersonal: "Personal use only", licPersonalT: "Don't use in ads",
+    licUnknown: "License unknown", licUnknownT: "The file has no license info",
+    vFree: n => `Open license (${n}): free for ads, logos, print, video and web.`,
+    vAuthor: "The author wrote in the file that it's free for commercial use. Confirm it where you downloaded it.",
+    vWin: "Comes with Windows: OK for ads, logos, print and video. Not for hosting on a website, giving to others or putting in an app.",
+    vRights: o => `Copyrighted${o ? " (" + o + ")" : ""}. Use it if you bought a license or the author gave permission.`,
+    vPersonal: "The file says personal use, demo or trial. Don't use it in ads or client work.",
+    vUnknown: "The file has no license info. Check where you downloaded it.",
+    licNote: "Based on what the font file says. Not legal advice.",
+    fCopyright: "Copyright", fManufacturer: "Manufacturer", fDesigner: "Designer", fLicense: "License", fLicenseUrl: "License URL", fEmbed: "Document embedding",
+    fs0: "Installable", fs2: "Not allowed", fs4: "Print & preview", fs8: "Editable",
     missSpan: "Not in this font. Your computer substitutes another font here.",
     cellMiss: ch => `${ch} is not in this font`,
     previewNA: "Preview unavailable",
+    notInstalledPreview: "Not installed on this computer, so it can't be previewed.",
     checking: "Checking…", stOk: "✓ Mongolian ready",
     starAdd: n => `Add ${n} to shortlist`, starRemove: n => `Remove ${n} from shortlist`,
     copiedName: n => `Copied “${n}”`, copiedCss: "Copied CSS", copiedNames: n => `Copied ${n} font name${n === 1 ? "" : "s"}`,
@@ -857,13 +1059,31 @@ const I18N = {
     skipped: "Skipped files that aren't .ttf, .otf or .ttc",
     addedFiles: n => `Added ${n} file${n === 1 ? "" : "s"}, shown first`,
     cantRead: n => `Couldn't read ${n}`,
-    getFont: "Get font ↗", getFontT: "Open on Google Fonts",
+    getFont: "Get font ↗", getFontT: "Download from the official source", info: "Details ↗", view: "View ↗", suggest: "Suggest a font ↗",
+    foundry: "Type foundry", notVerified: "Not verified · seller's claim",
+    paidTypeType: "International type foundry. Its Mongolian category lists 25+ font families and says each includes the Mongolian alphabet. Free trial versions available.",
+    submitTitle: "Made a Mongolian font?",
+    submitText: "Suggest it for the library. Include the license and where to buy or download it. We check the files before adding.",
     notHere: "Not on this computer.",
-    notInFree: "Not in the free list. Ask the sender where to get it.",
+    notInFree: "Not in the font library. Ask the sender where to get it.",
     noteUnsupported: "This browser can't list installed fonts. Open this page in Chrome or Edge on a computer (Firefox, Safari, Brave and phones can't). You can still drop font files here to check them.",
     noteDenied: "Font access is blocked for this page. Click the icon at the left of the address bar, allow Fonts, then scan again.",
     noteError: m => "Couldn't read the font list" + (m ? ": " + m : "."),
     axes: { wght: "Weight", wdth: "Width", slnt: "Slant", ital: "Italic", opsz: "Optical size", YEAR: "Year" },
+    guideHtml: `<h2>Using fonts in ads legally</h2>
+<p class="lead">Fonts are licensed like software. A free download doesn't mean you can use it in an ad.</p>
+<div class="rules">
+<article class="rule ok"><h3><span>✓</span> Open-license fonts</h3><p><b>OFL, Apache, Ubuntu Font Licence, DejaVu.</b> Free for ads, logos, print, video, web and apps. You can't sell the font file on its own, and if you pass the font on, include its license file. Every font in the <button type="button" class="link" data-go="lib">Font library</button>'s Free section is like this.</p></article>
+<article class="rule ok"><h3><span>✓</span> Fonts that come with Windows</h3><p>OK for ads, logos, posters, printed products and video captions. You may not give the font files to others, host them on your website or put them in an app. These rights don't apply to work made with software licensed for non-commercial use, such as Home &amp; Student editions.</p></article>
+<article class="rule info"><h3><span>✓</span> Paid fonts</h3><p>Check which license you bought: desktop (print and images), web and app licenses are sold separately, and licenses also limit how many people or computers can use the font.</p></article>
+<article class="rule bad"><h3><span>✗</span> "Personal use", "Demo", "Trial" fonts</h3><p>Personal use only. Not for ads, logos or client work. Most of the eye-catching fonts on free-font sites are like this.</p></article>
+<article class="rule bad"><h3><span>✗</span> Packs of hundreds of fonts</h3><p>Archives with 500 or 1,000+ fonts, Google Drive bundles and fonts resold on file-sharing sites usually come with no license. Paying for the archive doesn't give you a font license.</p></article>
+<article class="rule bad"><h3><span>✗</span> Renamed copies</h3><p>Copies of fonts like Arial or Times New Roman with Mongolian letters added and a new name aren't licensed. Microsoft doesn't allow modifying Windows fonts.</p></article>
+<article class="rule bad"><h3><span>✗</span> Old pre-Unicode fonts</h3><p>Some older fonts put Ө and Ү in place of other characters. Text typed in them breaks as soon as you switch fonts. Mongolian Font Finder shows these as "Partial".</p></article>
+</div>
+<h3 class="sub-h">Checking your own fonts</h3>
+<p><button type="button" class="link" data-go="mine">My fonts</button> reads the license information stored in each font file and sorts fonts into "OK for ads", "License required", "Personal/Demo" and "Unknown". That's only what the file says, so if in doubt, check the license where you got the font.</p>
+<p class="fine">General information, not legal advice. Sources: <a href="${MS_FAQ}" target="_blank" rel="noopener">Microsoft Font FAQ</a>, <a href="${OFL_URL}" target="_blank" rel="noopener">SIL Open Font License</a>.</p>`,
   },
 };
 const AXIS_EN = { GRAD: "Grade", MORF: "Morph", ELGR: "Element grid", ELSH: "Element shape", BNCE: "Bounce", INFM: "Informality", SPAC: "Spacing", CTRS: "Contrast", XTRA: "X transparent", CASL: "Casual", MONO: "Monospace", CRSV: "Cursive", SOFT: "Softness", WONK: "Wonky", FILL: "Fill" };
@@ -878,9 +1098,21 @@ const ABC = [..."АБВГДЕЁЖЗИЙКЛМНОӨПРСТУҮФХЦЧШЩЪЫ�
 const STAR = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3.6l2.6 5.3 5.8.85-4.2 4.1 1 5.8L12 16.9l-5.2 2.75 1-5.8-4.2-4.1 5.8-.85z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>';
 const STYLE_ORDER = ["hairline", "thin", "extralight", "ultralight", "light", "book", "regular", "normal", "roman", "", "medium", "semibold", "demibold", "bold", "extrabold", "ultrabold", "black", "heavy", "ultra"];
 const CAT_KEY = { S: "catS", R: "catR", D: "catD", H: "catH", M: "catM" };
+const GF_LICENSE = { O: "OFL", A: "Apache", U: "Ubuntu Font Licence" };
 
-const GALLERY = GALLERY_DATA.map(([family, q, cat, tug, axes]) => ({ family, q, cat, tug: !!tug, axes: axes ? axes.split(" ") : [] }));
-const GALLERY_BY_NAME = new Map(GALLERY.map(g => [g.family.toLowerCase(), g]));
+// One list for the whole library: free (Google Fonts + others), Windows, paid.
+const LIB = [
+  ...GALLERY_DATA.map(([family, q, cat, tug, axes, lic]) => ({
+    kind: "free", family, q, cat, tug: !!tug, axes: axes ? axes.split(" ") : [], lic: GF_LICENSE[lic] || "OFL",
+    url: "https://fonts.google.com/specimen/" + family.replace(/ /g, "+"), preview: "gf",
+  })),
+  ...EXTRA_FREE.map(([family, cat, tug, lic, url, ttf]) => ({ kind: "free", family, cat, tug: !!tug, axes: [], lic, url, ttf, preview: ttf ? "url" : "local" })),
+  ...WINDOWS_LIB.map(([family, cat, tug, variable, url]) => ({ kind: "windows", family, cat, tug: !!tug, axes: variable ? ["wght"] : [], url, preview: "local" })),
+  ...PAID_LIB.map(p => ({ kind: "paid", ...p, axes: [] })),
+];
+const LIB_BY_NAME = new Map(LIB.filter(e => e.kind !== "paid").map(e => [e.family.toLowerCase(), e]));
+const FREE_COUNT = LIB.filter(e => e.kind === "free").length;
+const IS_WINDOWS = /Windows/i.test(navigator.userAgentData?.platform || navigator.platform || navigator.userAgent);
 
 const state = {
   lang: store.get("lang", "mn") === "en" ? "en" : "mn",
@@ -888,8 +1120,11 @@ const state = {
   families: [],
   scanned: false,
   scanning: false,
+  styleCheck: null,
   installed: new Set(),
   filter: store.get("filter", "mn"),
+  lic: "all",
+  kind: "free",
   cat: "all",
   q: "",
   tugrik: false,
@@ -912,11 +1147,12 @@ const sampleText = () => state.sample || PRESETS.sentence;
 const faceSheet = (() => { const s = document.createElement("style"); document.head.append(s); return s.sheet; })();
 let aliasN = 0;
 function cssStr(s) { return '"' + String(s).replace(/[\u0000-\u001f]/g, "").replace(/\\/g, "\\\\").replace(/"/g, '\\"') + '"'; }
-function localAlias(ps, family) {
+function addFace(src) {
   const a = "mnff" + (++aliasN);
-  try { faceSheet.insertRule(`@font-face{font-family:${a};src:local(${cssStr(ps)})}`, faceSheet.cssRules.length); } catch { /* ignore bad names */ }
-  return `${a}, ${cssStr(family)}`;
+  try { faceSheet.insertRule(`@font-face{font-family:${a};src:${src}}`, faceSheet.cssRules.length); } catch { /* ignore bad names */ }
+  return a;
 }
+const localAlias = (ps, family) => `${addFace(`local(${cssStr(ps)})`)}, ${cssStr(family)}`;
 function styleRank(style) {
   const s = (style || "").toLowerCase();
   const italic = /italic|oblique/.test(s) ? 0.5 : 0;
@@ -961,12 +1197,28 @@ function badge(box, text, cls, title) {
   box.append(s);
 }
 
+// Is a font installed? Compare text width against generic fallbacks (no permission needed).
+const localCache = new Map();
+function hasLocalFont(family) {
+  if (localCache.has(family)) return localCache.get(family);
+  const ctx = document.createElement("canvas").getContext("2d");
+  const w = f => { ctx.font = `40px ${f}`; return ctx.measureText("Өндөр Үүлс Mmwil 0123").width; };
+  const found = ["monospace", "serif", "sans-serif"].some(g => w(`${cssStr(family)}, ${g}`) !== w(g));
+  localCache.set(family, found);
+  return found;
+}
+
 // ---------- scanning ----------
 async function analyzeFace(face) {
   if (face.result) return face.result;
   const blob = await face.fd.blob();
   face.result = analyze(await blob.arrayBuffer(), face.ps);
   return face.result;
+}
+
+function licenseFor(f) {
+  const r = f.rep && f.rep.result ? f.rep.result : f;
+  return licenseOf(r, [f.name, r.nameFamily, r.fullName, r.ps, f.fileName, ...(f.faces || []).map(x => x.full)]);
 }
 
 function showNote(kind, err) {
@@ -1034,14 +1286,39 @@ async function scanInstalled() {
       m.el = null;
     }
   }
-  state.families = state.families.filter(f => f.source === "file").concat([...merged.values()]);
-  state.installed = new Set([...merged.values()].map(f => f.name.toLowerCase()));
-  for (const g of GALLERY) if (g.el) fillFreeBadges($(".badges", g.el), g);
+  const all = [...merged.values()];
+  for (const f of all) f.licInfo = licenseFor(f);
+  state.families = state.families.filter(f => f.source === "file").concat(all);
+  state.installed = new Set(all.map(f => f.name.toLowerCase()));
+  for (const e of LIB) if (e.el) fillLibBadges($(".badges", e.el), e);
 
   state.scanning = false;
   state.scanned = true;
   for (const b of $$("#scanBtn, #introScan, #shScan")) b.disabled = false;
   $("#scanBtn").textContent = t("rescan");
+  render();
+  checkAllStyles(all);
+}
+
+// A family can pass in Regular and break in another style (Arial Narrow has no Ө/Ү).
+// Check every remaining style in the background and flag those families.
+async function checkAllStyles(fams) {
+  const multi = fams.filter(f => f.status === "mn" && f.faces.length > 1);
+  const jobs = multi.flatMap(f => f.faces.filter(x => !x.result && x.fd));
+  state.styleCheck = { done: 0, total: jobs.length };
+  const show = () => { $("#status2").textContent = state.styleCheck && state.styleCheck.done < state.styleCheck.total ? t("checkingStyles", state.styleCheck.done, state.styleCheck.total) : ""; };
+  show();
+  await pool(jobs, 4, async face => {
+    try { await analyzeFace(face); } catch { /* unreadable style */ }
+    state.styleCheck.done++;
+    if (state.styleCheck.done % 10 === 0) show();
+  });
+  for (const f of multi) {
+    const bad = f.faces.filter(x => x.result && x.result.status !== "mn");
+    if (bad.length) { f.badStyles = bad.map(x => x.style || x.ps); f.el = null; }
+  }
+  state.styleCheck = null;
+  show();
   render();
 }
 
@@ -1054,16 +1331,22 @@ async function addFiles(fileList) {
     try {
       const buf = await file.arrayBuffer();
       const r = analyze(buf, null);
-      const alias = "mnfffile" + (++aliasN);
       let css = null;
-      try { const ff = new FontFace(alias, buf); await ff.load(); document.fonts.add(ff); css = alias; } catch { /* preview unavailable */ }
+      try {
+        const alias = "mnfffile" + (++aliasN);
+        const ff = new FontFace(alias, buf);
+        await ff.load();
+        document.fonts.add(ff);
+        css = alias;
+      } catch { /* preview unavailable */ }
       const style = r.nameStyle && !/^regular$/i.test(r.nameStyle) ? " " + r.nameStyle : "";
       const fam = {
         ...r, key: "file:" + file.name, name: (r.nameFamily || file.name.replace(/\.[^.]+$/, "")) + style,
         source: "file", fileName: file.name, css,
-        faces: [{ ps: r.ps, style: r.nameStyle || "Regular", result: r, css }],
+        faces: [{ ps: r.ps, style: r.nameStyle || "Regular", full: r.fullName, result: r, css }],
       };
       fam.rep = fam.faces[0];
+      fam.licInfo = licenseFor(fam);
       state.families = state.families.filter(f => f.key !== fam.key);
       state.families.push(fam);
       added++;
@@ -1071,14 +1354,14 @@ async function addFiles(fileList) {
   }
   if (ok.length < files.length) toast(t("skipped"));
   else if (added) toast(t("addedFiles", added));
-  if (added) { setFilter("all"); setView("mine"); window.scrollTo({ top: 0, behavior: "smooth" }); }
+  if (added) { setFilter("all"); setLic("all"); setView("mine"); window.scrollTo({ top: 0, behavior: "smooth" }); }
 }
 
 // ---------- cards ----------
 function fillSpec(el, f, text) {
   el.replaceChildren();
   el.classList.toggle("na", !f.css);
-  if (!f.css) { el.textContent = t("previewNA"); el.style.fontFamily = ""; return; }
+  if (!f.css) { el.textContent = f.naText || t("previewNA"); el.style.fontFamily = ""; return; }
   el.style.fontFamily = f.css;
   let run = "";
   const flush = () => { if (run) { el.append(run); run = ""; } };
@@ -1095,12 +1378,23 @@ function fillSpec(el, f, text) {
   flush();
 }
 
+function licenseBadge(box, li) {
+  if (!li) return;
+  if (li.kind === "free") badge(box, li.name === "author" ? t("licAuthor") : t("licFree", li.name), "lic-free", t("licFreeT"));
+  else if (li.kind === "windows") badge(box, t("licWin"), "info", t("licWinT"));
+  else if (li.kind === "rights") badge(box, t("licRights"), "warn", t("licRightsT", li.owner));
+  else if (li.kind === "personal") badge(box, t("licPersonal"), "bad", t("licPersonalT"));
+  else badge(box, t("licUnknown"), "", t("licUnknownT"));
+}
+
 function fillBadges(box, f) {
   box.replaceChildren();
   if (f.status === "mn") badge(box, t("ok"), "ok", t("okT"));
   else if (f.status === "ru") badge(box, t("missing", chars(f.missing)), "warn", t("missingT"));
   else if (f.status === "none") badge(box, t("noCyr"), "bad");
   else badge(box, t("unreadable"));
+  if (f.badStyles && f.badStyles.length) badge(box, t("badStyles", f.badStyles.length, f.faces.length), "warn", t("badStylesT", f.badStyles.join(", ")));
+  licenseBadge(box, f.licInfo);
   if (f.tugrik) badge(box, "₮", "", t("tugT"));
   const ax = (f.axes || []).filter(a => !a.hidden);
   if (ax.length) badge(box, "Variable · " + ax.map(a => a.tag).join(" "), "", t("varT"));
@@ -1108,12 +1402,15 @@ function fillBadges(box, f) {
   if (f.source === "file") badge(box, t("file", f.fileName), "", t("fileT"));
 }
 
-function fillFreeBadges(box, g) {
+function fillLibBadges(box, e) {
   box.replaceChildren();
+  if (e.kind === "paid") { badge(box, t("notVerified"), "warn"); return; }
   badge(box, t("ok"), "ok", t("okT"));
-  if (g.tug) badge(box, "₮", "", t("tugT"));
-  if (g.axes.length) badge(box, "Variable · " + g.axes.join(" "), "");
-  if (state.installed.has(g.family.toLowerCase())) badge(box, t("installed"), "have", t("installedT"));
+  if (e.kind === "free") badge(box, t("licFree", e.lic), "lic-free", t("licFreeT"));
+  else badge(box, t("licWin"), "info", t("licWinT"));
+  if (e.tug) badge(box, "₮", "", t("tugT"));
+  if (e.axes.length) badge(box, "Variable · " + e.axes.join(" "), "");
+  if (state.installed.has(e.family.toLowerCase())) badge(box, t("installed"), "have", t("installedT"));
 }
 
 function setStar(btn, name) {
@@ -1125,14 +1422,25 @@ function setStar(btn, name) {
   btn.title = btn.getAttribute("aria-label");
 }
 
-function cardShell(name, metaText) {
+function cardShell(name, metaText, withStar = true) {
   const el = document.createElement("article");
   el.className = "card";
-  el.innerHTML = `<div class="card-h"><span class="name"></span><span class="meta"></span><button class="star" type="button"></button></div><div class="spec"></div><div class="card-f"><div class="badges"></div></div>`;
+  el.innerHTML = `<div class="card-h"><span class="name"></span><span class="meta"></span>${withStar ? '<button class="star" type="button"></button>' : ""}</div><div class="spec"></div><div class="card-f"><div class="badges"></div></div>`;
   $(".name", el).textContent = name;
   $(".meta", el).textContent = metaText;
-  setStar($(".star", el), name);
+  if (withStar) setStar($(".star", el), name);
   return el;
+}
+
+function addLink(el, href, text, title) {
+  const a = document.createElement("a");
+  a.className = "get";
+  a.href = href;
+  a.target = "_blank";
+  a.rel = "noopener";
+  a.textContent = text;
+  if (title) a.title = title;
+  $(".card-f", el).append(a);
 }
 
 function buildLocalCard(f) {
@@ -1155,35 +1463,55 @@ const io = new IntersectionObserver(entries => {
   for (const e of entries) {
     if (!e.isIntersecting) continue;
     const r = cardRef.get(e.target);
-    if (r && r.kind === "free") loadWebFont(r.g);
+    if (r && r.kind === "lib") loadLibFont(r.e);
     io.unobserve(e.target);
   }
 }, { rootMargin: "600px 0px" });
 
-function loadWebFont(g) {
-  if (g.loaded) return;
-  g.loaded = true;
-  const l = document.createElement("link");
-  l.rel = "stylesheet";
-  l.href = "https://fonts.googleapis.com/css2?family=" + g.q + "&display=swap";
-  document.head.append(l);
+function loadLibFont(e) {
+  if (e.loaded) return;
+  e.loaded = true;
+  if (e.preview === "gf") {
+    const l = document.createElement("link");
+    l.rel = "stylesheet";
+    l.href = "https://fonts.googleapis.com/css2?family=" + e.q + "&display=swap";
+    document.head.append(l);
+  }
 }
 
-function buildFreeCard(g) {
-  const el = cardShell(g.family, t(CAT_KEY[g.cat]));
-  g.css = cssStr(g.family);
-  fillSpec($(".spec", el), { css: g.css, has: cp => cp !== 0x20AE || g.tug }, sampleText());
-  fillFreeBadges($(".badges", el), g);
-  const a = document.createElement("a");
-  a.className = "get";
-  a.href = "https://fonts.google.com/specimen/" + g.family.replace(/ /g, "+");
-  a.target = "_blank";
-  a.rel = "noopener";
-  a.textContent = t("getFont");
-  a.title = t("getFontT");
-  $(".card-f", el).append(a);
-  cardRef.set(el, { kind: "free", g });
+function libSpec(e) {
+  if (e.preview === "gf") return { css: cssStr(e.family), has: cp => cp !== 0x20AE || e.tug };
+  if (e.preview === "url") return { css: e.alias || (e.alias = addFace(`url(${cssStr(e.ttf)}) format("truetype")`)), has: cp => cp !== 0x20AE || e.tug };
+  if (e.preview === "local") return hasLocalFont(e.family) ? { css: cssStr(e.family), has: cp => cp !== 0x20AE || e.tug } : { css: null, naText: t("notInstalledPreview") };
+  return { css: null };
+}
+
+function buildLibCard(e) {
+  if (e.kind === "paid") {
+    const el = cardShell(e.family, t("foundry"), false);
+    const spec = $(".spec", el);
+    spec.classList.add("text");
+    spec.textContent = t(e.textKey);
+    fillLibBadges($(".badges", el), e);
+    addLink(el, e.url, t("view"));
+    cardRef.set(el, { kind: "paid", e });
+    return el;
+  }
+  const el = cardShell(e.family, t(CAT_KEY[e.cat]));
+  fillSpec($(".spec", el), libSpec(e), sampleText());
+  fillLibBadges($(".badges", el), e);
+  addLink(el, e.url, e.kind === "windows" ? t("info") : t("getFont"), e.kind === "windows" ? "" : t("getFontT"));
+  cardRef.set(el, { kind: "lib", e });
   io.observe(el);
+  return el;
+}
+
+function buildSubmitCard() {
+  const el = cardShell(t("submitTitle"), "", false);
+  const spec = $(".spec", el);
+  spec.classList.add("text");
+  spec.textContent = t("submitText");
+  addLink(el, SUGGEST_URL, t("suggest"));
   return el;
 }
 
@@ -1200,8 +1528,8 @@ function resolveName(name) {
   const lc = name.toLowerCase();
   const f = state.families.find(x => x.status !== "pending" && x.name.toLowerCase() === lc);
   if (f) return f.el || (f.el = buildLocalCard(f));
-  const g = GALLERY_BY_NAME.get(lc);
-  if (g) return g.el || (g.el = buildFreeCard(g));
+  const e = LIB_BY_NAME.get(lc);
+  if (e) return e.el || (e.el = buildLibCard(e));
   return buildGhostCard(name);
 }
 
@@ -1214,28 +1542,33 @@ function setView(v) {
 function updateTabs(mnCount) {
   for (const b of $$("#tabs .tab")) b.setAttribute("aria-selected", String(b.dataset.tab === state.view));
   $("#cMine").textContent = state.scanned || state.families.length ? mnCount : "";
-  $("#cFree").textContent = GALLERY.length;
+  $("#cLib").textContent = FREE_COUNT;
   $("#cShort").textContent = state.shortlist.size || "";
   const sharedTab = $('#tabs [data-tab="shared"]');
   sharedTab.hidden = !state.shared;
   $("#cShared").textContent = state.shared ? state.shared.length : "";
 }
 
-function localVisible(f) {
+const licMatch = (f, l) => l === "all" || (f.licInfo && (l === "ads" ? (f.licInfo.kind === "free" || f.licInfo.kind === "windows") : f.licInfo.kind === l));
+
+function localVisible(f, ignore) {
   if (f.status === "pending") return false;
   if (state.q && !f.name.toLowerCase().includes(state.q)) return false;
-  if (state.filter !== "all" && f.status !== state.filter) return false;
+  if (ignore !== "status" && state.filter !== "all" && f.status !== state.filter) return false;
+  if (ignore !== "lic" && !licMatch(f, state.lic)) return false;
   if (state.tugrik && !f.tugrik) return false;
   if (state.variable && !(f.axes || []).some(a => !a.hidden)) return false;
   return true;
 }
 
-function freeVisible(g, ignoreCat) {
-  if (!ignoreCat && state.cat !== "all" && g.cat !== state.cat) return false;
-  if (state.q && !g.family.toLowerCase().includes(state.q)) return false;
-  if (state.tugrik && !g.tug) return false;
-  if (state.variable && !g.axes.length) return false;
-  if (state.hideInstalled && state.scanned && state.installed.has(g.family.toLowerCase())) return false;
+function libVisible(e, ignore) {
+  if (ignore !== "kind" && e.kind !== state.kind) return false;
+  if (e.kind === "paid") return !state.q || e.family.toLowerCase().includes(state.q);
+  if (ignore !== "cat" && state.cat !== "all" && e.cat !== state.cat) return false;
+  if (state.q && !e.family.toLowerCase().includes(state.q)) return false;
+  if (state.tugrik && !e.tug) return false;
+  if (state.variable && !e.axes.length) return false;
+  if (state.hideInstalled && state.scanned && e.kind === "free" && state.installed.has(e.family.toLowerCase())) return false;
   return true;
 }
 
@@ -1243,37 +1576,45 @@ function render() {
   clearTimeout(renderT); renderT = 0;
   const v = state.view;
   for (const el of $$("[data-views]")) el.hidden = !el.dataset.views.split(" ").includes(v);
-  if (!state.scanned) $("#hideInstLabel").hidden = true;
+  if (!state.scanned || state.kind !== "free") $("#hideInstLabel").hidden = true;
+  if (v === "lib" && state.kind === "paid") for (const el of $$("#catSeg, #filterRow .chk")) el.hidden = true;
 
+  const ready = state.families.filter(f => f.status !== "pending");
   const counts = { mn: 0, ru: 0, none: 0, all: 0 };
-  for (const f of state.families) {
-    if (f.status === "pending") continue;
-    counts.all++;
-    if (f.status in counts) counts[f.status]++;
-  }
+  for (const f of ready) { counts.all++; if (f.status in counts) counts[f.status]++; }
   updateTabs(counts.mn);
 
   const hasLocal = state.scanned || state.scanning || state.families.length > 0;
   $("#intro").hidden = v !== "mine" || hasLocal;
   $("#filterRow").hidden = v === "mine" && !hasLocal;
+  $("#grid").hidden = $("#empty").hidden = v === "guide";
 
   let cards = [], status = "", empty = t("empty");
   if (v === "mine") {
-    for (const b of $("#seg").children) b.querySelector("b").textContent = counts[b.dataset.f];
-    const list = state.families.filter(localVisible).sort((a, b) =>
+    for (const b of $("#seg").children) b.querySelector("b").textContent = ready.filter(f => (b.dataset.f === "all" || f.status === b.dataset.f) && localVisible(f, "status")).length;
+    for (const b of $("#licSeg").children) b.querySelector("b").textContent = ready.filter(f => licMatch(f, b.dataset.l) && localVisible(f, "lic")).length;
+    const list = state.families.filter(f => localVisible(f)).sort((a, b) =>
       (a.source === "file" ? 0 : 1) - (b.source === "file" ? 0 : 1) || a.name.localeCompare(b.name));
     cards = list.map(f => f.el || (f.el = buildLocalCard(f)));
     status = hasLocal && !state.scanning ? t("status", counts.all, counts.mn, list.length) : "";
     if (!hasLocal) empty = "";
-  } else if (v === "free") {
+  } else if (v === "lib") {
+    for (const b of $("#kindSeg").children) {
+      const bb = b.querySelector("b");
+      if (bb) bb.textContent = LIB.filter(e => e.kind === b.dataset.k && libVisible(e, "kind")).length;
+    }
     for (const b of $("#catSeg").children) {
       const c = b.dataset.c;
-      b.querySelector("b").textContent = GALLERY.filter(g => (c === "all" || g.cat === c) && freeVisible(g, true)).length;
+      b.querySelector("b").textContent = LIB.filter(e => (c === "all" || e.cat === c) && libVisible(e, "cat")).length;
     }
-    const list = GALLERY.filter(g => freeVisible(g));
-    cards = list.map(g => g.el || (g.el = buildFreeCard(g)));
-    status = t("freeStatus", GALLERY.length, state.scanned ? GALLERY.filter(g => state.installed.has(g.family.toLowerCase())).length : null);
-  } else {
+    const list = LIB.filter(e => libVisible(e));
+    cards = list.map(e => e.el || (e.el = buildLibCard(e)));
+    if (state.kind === "paid") cards.push(buildSubmitCard());
+    const have = state.scanned ? LIB.filter(e => e.kind === "free" && state.installed.has(e.family.toLowerCase())).length : null;
+    status = state.kind === "free" ? t("libFreeStatus", FREE_COUNT, have)
+      : state.kind === "windows" ? t("libWinStatus", LIB.filter(e => e.kind === "windows").length) + (IS_WINDOWS ? "" : t("notWindows"))
+      : t("libPaidStatus");
+  } else if (v === "short" || v === "shared") {
     const names = (v === "short" ? [...state.shortlist] : state.shared || []).filter(n => !state.q || n.toLowerCase().includes(state.q));
     cards = names.map(resolveName);
     if (v === "short") {
@@ -1295,7 +1636,7 @@ function render() {
   grid.classList.toggle("list", v === "short" || v === "shared");
   grid.replaceChildren(...cards);
   const emptyEl = $("#empty");
-  emptyEl.hidden = cards.length > 0 || state.scanning || !empty;
+  emptyEl.hidden = v === "guide" || cards.length > 0 || state.scanning || !empty;
   emptyEl.textContent = empty;
 }
 let renderT = 0;
@@ -1304,22 +1645,20 @@ function scheduleRender() { if (!renderT) renderT = setTimeout(render, 350); }
 function refreshSpecs() {
   const text = sampleText();
   for (const f of state.families) if (f.el) fillSpec($(".spec", f.el), f, text);
-  for (const g of GALLERY) if (g.el) fillSpec($(".spec", g.el), { css: g.css, has: cp => cp !== 0x20AE || g.tug }, text);
+  for (const e of LIB) if (e.el && e.kind !== "paid") fillSpec($(".spec", e.el), libSpec(e), text);
   if ($("#detail").open && cur) {
     fillSpec($("#dSpec"), cur, text);
     for (const face of cur.faces) if (face.li && face.result) fillSpec(face.li.sp, { css: face.css, has: face.result.has }, text);
   }
 }
 
-function setFilter(f) {
-  state.filter = f;
-  store.set("filter", f);
-  for (const b of $("#seg").children) b.setAttribute("aria-pressed", String(b.dataset.f === f));
+function setSeg(id, attr, value) {
+  for (const b of $(id).children) b.setAttribute("aria-pressed", String(b.dataset[attr] === value));
 }
-function setCat(c) {
-  state.cat = c;
-  for (const b of $("#catSeg").children) b.setAttribute("aria-pressed", String(b.dataset.c === c));
-}
+function setFilter(f) { state.filter = f; store.set("filter", f); setSeg("#seg", "f", f); }
+function setLic(l) { state.lic = l; setSeg("#licSeg", "l", l); }
+function setKind(k) { state.kind = k; setSeg("#kindSeg", "k", k); }
+function setCat(c) { state.cat = c; setSeg("#catSeg", "c", c); }
 
 function toggleStar(name) {
   if (state.shortlist.has(name)) state.shortlist.delete(name); else state.shortlist.add(name);
@@ -1342,6 +1681,46 @@ function readShared() {
 
 // ---------- detail ----------
 let cur = null;
+
+function fillLicense(box, f) {
+  box.replaceChildren();
+  const li = f.licInfo || { kind: "unknown" };
+  const r = (f.rep && f.rep.result) || f;
+  const v = document.createElement("div");
+  v.className = "lic-verdict";
+  const bx = document.createElement("div");
+  licenseBadge(bx, li);
+  const p = document.createElement("p");
+  p.textContent = li.kind === "free" ? (li.name === "author" ? t("vAuthor") : t("vFree", li.name))
+    : li.kind === "windows" ? t("vWin") : li.kind === "rights" ? t("vRights", li.owner)
+    : li.kind === "personal" ? t("vPersonal") : t("vUnknown");
+  v.append(bx, p);
+  const dl = document.createElement("dl");
+  dl.className = "lic-fields";
+  const row = (label, value, isUrl) => {
+    if (!value) return;
+    const dt = document.createElement("dt"), dd = document.createElement("dd");
+    dt.textContent = label;
+    if (isUrl && /^https?:\/\//i.test(value)) {
+      const a = document.createElement("a");
+      a.href = value; a.target = "_blank"; a.rel = "noopener noreferrer nofollow"; a.textContent = value;
+      dd.append(a);
+    } else dd.textContent = value.length > 400 ? value.slice(0, 400) + "…" : value;
+    dl.append(dt, dd);
+  };
+  row(t("fCopyright"), r.copyright);
+  row(t("fManufacturer"), r.manufacturer);
+  row(t("fDesigner"), r.designer);
+  row(t("fLicense"), r.license);
+  row(t("fLicenseUrl"), r.licenseUrl, true);
+  const fs = r.fsType || 0;
+  row(t("fEmbed"), fs & 8 ? t("fs8") : fs & 4 ? t("fs4") : fs & 2 ? t("fs2") : t("fs0"));
+  const note = document.createElement("p");
+  note.className = "lic-note";
+  note.textContent = t("licNote");
+  box.append(v, dl, note);
+}
+
 function openDetail(f) {
   cur = f;
   const text = sampleText();
@@ -1380,6 +1759,8 @@ function openDetail(f) {
     lab.append(nm, r, out);
     axesBox.append(lab);
   }
+
+  fillLicense($("#dLic"), f);
 
   abc.style.fontFamily = f.css || "";
   abc.replaceChildren(...ABC.map(ch => {
@@ -1422,9 +1803,9 @@ function openDetail(f) {
 function applyLang() {
   document.documentElement.lang = state.lang;
   document.title = t("docTitle");
-  $('meta[name="description"]').content = t("docDesc", GALLERY.length);
+  $('meta[name="description"]').content = t("docDesc", FREE_COUNT);
   for (const el of $$("[data-i18n]")) el.textContent = t(el.dataset.i18n);
-  for (const el of $$("[data-i18n-html]")) el.innerHTML = t(el.dataset.i18nHtml, GALLERY.length);
+  for (const el of $$("[data-i18n-html]")) el.innerHTML = t(el.dataset.i18nHtml, FREE_COUNT);
   for (const el of $$("[data-i18n-ph]")) el.placeholder = t(el.dataset.i18nPh);
   for (const el of $$("[data-i18n-title]")) el.title = t(el.dataset.i18nTitle);
   for (const el of $$("[data-i18n-aria]")) el.setAttribute("aria-label", t(el.dataset.i18nAria));
@@ -1432,7 +1813,7 @@ function applyLang() {
   $("#scanBtn").textContent = t(state.scanned ? "rescan" : "scan");
   if (state.note) showNote(state.note, state.noteErr);
   for (const f of state.families) f.el = null;
-  for (const g of GALLERY) g.el = null;
+  for (const e of LIB) e.el = null;
   if ($("#detail").open) $("#detail").close();
   render();
 }
@@ -1484,15 +1865,17 @@ sizeIn.addEventListener("input", () => {
 });
 
 setFilter(state.filter);
+setLic("all");
+setKind("free");
 setCat("all");
-$("#seg").addEventListener("click", e => {
-  const b = e.target.closest("button[data-f]");
-  if (b) { setFilter(b.dataset.f); render(); }
+const segClick = (id, attr, fn) => $(id).addEventListener("click", e => {
+  const b = e.target.closest(`button[data-${attr}]`);
+  if (b) { fn(b.dataset[attr]); render(); }
 });
-$("#catSeg").addEventListener("click", e => {
-  const b = e.target.closest("button[data-c]");
-  if (b) { setCat(b.dataset.c); render(); }
-});
+segClick("#seg", "f", setFilter);
+segClick("#licSeg", "l", setLic);
+segClick("#kindSeg", "k", setKind);
+segClick("#catSeg", "c", setCat);
 $("#search").addEventListener("input", e => { state.q = e.target.value.trim().toLowerCase(); render(); });
 $("#fTug").addEventListener("change", e => { state.tugrik = e.target.checked; render(); });
 $("#fVar").addEventListener("change", e => { state.variable = e.target.checked; render(); });
@@ -1556,6 +1939,8 @@ window.addEventListener("drop", e => {
 // ---------- start ----------
 state.shared = readShared();
 if (state.shared) state.view = "shared";
+else if (location.hash === "#guide") state.view = "guide";
+else if (location.hash === "#library") state.view = "lib";
 applyLang();
 (async () => {
   if (!("queryLocalFonts" in window)) { showNote("unsupported"); return; }
