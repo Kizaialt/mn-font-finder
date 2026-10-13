@@ -49,16 +49,24 @@ def css_query(fam):
     return f"{name}:ital,wght@1,{italics[0]}"
 
 
+def num(v):
+    return str(int(v)) if float(v).is_integer() else str(v)
+
+
 def check(fam):
     q = css_query(fam)
     css = get("https://fonts.googleapis.com/css2?family=" + q).decode()
     cps = set()
     for url in set(re.findall(r"url\((https://[^)]+)\)", css)):
         cps |= set(TTFont(io.BytesIO(get(url))).getBestCmap().keys())
+    styles = sorted((k for k in fam["fonts"] if k.rstrip("i").isdigit()), key=lambda k: (k.endswith("i"), int(k.rstrip("i"))))
     return {
         "family": fam["family"], "q": q, "cat": CATS.get(fam["category"], "S"), "pop": fam["popularity"],
         "ok": all(c in cps for c in MN), "tug": 0x20AE in cps,
-        "axes": " ".join(a["tag"] for a in fam.get("axes", [])),
+        # "tag:min:max:default" per variable axis, e.g. "wght:100:900:400"
+        "axes": " ".join(f'{a["tag"]}:{num(a["min"])}:{num(a["max"])}:{num(a["defaultValue"])}' for a in fam.get("axes", [])),
+        "designers": ", ".join(fam.get("designers", [])),
+        "styles": " ".join(styles),
     }
 
 
@@ -91,7 +99,7 @@ def main():
     if unknown:
         sys.exit(f"No license folder found for: {', '.join(unknown)}")
 
-    rows = ",\n".join("  " + json.dumps([r["family"], r["q"], r["cat"], int(r["tug"]), r["axes"], r["lic"]], ensure_ascii=False) for r in ok)
+    rows = ",\n".join("  " + json.dumps([r["family"], r["q"], r["cat"], int(r["tug"]), r["axes"], r["lic"], r["designers"], r["styles"]], ensure_ascii=False) for r in ok)
     block = f"// ==GALLERY START==\nconst GALLERY_DATA = [\n{rows},\n];\n// ==GALLERY END=="
     html = INDEX.read_text(encoding="utf-8")
     new, n = re.subn(r"// ==GALLERY START==.*?// ==GALLERY END==", lambda _: block, html, flags=re.S)

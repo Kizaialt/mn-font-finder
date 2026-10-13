@@ -12,6 +12,7 @@ A free tool that finds which fonts on your computer really contain the Mongolian
   - **Free:** open-license fonts from Google Fonts plus DejaVu and Liberation, each with its license and official download link.
   - **Comes with Windows:** Windows fonts that pass the check, usable in ads, logos and print under Microsoft's font terms.
   - **Paid:** places to buy fonts with Mongolian support, plus a way for designers to suggest their fonts.
+  - Click any library font for the same detail view as installed fonts: every style, variable-axis sliders, the Mongolian alphabet and its license (designer, license text link, source).
 - **License guide:** what you can and can't do with each kind of font, in Mongolian and English.
 - **Shortlist:** star fonts for a project and share the list as a link.
 
