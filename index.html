@@ -600,7 +600,8 @@ function analyze(buf, wantPs) {
 }
 
 // What the font file itself says about its license. A hint, not legal advice.
-const WINDOWS_FAMILIES = new Set(["Arial", "Arial Black", "Bahnschrift", "Calibri", "Cambria", "Cambria Math", "Candara", "Cascadia Code", "Cascadia Mono", "Comic Sans MS", "Consolas", "Constantia", "Corbel", "Courier New", "Ebrima", "Franklin Gothic Medium", "Gabriola", "Gadugi", "Georgia", "Impact", "Ink Free", "Javanese Text", "Leelawadee UI", "Lucida Console", "Lucida Sans Unicode", "Malgun Gothic", "Microsoft Himalaya", "Microsoft JhengHei", "Microsoft JhengHei UI", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Sans Serif", "Microsoft Tai Le", "Microsoft YaHei", "Microsoft YaHei UI", "Microsoft Yi Baiti", "MingLiU-ExtB", "Mongolian Baiti", "MS Gothic", "MS PGothic", "MS UI Gothic", "MV Boli", "Myanmar Text", "Nirmala UI", "Palatino Linotype", "Segoe Fluent Icons", "Segoe MDL2 Assets", "Segoe Print", "Segoe Script", "Segoe UI", "Segoe UI Emoji", "Segoe UI Historic", "Segoe UI Symbol", "Segoe UI Variable", "SimSun", "NSimSun", "Sitka", "Sylfaen", "Symbol", "Tahoma", "Times New Roman", "Trebuchet MS", "Verdana", "Webdings", "Wingdings", "Yu Gothic", "Yu Gothic UI", "Arial Nova", "Georgia Pro", "Gill Sans Nova", "Neue Haas Grotesk Text Pro", "Rockwell Nova", "Verdana Pro", "Marlett", "HoloLens MDL2 Assets"].map(s => s.toLowerCase()));
+const WINDOWS_NAMES = ["Arial", "Arial Black", "Bahnschrift", "Calibri", "Cambria", "Cambria Math", "Candara", "Cascadia Code", "Cascadia Mono", "Comic Sans MS", "Consolas", "Constantia", "Corbel", "Courier New", "Ebrima", "Franklin Gothic Medium", "Gabriola", "Gadugi", "Georgia", "Impact", "Ink Free", "Javanese Text", "Leelawadee UI", "Lucida Console", "Lucida Sans Unicode", "Malgun Gothic", "Microsoft Himalaya", "Microsoft JhengHei", "Microsoft JhengHei UI", "Microsoft New Tai Lue", "Microsoft PhagsPa", "Microsoft Sans Serif", "Microsoft Tai Le", "Microsoft YaHei", "Microsoft YaHei UI", "Microsoft Yi Baiti", "MingLiU-ExtB", "Mongolian Baiti", "MS Gothic", "MS PGothic", "MS UI Gothic", "MV Boli", "Myanmar Text", "Nirmala UI", "Palatino Linotype", "Segoe Fluent Icons", "Segoe MDL2 Assets", "Segoe Print", "Segoe Script", "Segoe UI", "Segoe UI Emoji", "Segoe UI Historic", "Segoe UI Symbol", "Segoe UI Variable", "SimSun", "NSimSun", "Sitka", "Sylfaen", "Symbol", "Tahoma", "Times New Roman", "Trebuchet MS", "Verdana", "Webdings", "Wingdings", "Yu Gothic", "Yu Gothic UI", "Arial Nova", "Georgia Pro", "Gill Sans Nova", "Neue Haas Grotesk Text Pro", "Rockwell Nova", "Verdana Pro", "Marlett", "HoloLens MDL2 Assets"];
+const WINDOWS_FAMILIES = new Set(WINDOWS_NAMES.map(s => s.toLowerCase()));
 const OPEN_LICENSES = [
   [/open font licen[cs]e|scripts\.sil\.org\/ofl|openfontlicense\.org|\bOFL\b/i, "OFL"],
   [/apache licen[cs]e|apache\.org\/licenses/i, "Apache"],
@@ -624,19 +625,27 @@ const BOTH_USES = /(personal|non[\s_-]?commercial)\s*(and|or|&|\/)\s*commercial|
 const FOUNDRY = /monotype|linotype|adobe|\bITC\b|international typeface|\bURW\b|paratype|fontfabric|typetype|hoefler|font bureau|emigre|berthold|fontsmith|dalton maag|commercial type|klim|grilli|typotheque|positype|latinotype|bitstream|agfa|ascender|fontshop|licensed,? not sold|end[\s-]user licen[cs]e|\bEULA\b|all rights reserved/i;
 const isDemoName = s => /(?<![a-z])(demo|trial)(?![a-z])/i.test(s) || /[a-z](Demo|Trial|DEMO|TRIAL)(?![a-z])/.test(s);
 
-function licenseOf(info, names) {
+// family: the font's own family name. Only that decides "comes with Windows", so a
+// renamed copy such as "Arial Mon" never passes as the real Arial.
+function licenseOf(info, names, family) {
+  const fam = (family || info.nameFamily || names[0] || "").trim();
   const nameText = names.filter(Boolean).join(" | ");
   const licText = [info.license, info.licenseUrl, info.copyright].join(" | ");
   const allText = [info.copyright, info.trademark, info.manufacturer, info.license, info.licenseUrl].join(" | ").replace(BOTH_USES, " BOTH_USES ");
   if (STRONG_PERSONAL.test(nameText) || STRONG_PERSONAL.test(allText) || isDemoName(nameText)) return { kind: "personal" };
   for (const [re, name] of OPEN_LICENSES) if (re.test(licText)) return { kind: "free", name };
-  if (names.some(n => n && WINDOWS_FAMILIES.has(n.toLowerCase()))) return { kind: "windows" };
+  if (WINDOWS_FAMILIES.has(fam.toLowerCase())) return { kind: "windows" };
   if (!EULA_LIKE.test(licText)) for (const [re, name] of WEAK_OPEN) if (re.test(licText)) return { kind: "free", name };
   if (COMMERCIAL_OK.test(allText)) return { kind: "free", name: "author" };
   if (WEAK_PERSONAL.test(nameText) || WEAK_PERSONAL.test(allText)) return { kind: "personal" };
   if (FOUNDRY.test(allText)) {
     const owner = (info.manufacturer || info.copyright.replace(/copyright|\(c\)|©|\d{4}(\s*[-–,]\s*\d{4})*|all rights reserved\.?/gi, "")).replace(/\s+/g, " ").replace(/^[\s.,;-]+|[\s.,;-]+$/g, "");
-    return { kind: "rights", owner: owner.slice(0, 60) };
+    // "Arial Mon", "Times New Roman Mon": a Windows font someone edited and renamed.
+    const words = s => " " + s.toLowerCase().split(/\s+/).filter(Boolean).join(" ") + " ";
+    const base = WINDOWS_NAMES.filter(w => words(w) !== words(fam) && words(fam).includes(words(w))
+      && /\b(mon|mong|mongol|mongolian|mgl|mn)\b/i.test(words(fam).replace(words(w), " ")))
+      .sort((x, y) => y.length - x.length)[0];
+    return { kind: "rights", owner: owner.slice(0, 60), ...(base ? { renamedFrom: base } : {}) };
   }
   return { kind: "unknown" };
 }
@@ -941,6 +950,8 @@ const I18N = {
     vAuthor: "Зохиогч арилжааны хэрэглээнд үнэгүй гэж файлдаа бичсэн байна. Татсан эх сурвалжаас нь баталгаажуулаарай.",
     vWin: "Windows-тай ирдэг фонт: зар, лого, хэвлэл, видеод ашиглаж болно. Вэб сайтад байршуулах, бусдад өгөх, апп-д оруулахыг хориглоно.",
     vRights: o => `Зохиогчийн эрхтэй${o ? " (" + o + ")" : ""}. Лиценз худалдаж авсан эсвэл зохиогч зөвшөөрсөн бол ашиглаж болно.`,
+    licRenamed: "Өөрчилсөн хуулбар",
+    vRenamed: (base, o, ok) => `${base} фонтыг өөрчилж, нэрийг нь сольсон хуулбар бололтой${o ? " (" + o + ")" : ""}. Windows-ын фонтыг өөрчлөхийг Microsoft зөвшөөрдөггүй тул сурталчилгаанд ашиглахгүй.` + (ok ? ` Оронд нь Windows-тай ирдэг жинхэнэ ${base} фонтыг ашиглаарай: Ө, Ү бүрэн.` : ""),
     vPersonal: "Файлд хувийн хэрэглээнд, demo эсвэл trial гэж бичсэн байна. Зар сурталчилгаа, захиалгат ажилд ашиглахгүй.",
     vUnknown: "Файлд лицензийн мэдээлэл алга. Фонтыг хаанаас татсанаа шалгаарай.",
     licNote: "Фонтын файлд бичигдсэн мэдээлэлд үндэслэв. Хуулийн зөвлөгөө биш.",
@@ -980,7 +991,7 @@ const I18N = {
 <article class="rule bad"><h3><span>✗</span> «Personal use», «Demo», «Trial» фонт</h3><p>Зөвхөн хувийн хэрэглээнд. Зар, лого, захиалгат ажилд ашиглахыг хориглоно. Үнэгүй фонтын сайтаас татсан гоё фонтуудын ихэнх нь ийм байдаг.</p></article>
 <article class="rule bad"><h3><span>✗</span> Олон зуун фонттой багц, архив</h3><p>500, 1000 гаруй фонттой архив, Google Drive-ын багц, файл худалдааны сайтаас авсан фонтууд ихэвчлэн лицензгүй. Архивыг мөнгөөр авсан ч фонтын лиценз авсан гэсэн үг биш.</p></article>
 <article class="rule bad"><h3><span>✗</span> Нэрийг нь өөрчилсөн хуулбар</h3><p>Arial, Times New Roman зэрэг фонтод Монгол үсэг нэмж, нэрийг нь сольсон хуулбарыг ашиглах эрхгүй. Windows-ын фонтыг өөрчлөхийг Microsoft зөвшөөрдөггүй.</p></article>
-<article class="rule bad"><h3><span>✗</span> Хуучин кодчиллын фонт</h3><p>Юникодоос өмнөх зарим фонт Ө, Ү-г өөр тэмдэгтийн байранд суулгасан байдаг. Ийм фонтоор бичсэн текст өөр фонт руу шилжихэд эвдэрнэ. Фонт Шүүгч ийм фонтыг «Дутуу» гэж харуулна.</p></article>
+<article class="rule bad"><h3><span>✗</span> Хуучин кодчиллын фонт</h3><p>Юникодоос өмнөх зарим фонт Ө, Ү-г өөр тэмдэгтийн байранд суулгасан байдаг. Ийм фонтоор бичсэн текст өөр фонт руу шилжихэд эвдэрнэ. Фонт Шүүгч ийм фонтыг «Дутуу» эсвэл «Кириллгүй» гэж харуулна.</p></article>
 </div>
 <h3 class="sub-h">Өөрийн фонтуудаа шалгах</h3>
 <p><button type="button" class="link" data-go="mine">Миний фонтууд</button> хэсэгт фонт бүрийн файлд бичигдсэн лицензийн мэдээллийг уншиж «Сурталчилгаанд OK», «Лиценз шаардлагатай», «Хувийн/Demo», «Тодорхойгүй» гэж ангилна. Энэ нь файлд бичигдсэн мэдээлэл төдий тул эргэлзээтэй бол фонтыг татсан эх сурвалжаас нь лицензийг шалгаарай.</p>
@@ -1043,6 +1054,8 @@ const I18N = {
     vAuthor: "The author wrote in the file that it's free for commercial use. Confirm it where you downloaded it.",
     vWin: "Comes with Windows: OK for ads, logos, print and video. Not for hosting on a website, giving to others or putting in an app.",
     vRights: o => `Copyrighted${o ? " (" + o + ")" : ""}. Use it if you bought a license or the author gave permission.`,
+    licRenamed: "Renamed copy",
+    vRenamed: (base, o, ok) => `Looks like a modified, renamed copy of ${base}${o ? " (" + o + ")" : ""}. Microsoft doesn't allow modifying Windows fonts, so don't use it in ads.` + (ok ? ` Use the real ${base} that comes with Windows instead: it has every Mongolian letter.` : ""),
     vPersonal: "The file says personal use, demo or trial. Don't use it in ads or client work.",
     vUnknown: "The file has no license info. Check where you downloaded it.",
     licNote: "Based on what the font file says. Not legal advice.",
@@ -1082,7 +1095,7 @@ const I18N = {
 <article class="rule bad"><h3><span>✗</span> "Personal use", "Demo", "Trial" fonts</h3><p>Personal use only. Not for ads, logos or client work. Most of the eye-catching fonts on free-font sites are like this.</p></article>
 <article class="rule bad"><h3><span>✗</span> Packs of hundreds of fonts</h3><p>Archives with 500 or 1,000+ fonts, Google Drive bundles and fonts resold on file-sharing sites usually come with no license. Paying for the archive doesn't give you a font license.</p></article>
 <article class="rule bad"><h3><span>✗</span> Renamed copies</h3><p>Copies of fonts like Arial or Times New Roman with Mongolian letters added and a new name aren't licensed. Microsoft doesn't allow modifying Windows fonts.</p></article>
-<article class="rule bad"><h3><span>✗</span> Old pre-Unicode fonts</h3><p>Some older fonts put Ө and Ү in place of other characters. Text typed in them breaks as soon as you switch fonts. Mongolian Font Finder shows these as "Partial".</p></article>
+<article class="rule bad"><h3><span>✗</span> Old pre-Unicode fonts</h3><p>Some older fonts put Ө and Ү in place of other characters. Text typed in them breaks as soon as you switch fonts. Mongolian Font Finder shows these as "Partial" or "No Cyrillic".</p></article>
 </div>
 <h3 class="sub-h">Checking your own fonts</h3>
 <p><button type="button" class="link" data-go="mine">My fonts</button> reads the license information stored in each font file and sorts fonts into "OK for ads", "License required", "Personal/Demo" and "Unknown". That's only what the file says, so if in doubt, check the license where you got the font.</p>
@@ -1224,7 +1237,7 @@ async function analyzeFace(face) {
 
 function licenseFor(f) {
   const r = f.rep && f.rep.result ? f.rep.result : f;
-  return licenseOf(r, [f.name, r.nameFamily, r.fullName, r.ps, f.fileName, ...(f.faces || []).map(x => x.full)]);
+  return licenseOf(r, [f.name, r.nameFamily, r.fullName, r.ps, f.fileName, ...(f.faces || []).map(x => x.full)], r.nameFamily || f.name);
 }
 
 function showNote(kind, err) {
@@ -1388,7 +1401,7 @@ function licenseBadge(box, li) {
   if (!li) return;
   if (li.kind === "free") badge(box, li.name === "author" ? t("licAuthor") : t("licFree", li.name), "lic-free", t("licFreeT"));
   else if (li.kind === "windows") badge(box, t("licWin"), "info", t("licWinT"));
-  else if (li.kind === "rights") badge(box, t("licRights"), "warn", t("licRightsT", li.owner));
+  else if (li.kind === "rights") badge(box, li.renamedFrom ? t("licRenamed") : t("licRights"), "warn", t("licRightsT", li.owner));
   else if (li.kind === "personal") badge(box, t("licPersonal"), "bad", t("licPersonalT"));
   else badge(box, t("licUnknown"), "", t("licUnknownT"));
 }
@@ -1766,7 +1779,7 @@ function fillLicense(box, f) {
   licenseBadge(bx, li);
   const p = document.createElement("p");
   p.textContent = li.kind === "free" ? (li.name === "author" ? t("vAuthor") : t("vFree", li.name))
-    : li.kind === "windows" ? t("vWin") : li.kind === "rights" ? t("vRights", li.owner)
+    : li.kind === "windows" ? t("vWin") : li.kind === "rights" ? (li.renamedFrom ? t("vRenamed", li.renamedFrom, li.owner, WINDOWS_LIB.some(w => w[0] === li.renamedFrom)) : t("vRights", li.owner))
     : li.kind === "personal" ? t("vPersonal") : t("vUnknown");
   v.append(bx, p);
   const dl = document.createElement("dl");
