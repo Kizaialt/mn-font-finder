@@ -880,6 +880,7 @@ const WINDOWS_LIB = [
 // Paid sources. Not verified by us: the seller's own description.
 const PAID_LIB = [
   { family: "TypeType", url: "https://typetype.org/fonts/mongolian/", textKey: "paidTypeType" },
+  { family: "Rentafont", url: "https://rentafont.com/search/mongolian-cyrillic-language-fonts", textKey: "paidRentafont" },
 ];
 const SUGGEST_URL = "https://github.com/Kizaialt/mn-font-finder/issues/new?title=" + encodeURIComponent("Font suggestion: ") + "&body=" + encodeURIComponent("Font name:\nDesigner / foundry:\nWhere to get it (link):\nLicense (free / paid / terms):\n");
 
@@ -973,6 +974,7 @@ const I18N = {
     cantRead: n => `${n} файлыг уншиж чадсангүй`,
     getFont: "Татах ↗", getFontT: "Албан ёсны эх сурвалжаас татах", info: "Мэдээлэл ↗", view: "Үзэх ↗", suggest: "Санал илгээх ↗",
     foundry: "Фонтын компани", notVerified: "Шалгаагүй · худалдагчийн мэдээлэл",
+    paidRentafont: "Фонт түрээслэх, худалдах үйлчилгээ. «Mongolian Cyrillic» шүүлтүүрээр 94 фонтын гэр бүл (948 хэв маяг) гардаг. Хэв маяг бүрээр үнэтэй, түрээслэх эсвэл худалдаж авах боломжтой.",
     paidTypeType: "Олон улсын фонтын компани. Сайтын Mongolian ангилалд 25 гаруй фонт байгаа бөгөөд бүгд Монгол цагаан толгойтой гэж бичсэн. Үнэгүй туршилтын хувилбартай.",
     submitTitle: "Та Монгол фонт бүтээсэн үү?",
     submitText: "Фонтоо энд нэмүүлэхийг хүсвэл санал илгээгээрэй. Лиценз, худалдаж авах холбоосоо хавсаргаарай. Бид файлыг нь шалгаад нэмнэ.",
@@ -1077,6 +1079,7 @@ const I18N = {
     cantRead: n => `Couldn't read ${n}`,
     getFont: "Get font ↗", getFontT: "Download from the official source", info: "Details ↗", view: "View ↗", suggest: "Suggest a font ↗",
     foundry: "Type foundry", notVerified: "Not verified · seller's claim",
+    paidRentafont: "Font rental and purchase service. Its Mongolian Cyrillic filter lists 94 font families (948 styles), priced per style, to rent or buy.",
     paidTypeType: "International type foundry. Its Mongolian category lists 25+ font families and says each includes the Mongolian alphabet. Free trial versions available.",
     submitTitle: "Made a Mongolian font?",
     submitText: "Suggest it for the library. Include the license and where to buy or download it. We check the files before adding.",
