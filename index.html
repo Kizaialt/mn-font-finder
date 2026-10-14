@@ -84,20 +84,17 @@ a { color: inherit; }
 .wrap { max-width: 1480px; margin-inline: auto; padding-inline: 24px; }
 
 /* Header */
-.top { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px 32px; flex-wrap: wrap; padding-top: 32px; padding-bottom: 20px; }
-.brand { display: flex; align-items: center; gap: 14px; margin: 0 0 10px; }
-.brand svg { flex: none; }
-h1 { font-size: clamp(28px, 3.6vw, 42px); line-height: 1.05; letter-spacing: -0.02em; margin: 0; font-weight: 700; }
-.sub { margin: 0; color: var(--ink-2); max-width: 62ch; }
-.sub strong { color: var(--ink); font-weight: 600; }
-.top-actions { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.brand { display: flex; align-items: center; gap: 10px; margin: 0; flex: none; }
+.brand svg { flex: none; width: 30px; height: 30px; }
+h1 { font-size: 20px; line-height: 1.1; letter-spacing: -0.015em; margin: 0; font-weight: 700; }
+.top-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-left: auto; }
 .lang { display: inline-flex; gap: 2px; padding: 2px; border: 1px solid var(--line-2); border-radius: 999px; }
-.lang button { border: 0; background: transparent; height: 32px; min-width: 38px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .04em; color: var(--ink-3); }
+.lang button { border: 0; background: transparent; height: 30px; min-width: 38px; padding: 0 10px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .04em; color: var(--ink-3); }
 .lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
 .btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 40px; padding: 0 16px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 36px; padding: 0 15px;
   border-radius: 999px; border: 1px solid var(--line-2); background: var(--surface);
-  font-weight: 600; font-size: 14px; white-space: nowrap; cursor: pointer; text-decoration: none;
+  font-weight: 600; font-size: 13px; white-space: nowrap; cursor: pointer; text-decoration: none;
   transition: border-color .15s, background .15s, opacity .15s;
 }
 .btn:hover { border-color: var(--ink-3); }
@@ -109,13 +106,15 @@ h1 { font-size: clamp(28px, 3.6vw, 42px); line-height: 1.05; letter-spacing: -0.
 /* Toolbar */
 .toolbar { position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
 @media (max-height: 760px), (max-width: 640px) { .toolbar { position: static; } }
-.tabs { display: flex; gap: 2px; flex-wrap: wrap; border-bottom: 1px solid var(--line); }
-.tab { border: 0; background: none; height: 44px; padding: 0 14px; font-weight: 600; font-size: 14px; color: var(--ink-3); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.nav { display: flex; align-items: center; gap: 0 28px; border-bottom: 1px solid var(--line); }
+.tabs { display: flex; gap: 2px; align-self: stretch; overflow-x: auto; scrollbar-width: none; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { border: 0; background: none; height: 58px; padding: 0 14px; font-weight: 600; font-size: 14px; color: var(--ink-3); border-bottom: 2px solid transparent; margin-bottom: -1px; white-space: nowrap; }
 .tab:hover { color: var(--ink); }
 .tab[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--ink); }
 .tab b { font-weight: 500; margin-left: 6px; font-variant-numeric: tabular-nums; color: var(--ink-3); }
 .tab .star-ic { color: var(--star); margin-right: 4px; }
-.tb { padding-top: 12px; padding-bottom: 10px; display: grid; gap: 10px; }
+.tb { padding-top: 12px; padding-bottom: 8px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 10px; }
 .tb-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .sample { flex: 1 1 360px; min-width: 0; height: 46px; padding: 0 16px; font-size: 19px; border: 1px solid var(--line-2); border-radius: 12px; background: var(--surface); }
 .presets { display: flex; gap: 6px; flex-wrap: wrap; }
@@ -126,22 +125,37 @@ h1 { font-size: clamp(28px, 3.6vw, 42px); line-height: 1.05; letter-spacing: -0.
 .seg button b { font-weight: 600; margin-left: 5px; font-variant-numeric: tabular-nums; color: var(--ink-3); }
 .seg button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgb(0 0 0 / .1); }
 .seg button[aria-pressed="true"] b { color: inherit; }
-.search { height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-2); background: var(--surface); width: 200px; font-size: 14px; }
+.search { height: 36px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--line-2); background: var(--surface); width: 170px; font-size: 14px; margin-left: auto; }
+#catSeg b, #kindSeg b { display: none; }
 .chk { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink-2); cursor: pointer; user-select: none; }
 .chk input { accent-color: var(--ink); width: 16px; height: 16px; margin: 0; }
 .range { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--ink-2); }
 .range input { accent-color: var(--ink); width: 120px; }
-.tb-status { display: flex; gap: 4px 16px; align-items: center; flex-wrap: wrap; font-size: 13px; color: var(--ink-3); min-height: 20px; }
+.tb-status { display: flex; gap: 4px 16px; align-items: flex-start; flex-wrap: wrap; font-size: 13px; color: var(--ink-3); min-height: 20px; }
 .tb-status .spacer { flex: 1; }
+.licnote { font-size: 13px; }
+.licnote a, .lic-box .link { cursor: pointer; }
+.licnote summary { cursor: pointer; list-style: none; color: var(--ink-2); font-weight: 600; display: inline-flex; align-items: center; gap: 5px; }
+.licnote summary::-webkit-details-marker { display: none; }
+.licnote summary::before { content: "i"; display: inline-grid; place-items: center; width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid currentColor; font-size: 10px; font-weight: 700; font-style: italic; font-family: Georgia, serif; }
+.licnote summary:hover { color: var(--ink); }
+.licnote p { margin: 6px 0 0; color: var(--ink-2); max-width: 72ch; }
+.licnote a { font-weight: 600; }
+#licSeg button[data-l]:not([data-l="all"])::before { content: ""; display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 7px; vertical-align: 1px; background: var(--ink-3); }
+#licSeg button[data-l="ads"]::before { background: var(--ok) !important; }
+#licSeg button[data-l="rights"]::before { background: var(--warn) !important; }
+#licSeg button[data-l="personal"]::before { background: var(--bad) !important; }
 .link { border: 0; background: none; padding: 0; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; font-size: inherit; font-weight: 600; }
 
 /* Intro + notes */
 .intro { padding-top: 24px; padding-bottom: 48px; }
-.intro-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 40px clamp(20px, 5vw, 56px); max-width: 800px; }
-.intro-big { font-size: clamp(64px, 11vw, 128px); line-height: 1.2; margin: 0 0 16px; font-weight: 800; letter-spacing: -0.02em; color: var(--ink) !important; }
+.intro-card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: clamp(24px, 4vw, 48px); max-width: 1080px; margin-inline: auto; display: grid; gap: 28px 56px; align-items: center; }
+@media (min-width: 880px) { .intro-card { grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); } }
+.intro-big { font-size: clamp(60px, 9vw, 116px); line-height: 1.15; margin: 0 0 12px !important; font-weight: 800; letter-spacing: -0.02em; color: var(--ink) !important; max-width: none !important; }
+.intro-lede { font-size: 17px; line-height: 1.5; }
 .intro-card p { color: var(--ink-2); margin: 0 0 12px; max-width: 62ch; }
 .intro-card strong { color: var(--ink); }
-.intro-card .btn { margin: 8px 0 20px; }
+.intro-card .btn { margin: 6px 0 18px; height: 40px; font-size: 14px; }
 .privacy { display: flex; gap: 8px; align-items: flex-start; }
 .privacy svg { flex: none; margin-top: 3px; color: var(--ok); }
 code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: .9em; background: var(--muted-bg); padding: 1px 6px; border-radius: 6px; }
@@ -152,8 +166,10 @@ code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-siz
 .banner .acts { display: flex; gap: 8px; flex-wrap: wrap; }
 
 /* License guide */
-.guide { padding-top: 28px; padding-bottom: 56px; max-width: 1100px; }
-.guide h2 { font-size: clamp(22px, 2.6vw, 30px); letter-spacing: -0.01em; margin: 0 0 8px; }
+.guide { padding: 4px 0 8px; }
+.g-close { position: absolute; top: 16px; right: 16px; z-index: 1; }
+#guideDlg { width: min(1040px, calc(100vw - 32px)); }
+.guide h2 { padding-right: 48px; font-size: clamp(22px, 2.6vw, 30px); letter-spacing: -0.01em; margin: 0 0 8px; }
 .guide .lead { color: var(--ink-2); font-size: 17px; margin: 0 0 24px; max-width: 64ch; }
 .rules { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 12px; }
 .rule { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
@@ -165,14 +181,18 @@ code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-siz
 .rule p { margin: 0; color: var(--ink-2); font-size: 14px; }
 .guide .sub-h { font-size: 16px; text-transform: none; letter-spacing: 0; color: var(--ink); margin: 32px 0 6px; }
 .guide p { max-width: 72ch; }
+.guide .legend { color: var(--ink-2); font-size: 14px; margin: -8px 0 22px; line-height: 2; }
+.guide .legend .lg { display: inline-block; white-space: nowrap; margin-right: 20px; }
+.guide .legend .lic-dot { margin-right: 7px; vertical-align: 0; }
+.guide .legend small { color: var(--ink-3); font-size: 13px; }
 .guide .fine { color: var(--ink-3); font-size: 13px; margin-top: 24px; }
 
 /* Grid + cards */
 .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 14px; padding-top: 20px; padding-bottom: 56px; }
 .grid.list { grid-template-columns: 1fr; }
 .card {
-  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
-  padding: 12px 14px 12px 16px; display: flex; flex-direction: column; min-width: 0;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+  padding: 12px 14px 12px 18px; display: flex; flex-direction: column; min-width: 0;
   content-visibility: auto; contain-intrinsic-size: auto 220px; transition: border-color .15s;
 }
 .card:hover { border-color: var(--line-2); }
@@ -195,7 +215,16 @@ button.name:hover { text-decoration: underline; text-underline-offset: 3px; }
 .spec.text { color: var(--ink-2); }
 .miss { color: var(--bad); text-decoration: underline wavy var(--bad); text-decoration-skip-ink: none; text-underline-offset: .15em; text-decoration-thickness: 2px; }
 .card-f { display: flex; align-items: center; gap: 8px; justify-content: space-between; }
-.badges { display: flex; flex-wrap: wrap; gap: 6px; min-width: 0; }
+.badges { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; min-width: 0; }
+.fact { font-size: 12px; color: var(--ink-3); white-space: nowrap; }
+.fact + .fact::before { content: "·"; margin: 0 6px; opacity: .6; }
+.lic-dot { display: inline-block; flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--ink-3); cursor: help; }
+.lic-dot.ok { background: var(--ok); }
+.lic-dot.ring { background: transparent; box-shadow: inset 0 0 0 2px var(--ok); }
+.lic-dot.warn { background: var(--warn); }
+.lic-dot.bad { background: var(--bad); }
+.grid[data-view="lib"] .lic-dot { display: none; }
+.card-h .lic-dot { margin-left: 2px; }
 .badge { display: inline-block; height: 22px; line-height: 22px; padding: 0 8px; border-radius: 6px; font-size: 12px; font-weight: 500; background: var(--muted-bg); color: var(--ink-2); white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
 .badge.ok { background: var(--ok-bg); color: var(--ok); }
 .badge.warn { background: var(--warn-bg); color: var(--warn); }
@@ -227,6 +256,16 @@ dialog::backdrop { background: rgb(10 10 12 / .5); }
 .axis input { accent-color: var(--ink); width: 100%; }
 .axis output { font-variant-numeric: tabular-nums; text-align: right; color: var(--ink); }
 h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); margin: 24px 0 10px; font-weight: 600; }
+.lic-box { margin-top: 28px; border-top: 1px solid var(--line); padding-top: 4px; }
+.lic-box summary { cursor: pointer; list-style: none; display: flex; align-items: center; gap: 10px; padding: 12px 0; font-size: 14px; font-weight: 600; }
+.lic-box summary::-webkit-details-marker { display: none; }
+.lic-box summary::after { content: ""; margin-left: auto; width: 8px; height: 8px; border-right: 2px solid var(--ink-3); border-bottom: 2px solid var(--ink-3); transform: rotate(45deg) translate(-2px, -2px); transition: transform .15s; }
+.lic-box[open] summary::after { transform: rotate(-135deg) translate(-2px, -2px); }
+.lic-box .lic-sum { color: var(--ink-3); font-weight: 500; }
+.lic-box > div { padding-bottom: 6px; }
+.lic-box .lic-guide { margin: 10px 0 0; font-size: 13px; }
+.info-btn { flex: none; width: 24px; height: 24px; border-radius: 50%; border: 1.5px solid var(--ink-3); background: none; color: var(--ink-3); font: italic 700 12px/1 Georgia, serif; padding: 0; display: grid; place-items: center; }
+.info-btn:hover { color: var(--ink); border-color: var(--ink); }
 .lic-verdict { display: flex; gap: 10px; align-items: flex-start; margin: 0 0 12px; }
 .lic-verdict p { margin: 0; color: var(--ink); }
 .lic-fields { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; margin: 0; font-size: 13px; }
@@ -255,8 +294,14 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
 
 @media (max-width: 640px) {
   .wrap { padding-inline: 16px; }
-  .top { padding-top: 22px; }
-  .search { flex: 1 1 100%; width: auto; }
+  .nav { flex-wrap: wrap; gap: 10px 12px; padding-top: 12px; }
+  .top-actions { order: 2; }
+  .tabs { order: 3; flex: 1 1 100%; margin-inline: -4px; }
+  .tab { height: 44px; }
+  .seg, .presets { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; scrollbar-width: none; }
+  .seg::-webkit-scrollbar, .presets::-webkit-scrollbar { display: none; }
+  .seg button, .presets button { flex: none; }
+  .search { flex: 1 1 100%; width: auto; margin-left: 0; }
   .range input { width: 100px; }
   .tab { padding: 0 10px; font-size: 13px; }
   .styles li { grid-template-columns: 1fr auto; }
@@ -270,34 +315,30 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
 <body>
 <div id="bar" class="bar" hidden><span></span></div>
 
-<header class="top wrap">
-  <div>
-    <div class="brand">
-      <svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="currentColor"/><ellipse cx="32" cy="32" rx="15" ry="19" fill="none" stroke="var(--bg)" stroke-width="6"/><path d="M17 32h30" stroke="var(--bg)" stroke-width="6"/></svg>
-      <h1 data-i18n="brand">Фонт Шүүгч</h1>
-    </div>
-    <p class="sub" data-i18n-html="tagline"></p>
-  </div>
-  <div class="top-actions">
-    <div class="lang" id="langSw" role="group" aria-label="Language / Хэл">
-      <button type="button" data-lang="mn" aria-pressed="true">МН</button>
-      <button type="button" data-lang="en" aria-pressed="false">EN</button>
-    </div>
-    <label class="btn" for="fileInput" tabindex="0" id="fileBtn" data-i18n="checkFiles"></label>
-    <input id="fileInput" type="file" multiple accept=".ttf,.otf,.ttc" hidden>
-    <button id="scanBtn" class="btn primary" type="button"></button>
-  </div>
-</header>
 
 <div id="toolbar" class="toolbar">
   <div class="wrap">
+    <div class="nav">
+    <div class="brand">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="currentColor"/><ellipse cx="32" cy="32" rx="15" ry="19" fill="none" stroke="var(--bg)" stroke-width="6"/><path d="M17 32h30" stroke="var(--bg)" stroke-width="6"/></svg>
+      <h1 data-i18n="brand">Фонт Шүүгч</h1>
+    </div>
     <nav class="tabs" id="tabs" role="tablist">
       <button class="tab" role="tab" type="button" data-tab="mine"><span data-i18n="tabMine"></span><b id="cMine"></b></button>
       <button class="tab" role="tab" type="button" data-tab="lib"><span data-i18n="tabLib"></span><b id="cLib"></b></button>
-      <button class="tab" role="tab" type="button" data-tab="guide"><span data-i18n="tabGuide"></span></button>
       <button class="tab" role="tab" type="button" data-tab="short"><span class="star-ic" aria-hidden="true">★</span><span data-i18n="tabShort"></span><b id="cShort"></b></button>
       <button class="tab" role="tab" type="button" data-tab="shared" hidden><span data-i18n="tabShared"></span><b id="cShared"></b></button>
     </nav>
+    <div class="top-actions">
+      <div class="lang" id="langSw" role="group" aria-label="Language / Хэл">
+        <button type="button" data-lang="mn" aria-pressed="true">МН</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <label class="btn" for="fileInput" tabindex="0" id="fileBtn" data-i18n="checkFiles"></label>
+      <input id="fileInput" type="file" multiple accept=".ttf,.otf,.ttc" hidden>
+      <button id="scanBtn" class="btn primary" type="button"></button>
+    </div>
+    </div>
     <div class="tb" data-views="mine lib short shared">
       <div class="tb-row">
         <input id="sample" class="sample" type="text" spellcheck="false" data-i18n-aria="sampleAria">
@@ -306,6 +347,7 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
           <button type="button" data-preset="caps" data-i18n="presetCaps"></button>
           <button type="button" data-preset="abc" data-i18n="presetAbc"></button>
           <button type="button" data-preset="num">0–9 ₮</button>
+          <button type="button" data-preset="fox" title="The quick brown fox jumps over the lazy dog">The quick brown fox</button>
         </div>
         <label class="range"><span data-i18n="size"></span> <input id="size" type="range" min="16" max="140" step="2" data-i18n-aria="size"></label>
       </div>
@@ -323,6 +365,7 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
           <button type="button" data-l="personal"><span data-i18n="licSegPersonal"></span><b></b></button>
           <button type="button" data-l="unknown"><span data-i18n="licSegUnknown"></span><b></b></button>
         </div>
+        <button type="button" class="info-btn" data-go="guide" data-views="mine" data-i18n-title="tabGuide" data-i18n-aria="tabGuide">i</button>
         <div class="seg" id="kindSeg" role="group" data-views="lib">
           <button type="button" data-k="free"><span data-i18n="libFree"></span><b></b></button>
           <button type="button" data-k="mn"><span data-i18n="libMn"></span><b></b></button>
@@ -345,6 +388,7 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
       <div class="tb-status">
         <span id="status" aria-live="polite"></span>
         <span id="status2"></span>
+        <details class="licnote" id="licNote" data-views="lib"><summary data-i18n="licInfo"></summary><p id="licNoteText"></p></details>
         <span class="spacer"></span>
         <button id="copyNames" class="link" type="button" data-views="short" data-i18n="copyNames"></button>
         <button id="copyLink" class="link" type="button" data-views="short" data-i18n="copyLink"></button>
@@ -369,17 +413,21 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
 
 <section id="intro" class="intro wrap">
   <div class="intro-card">
-    <p class="intro-big" aria-hidden="true">Ө Ү ө ү</p>
+    <div>
+      <p class="intro-big" aria-hidden="true">Ө Ү ө ү</p>
+      <p class="intro-lede" data-i18n-html="tagline"></p>
+    </div>
+    <div>
     <p data-i18n-html="intro1"></p>
     <button id="introScan" class="btn primary" type="button" data-i18n="scan"></button>
     <p class="privacy"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="privacy"></span></p>
     <p data-i18n-html="intro2"></p>
     <p data-i18n-html="intro3"></p>
     <p id="note" class="note" hidden></p>
+    </div>
   </div>
 </section>
 
-<section id="guide" class="guide wrap" data-views="guide" data-i18n-html="guideHtml"></section>
 
 <main id="grid" class="grid wrap"></main>
 <p id="empty" class="empty wrap" hidden></p>
@@ -404,12 +452,23 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
     </div>
     <div id="dSpec" class="d-spec"></div>
     <div id="dAxes" class="axes" hidden></div>
-    <h3 data-i18n="licenseH"></h3>
-    <div id="dLic"></div>
     <h3 data-i18n="alphabet"></h3>
     <div id="dAbc" class="abc"></div>
     <h3 data-i18n="stylesH"></h3>
     <ul id="dStyles" class="styles"></ul>
+    <details id="dLicBox" class="lic-box">
+      <summary><span id="dLicDot"></span><span data-i18n="licenseH"></span><span id="dLicSum" class="lic-sum"></span></summary>
+      <div id="dLic"></div>
+    </details>
+  </div>
+</dialog>
+
+<dialog id="guideDlg" data-i18n-aria="tabGuide">
+  <div class="d-in">
+    <button id="gClose" class="icon-btn g-close" type="button" data-i18n-aria="close">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <div id="guide" class="guide" data-i18n-html="guideHtml"></div>
   </div>
 </dialog>
 
@@ -940,6 +999,7 @@ const I18N = {
     licSegAll: "Бүх лиценз", licSegAds: "Сурталчилгаанд OK", licSegAdsT: "Нээлттэй лицензтэй эсвэл Windows-тай ирдэг фонт",
     licSegRights: "Лиценз шаардлагатай", licSegPersonal: "Хувийн/Demo", licSegUnknown: "Тодорхойгүй",
     libFree: "Үнэгүй", libMn: "Монгол хувилбар", libWin: "Windows-тай ирдэг", libPaid: "Төлбөртэй",
+    licInfo: "Лиценз", licGuideLink: "Лицензийн заавар →", libCount: n => `${n} фонт`, libHave: n => `${n} нь танд суусан`,
     libMnStatus: n => `Ө ө Ү ү эсвэл ₮ дутуу байсан ${n} нээлттэй фонтод эдгээр үсгийг тухайн фонтын өөрийн хэв маягаар нэмсэн Монгол хувилбарууд. Арилжааны хэрэглээнд үнэгүй (OFL).`,
     mnBadge: "Монгол хувилбар", mnBadgeT: (b, d) => `${b} (${d}) фонт дээр Ө ө Ү ү ₮ нэмсэн`, mnAdditions: "Монгол үсгийг нэмсэн: Фонт Шүүгч",
     catAll: "Бүгд", catS: "Sans serif", catR: "Serif", catD: "Чимэглэлийн", catH: "Гар бичмэл", catM: "Monospace",
@@ -947,7 +1007,7 @@ const I18N = {
     copyNames: "Нэрсийг хуулах", copyLink: "Хуваалцах холбоос хуулах", addAll: "Миний жагсаалтад нэмэх", closeShared: "Хаах",
     alphabet: "Монгол цагаан толгой", stylesH: "Хэв маяг", licenseH: "Лиценз", copyName: "Нэр хуулах", copyCss: "CSS хуулах", close: "Хаах",
     drop: ".ttf, .otf, .ttc файлаа энд тавьж шалгаарай",
-    footer: "Үнэгүй хэрэгсэл. Фонтууд тань таны компьютерээс гарахгүй, бүх шалгалт хөтөч дотор явагдана. Үнэгүй фонтын жишээг Google Fonts болон jsDelivr-ээс ачаална. Лицензийн мэдээлэл нь ерөнхий чиглүүлэг, хуулийн зөвлөгөө биш. Компьютер дээрх Chrome эсвэл Edge хөтөчид хамгийн сайн ажиллана.",
+    footer: "Үнэгүй хэрэгсэл. Фонтууд тань таны компьютерээс гарахгүй, бүх шалгалт хөтөч дотор явагдана. Үнэгүй фонтын жишээг Google Fonts болон jsDelivr-ээс ачаална. Лицензийн мэдээлэл нь ерөнхий чиглүүлэг, хуулийн зөвлөгөө биш. Компьютер дээрх Chrome эсвэл Edge хөтөчид хамгийн сайн ажиллана. <button type=\"button\" class=\"link\" data-go=\"guide\">Лицензийн заавар</button>",
     styles: n => `${n} хэв маяг`,
     status: (all, mn, shown) => `${all} фонт · ${mn} нь Монгол үсэгтэй · ${shown} харагдаж байна`,
     scanning: (d, total) => `Фонт шалгаж байна… ${d} / ${total}`,
@@ -1015,6 +1075,7 @@ const I18N = {
     axes: { wght: "Зузаан", wdth: "Өргөн", slnt: "Налуу", ital: "Italic", opsz: "Оптик хэмжээ", YEAR: "Он" },
     guideHtml: `<h2>Фонтоо сурталчилгаанд хууль ёсоор ашиглах</h2>
 <p class="lead">Фонт бол программ шиг лицензтэй бүтээл. Үнэгүй татсан гэдэг нь зар сурталчилгаанд ашиглаж болно гэсэн үг биш.</p>
+<p class="legend"><span class="lg"><span class="lic-dot ok"></span> Нээлттэй лиценз</span> <span class="lg"><span class="lic-dot ok ring"></span> Windows-тай ирдэг</span> <span class="lg"><span class="lic-dot warn"></span> Лиценз шаардлагатай</span> <span class="lg"><span class="lic-dot bad"></span> Хувийн хэрэглээ / Demo</span> <span class="lg"><span class="lic-dot"></span> Тодорхойгүй</span><br><small>Фонтын картан дээрх жижиг цэг ийм утгатай. Дээр нь хулганаа аваачвал тайлбар гарна.</small></p>
 <div class="rules">
 <article class="rule ok"><h3><span>✓</span> Нээлттэй лицензтэй фонт</h3><p><b>OFL, Apache, Ubuntu Font Licence, DejaVu.</b> Зар, лого, хэвлэл, видео, вэб, апп, бүгдэд үнэгүй. Фонтын файлыг дангаар нь зарж болохгүй, бусдад дамжуулбал лицензийн файлыг хамт өгнө. <button type="button" class="link" data-go="lib">Фонтын сан</button>-гийн «Үнэгүй» хэсгийн бүх фонт ийм.</p></article>
 <article class="rule ok"><h3><span>✓</span> Windows-тай ирдэг фонт</h3><p>Зар, лого, постер, хэвлэмэл бүтээгдэхүүн, видеоны бичвэрт ашиглаж болно. Харин фонтын файлыг бусдад өгөх, вэб сайтдаа байршуулах, апп-д оруулахыг хориглоно. «Home &amp; Student» зэрэг арилжааны бус хувилбарын программаар хийсэн ажилд энэ эрх хамаарахгүй.</p></article>
@@ -1047,6 +1108,7 @@ const I18N = {
     licSegAll: "Any license", licSegAds: "OK for ads", licSegAdsT: "Open-license fonts and fonts that come with Windows",
     licSegRights: "License required", licSegPersonal: "Personal/Demo", licSegUnknown: "Unknown",
     libFree: "Free", libMn: "MN editions", libWin: "Comes with Windows", libPaid: "Paid",
+    licInfo: "License", licGuideLink: "License guide →", libCount: n => `${n} ${n === 1 ? "font" : "fonts"}`, libHave: n => `${n} already installed`,
     libMnStatus: n => `${n} open-licensed fonts that lacked Ө ө Ү ү or ₮, with those letters added in each font's own style. Free for commercial use (OFL).`,
     mnBadge: "MN edition", mnBadgeT: (b, d) => `${b} by ${d}, with Ө ө Ү ү ₮ added`, mnAdditions: "Mongolian letters added by Font Shuugch",
     catAll: "All", catS: "Sans serif", catR: "Serif", catD: "Display", catH: "Handwriting", catM: "Monospace",
@@ -1054,7 +1116,7 @@ const I18N = {
     copyNames: "Copy names", copyLink: "Copy share link", addAll: "Add to my shortlist", closeShared: "Close",
     alphabet: "Mongolian alphabet", stylesH: "Styles", licenseH: "License", copyName: "Copy name", copyCss: "Copy CSS", close: "Close",
     drop: "Drop .ttf / .otf / .ttc files to check them",
-    footer: "Free tool. Your fonts never leave your computer; every check runs in your browser. Free-font previews load from Google Fonts and jsDelivr. License information is general guidance, not legal advice. Works best in Chrome or Edge on a computer.",
+    footer: "Free tool. Your fonts never leave your computer; every check runs in your browser. Free-font previews load from Google Fonts and jsDelivr. License information is general guidance, not legal advice. Works best in Chrome or Edge on a computer. <button type=\"button\" class=\"link\" data-go=\"guide\">License guide</button>",
     styles: n => `${n} style${n === 1 ? "" : "s"}`,
     status: (all, mn, shown) => `${all} font families · ${mn} ready for Mongolian · showing ${shown}`,
     scanning: (d, total) => `Checking fonts… ${d} / ${total}`,
@@ -1122,6 +1184,7 @@ const I18N = {
     axes: { wght: "Weight", wdth: "Width", slnt: "Slant", ital: "Italic", opsz: "Optical size", YEAR: "Year" },
     guideHtml: `<h2>Using fonts in ads legally</h2>
 <p class="lead">Fonts are licensed like software. A free download doesn't mean you can use it in an ad.</p>
+<p class="legend"><span class="lg"><span class="lic-dot ok"></span> Open license</span> <span class="lg"><span class="lic-dot ok ring"></span> Comes with Windows</span> <span class="lg"><span class="lic-dot warn"></span> License needed</span> <span class="lg"><span class="lic-dot bad"></span> Personal use / demo</span> <span class="lg"><span class="lic-dot"></span> Unknown</span><br><small>This is what the small dot on each font card means. Hover it for the explanation.</small></p>
 <div class="rules">
 <article class="rule ok"><h3><span>✓</span> Open-license fonts</h3><p><b>OFL, Apache, Ubuntu Font Licence, DejaVu.</b> Free for ads, logos, print, video, web and apps. You can't sell the font file on its own, and if you pass the font on, include its license file. Every font in the <button type="button" class="link" data-go="lib">Font library</button>'s Free section is like this.</p></article>
 <article class="rule ok"><h3><span>✓</span> Fonts that come with Windows</h3><p>OK for ads, logos, posters, printed products and video captions. You may not give the font files to others, host them on your website or put them in an app. These rights don't apply to work made with software licensed for non-commercial use, such as Home &amp; Student editions.</p></article>
@@ -1143,6 +1206,7 @@ const PRESETS = {
   caps: "ӨНДӨР ҮҮЛС ХӨХ ТЭНГЭР",
   abc: "АБВГДЕЁЖЗИЙКЛМНОӨПРСТУҮФХЦЧШЩЪЫЬЭЮЯ абвгдеёжзийклмноөпрстуүфхцчшщъыьэюя",
   num: "0123456789 ₮25 000 №1 «Үнэ» 50%",
+  fox: "The quick brown fox jumps over the lazy dog",
 };
 const ABC = [..."АБВГДЕЁЖЗИЙКЛМНОӨПРСТУҮФХЦЧШЩЪЫЬЭЮЯ", ..."абвгдеёжзийклмноөпрстуүфхцчшщъыьэюя", ..."0123456789₮№«»"];
 const STAR = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 3.6l2.6 5.3 5.8.85-4.2 4.1 1 5.8L12 16.9l-5.2 2.75 1-5.8-4.2-4.1 5.8-.85z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>';
@@ -1437,39 +1501,56 @@ function fillSpec(el, f, text) {
   flush();
 }
 
+// [label, tooltip, colour class] for a licence verdict
+function licText(li) {
+  if (li.kind === "free") return [li.name === "author" ? t("licAuthor") : t("licFree", li.name), t("licFreeT"), "lic-free"];
+  if (li.kind === "windows") return [t("licWin"), t("licWinT"), "info"];
+  if (li.kind === "rights") return [li.renamedFrom ? t("licRenamed") : t("licRights"), t("licRightsT", li.owner), "warn"];
+  if (li.kind === "personal") return [t("licPersonal"), t("licPersonalT"), "bad"];
+  return [t("licUnknown"), t("licUnknownT"), ""];
+}
 function licenseBadge(box, li) {
   if (!li) return;
-  if (li.kind === "free") badge(box, li.name === "author" ? t("licAuthor") : t("licFree", li.name), "lic-free", t("licFreeT"));
-  else if (li.kind === "windows") badge(box, t("licWin"), "info", t("licWinT"));
-  else if (li.kind === "rights") badge(box, li.renamedFrom ? t("licRenamed") : t("licRights"), "warn", t("licRightsT", li.owner));
-  else if (li.kind === "personal") badge(box, t("licPersonal"), "bad", t("licPersonalT"));
-  else badge(box, t("licUnknown"), "", t("licUnknownT"));
+  const [label, tip, cls] = licText(li);
+  badge(box, label, cls, tip);
+}
+// The licence on a card is just a coloured dot; the words live in its tooltip and in the detail view.
+function licDot(li) {
+  const [label, tip, cls] = licText(li || { kind: "unknown" });
+  const d = document.createElement("span");
+  d.className = "lic-dot" + (cls === "lic-free" ? " ok" : cls === "info" ? " ok ring" : cls ? " " + cls : "");
+  d.title = label + " · " + tip;
+  d.setAttribute("role", "img");
+  d.setAttribute("aria-label", label);
+  return d;
+}
+function fact(box, text, title) {
+  const s = document.createElement("span");
+  s.className = "fact";
+  s.textContent = text;
+  if (title) s.title = title;
+  box.append(s);
 }
 
-function fillBadges(box, f) {
+function fillBadges(box, f, noLic) {
   box.replaceChildren();
   if (f.status === "mn") badge(box, t("ok"), "ok", t("okT"));
   else if (f.status === "ru") badge(box, t("missing", chars(f.missing)), "warn", t("missingT"));
   else if (f.status === "none") badge(box, t("noCyr"), "bad");
   else badge(box, t("unreadable"));
   if (f.badStyles && f.badStyles.length) badge(box, t("badStyles", f.badStyles.length, f.faces.length), "warn", t("badStylesT", f.badStyles.join(", ")));
-  licenseBadge(box, f.licInfo);
-  if (f.tugrik) badge(box, "₮", "", t("tugT"));
+  if (f.tugrik) fact(box, "₮", t("tugT"));
   const ax = (f.axes || []).filter(a => !a.hidden);
-  if (ax.length) badge(box, "Variable · " + ax.map(a => a.tag).join(" "), "", t("varT"));
-  if (f.bichig) badge(box, t("bichig"), "", t("bichigT"));
-  if (f.source === "file") badge(box, t("file", f.fileName), "", t("fileT"));
+  if (ax.length) fact(box, "Variable · " + ax.map(a => a.tag).join(" "), t("varT"));
+  if (f.bichig) fact(box, t("bichig"), t("bichigT"));
+  if (f.source === "file") fact(box, t("file", f.fileName), t("fileT"));
 }
 
 function fillLibBadges(box, e) {
   box.replaceChildren();
   if (e.kind === "paid") { badge(box, t("notVerified"), "warn"); return; }
-  badge(box, t("ok"), "ok", t("okT"));
-  if (e.kind === "free" || e.kind === "mn") badge(box, t("licFree", e.lic), "lic-free", t("licFreeT"));
-  if (e.kind === "mn") badge(box, t("mnBadge"), "info", t("mnBadgeT", e.basedOn, e.designers));
-  else if (e.kind === "windows") badge(box, t("licWin"), "info", t("licWinT"));
-  if (e.tug) badge(box, "₮", "", t("tugT"));
-  if (e.axes.length) badge(box, "Variable · " + e.axes.map(a => a.tag).join(" "), "", t("varT"));
+  if (e.tug) fact(box, "₮", t("tugT"));
+  if (e.axes.length) fact(box, "Variable · " + e.axes.map(a => a.tag).join(" "), t("varT"));
   if (state.installed.has(e.family.toLowerCase())) badge(box, t("installed"), "have", t("installedT"));
 }
 
@@ -1512,6 +1593,7 @@ function buildLocalCard(f) {
   spec.classList.toggle("click", !!f.css);
   fillSpec(spec, f, sampleText());
   fillBadges($(".badges", el), f);
+  if (f.licInfo) $(".meta", el).after(licDot(f.licInfo));
   const copy = document.createElement("button");
   copy.className = "copy"; copy.type = "button"; copy.textContent = t("copyName");
   $(".card-f", el).append(copy);
@@ -1569,6 +1651,8 @@ function buildLibCard(e) {
   spec.classList.add("click");
   fillSpec(spec, libSpec(e), sampleText());
   fillLibBadges($(".badges", el), e);
+  $(".meta", el).after(licDot(e.kind === "windows" ? { kind: "windows" } : { kind: "free", name: e.lic }));
+  if (e.kind === "mn") btn.title = t("mnBadgeT", e.basedOn, e.designers);
   addLink(el, e.url, e.kind === "windows" ? t("info") : t("getFont"), e.kind === "windows" ? "" : t("getFontT"));
   cardRef.set(el, { kind: "lib", e });
   io.observe(el);
@@ -1656,7 +1740,6 @@ function render() {
   const hasLocal = state.scanned || state.scanning || state.families.length > 0;
   $("#intro").hidden = v !== "mine" || hasLocal;
   $("#filterRow").hidden = v === "mine" && !hasLocal;
-  $("#grid").hidden = $("#empty").hidden = v === "guide";
 
   let cards = [], status = "", empty = t("empty");
   if (v === "mine") {
@@ -1674,16 +1757,24 @@ function render() {
     }
     for (const b of $("#catSeg").children) {
       const c = b.dataset.c;
-      b.querySelector("b").textContent = LIB.filter(e => (c === "all" || e.cat === c) && libVisible(e, "cat")).length;
+      const n = LIB.filter(e => (c === "all" || e.cat === c) && libVisible(e, "cat")).length;
+      b.querySelector("b").textContent = n;
+      b.hidden = n === 0 && c !== "all" && state.cat !== c;
     }
     const list = LIB.filter(e => libVisible(e));
     cards = list.map(e => e.el || (e.el = buildLibCard(e)));
     if (state.kind === "paid") cards.push(buildSubmitCard());
     const have = state.scanned ? LIB.filter(e => e.kind === "free" && state.installed.has(e.family.toLowerCase())).length : null;
-    status = state.kind === "free" ? t("libFreeStatus", FREE_COUNT, have)
+    const note = state.kind === "free" ? t("libFreeStatus", FREE_COUNT, null)
       : state.kind === "mn" ? t("libMnStatus", MN_COUNT)
       : state.kind === "windows" ? t("libWinStatus", LIB.filter(e => e.kind === "windows").length) + (IS_WINDOWS ? "" : t("notWindows"))
       : t("libPaidStatus");
+    $("#licNoteText").replaceChildren(note + " ");
+    const more = document.createElement("a");
+    more.href = "#"; more.dataset.go = "guide"; more.textContent = t("licGuideLink");
+    more.addEventListener("click", ev => ev.preventDefault());
+    $("#licNoteText").append(more);
+    status = state.kind === "paid" ? "" : t("libCount", list.length) + (have === null || state.kind !== "free" ? "" : " · " + t("libHave", have));
   } else if (v === "short" || v === "shared") {
     const names = (v === "short" ? [...state.shortlist] : state.shared || []).filter(n => !state.q || n.toLowerCase().includes(state.q));
     cards = names.map(resolveName);
@@ -1703,10 +1794,11 @@ function render() {
   if (!state.scanning) $("#status").textContent = status;
 
   const grid = $("#grid");
+  grid.dataset.view = v;
   grid.classList.toggle("list", v === "short" || v === "shared");
   grid.replaceChildren(...cards);
   const emptyEl = $("#empty");
-  emptyEl.hidden = v === "guide" || cards.length > 0 || state.scanning || !empty;
+  emptyEl.hidden = cards.length > 0 || state.scanning || !empty;
   emptyEl.textContent = empty;
 }
 let renderT = 0;
@@ -1863,14 +1955,19 @@ function fillLicense(box, f) {
   const note = document.createElement("p");
   note.className = "lic-note";
   note.textContent = t(f.libLicense ? "libLicNote" : "licNote");
-  box.append(v, dl, note);
+  const g = document.createElement("p");
+  g.className = "lic-guide";
+  const gb = document.createElement("button");
+  gb.type = "button"; gb.className = "link"; gb.dataset.go = "guide"; gb.textContent = t("licGuideLink");
+  g.append(gb);
+  box.append(v, dl, note, g);
 }
 
 function openDetail(f) {
   cur = f;
   const text = sampleText();
   $("#dTitle").textContent = f.name;
-  fillBadges($("#dBadges"), f);
+  fillBadges($("#dBadges"), f, true);
   setStar($("#dStar"), f.name);
 
   const spec = $("#dSpec"), abc = $("#dAbc");
@@ -1906,6 +2003,10 @@ function openDetail(f) {
   }
 
   fillLicense($("#dLic"), f);
+  const lt = licText(f.licInfo || { kind: "unknown" });
+  $("#dLicSum").textContent = lt[0];
+  $("#dLicDot").replaceChildren(licDot(f.licInfo));
+  $("#dLicBox").open = false;
 
   abc.style.fontFamily = f.css || "";
   abc.replaceChildren(...ABC.map(ch => {
@@ -1979,9 +2080,17 @@ $("#tabs").addEventListener("click", e => {
   const b = e.target.closest("[data-tab]");
   if (b) setView(b.dataset.tab);
 });
+const guideDlg = $("#guideDlg");
+function openGuide() { if (!guideDlg.open) guideDlg.showModal(); guideDlg.scrollTop = 0; }
+$("#gClose").addEventListener("click", () => guideDlg.close());
+guideDlg.addEventListener("click", e => { if (e.target === guideDlg) guideDlg.close(); });
 document.addEventListener("click", e => {
   const go = e.target.closest("[data-go]");
-  if (go) { setView(go.dataset.go); window.scrollTo({ top: 0, behavior: "smooth" }); }
+  if (!go) return;
+  if (go.dataset.go === "guide") { openGuide(); return; }
+  for (const d of $$("dialog[open]")) d.close();
+  setView(go.dataset.go);
+  window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
 const sampleIn = $("#sample");
@@ -2089,9 +2198,9 @@ window.addEventListener("drop", e => {
 // ---------- start ----------
 state.shared = readShared();
 if (state.shared) state.view = "shared";
-else if (location.hash === "#guide") state.view = "guide";
 else if (location.hash === "#library") state.view = "lib";
 applyLang();
+if (location.hash === "#guide") openGuide();
 (async () => {
   if (!("queryLocalFonts" in window)) { showNote("unsupported"); return; }
   try {
