@@ -1467,7 +1467,7 @@ function fillLibBadges(box, e) {
   badge(box, t("ok"), "ok", t("okT"));
   if (e.kind === "free" || e.kind === "mn") badge(box, t("licFree", e.lic), "lic-free", t("licFreeT"));
   if (e.kind === "mn") badge(box, t("mnBadge"), "info", t("mnBadgeT", e.basedOn, e.designers));
-  else badge(box, t("licWin"), "info", t("licWinT"));
+  else if (e.kind === "windows") badge(box, t("licWin"), "info", t("licWinT"));
   if (e.tug) badge(box, "₮", "", t("tugT"));
   if (e.axes.length) badge(box, "Variable · " + e.axes.map(a => a.tag).join(" "), "", t("varT"));
   if (state.installed.has(e.family.toLowerCase())) badge(box, t("installed"), "have", t("installedT"));
