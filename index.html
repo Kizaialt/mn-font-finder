@@ -325,6 +325,7 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
         </div>
         <div class="seg" id="kindSeg" role="group" data-views="lib">
           <button type="button" data-k="free"><span data-i18n="libFree"></span><b></b></button>
+          <button type="button" data-k="mn"><span data-i18n="libMn"></span><b></b></button>
           <button type="button" data-k="windows"><span data-i18n="libWin"></span><b></b></button>
           <button type="button" data-k="paid"><span data-i18n="libPaid"></span></button>
         </div>
@@ -878,6 +879,32 @@ const WINDOWS_LIB = [
 ];
 
 // Paid sources. Not verified by us: the seller's own description.
+// Our own Mongolian editions: OFL fonts that lacked Ө ө Ү ү / ₮, with those letters added in
+// each font's style. Built in github.com/Kizaialt/mn-font-editions (release v1.1).
+// [family, based on, category, has ₮, axes "tag:min:max:default", preview file, release zip, original designers]
+const MN_REPO = "https://github.com/Kizaialt/mn-font-editions";
+const MN_CDN = "https://cdn.jsdelivr.net/gh/Kizaialt/mn-font-editions@v1.1/";
+const MN_ZIP = MN_REPO + "/releases/download/v1.1/";
+const MN_LIB = [
+  ["Unbounded MN", "Unbounded", "S", 1, "wght:200:900:400", "build/UnboundedMN/UnboundedMN%5Bwght%5D.ttf", "UnboundedMN", "NaN"],
+  ["Sofia Sans MN", "Sofia Sans", "S", 1, "wght:1:1000:400", "build/SofiaSansMN/SofiaSansMN%5Bwght%5D.ttf", "SofiaSansMN", "Lettersoup, Botio Nikoltchev, Ani Petrova"],
+  ["Sofia Sans Semi Condensed MN", "Sofia Sans Semi Condensed", "S", 1, "wght:1:1000:400", "build/SofiaSansSemiCondensedMN/SofiaSansSemiCondensedMN%5Bwght%5D.ttf", "SofiaSansSemiCondensedMN", "Lettersoup, Botio Nikoltchev, Ani Petrova"],
+  ["Sofia Sans Condensed MN", "Sofia Sans Condensed", "S", 1, "wght:1:1000:400", "build/SofiaSansCondensedMN/SofiaSansCondensedMN%5Bwght%5D.ttf", "SofiaSansCondensedMN", "Lettersoup, Botio Nikoltchev, Ani Petrova"],
+  ["Sofia Sans Extra Condensed MN", "Sofia Sans Extra Condensed", "S", 1, "wght:1:1000:400", "build/SofiaSansExtraCondensedMN/SofiaSansExtraCondensedMN%5Bwght%5D.ttf", "SofiaSansExtraCondensedMN", "Lettersoup, Botio Nikoltchev, Ani Petrova"],
+  ["Yanone Kaffeesatz MN", "Yanone Kaffeesatz", "S", 1, "wght:200:700:200", "build/YanoneKaffeesatzMN/YanoneKaffeesatzMN%5Bwght%5D.ttf", "YanoneKaffeesatzMN", "Yanone, Cyreal"],
+  ["Jura MN", "Jura", "S", 1, "wght:300:700:300", "build/JuraMN/JuraMN%5Bwght%5D.ttf", "JuraMN", "Daniel Johnson, Cyreal"],
+  ["Alumni Sans MN", "Alumni Sans", "S", 1, "wght:100:900:100", "build/AlumniSansMN/AlumniSansMN%5Bwght%5D.ttf", "AlumniSansMN", "Robert Leuschke"],
+  ["Alumni Sans SC MN", "Alumni Sans SC", "S", 1, "wght:100:900:100", "build/AlumniSansSCMN/AlumniSansSCMN%5Bwght%5D.ttf", "AlumniSansSCMN", "Robert Leuschke"],
+  ["Alumni Sans Pinstripe MN", "Alumni Sans Pinstripe", "D", 1, "", "build/AlumniSansPinstripeMN/AlumniSansPinstripeMN-Regular.ttf", "AlumniSansPinstripeMN", "Robert Leuschke"],
+  ["Wix Madefor Text MN", "Wix Madefor Text", "S", 1, "wght:400:800:400", "build/WixMadeforTextMN/WixMadeforTextMN%5Bwght%5D.ttf", "WixMadeforTextMN", "Dalton Maag"],
+  ["Wix Madefor Display MN", "Wix Madefor Display", "S", 1, "wght:400:800:400", "build/WixMadeforDisplayMN/WixMadeforDisplayMN%5Bwght%5D.ttf", "WixMadeforDisplayMN", "Dalton Maag"],
+  ["Murecho MN", "Murecho", "S", 1, "wght:100:900:100", "build/MurechoMN/MurechoMN%5Bwght%5D.ttf", "MurechoMN", "Neil Summerour"],
+  ["Martian Mono MN", "Martian Mono", "M", 1, "wght:100:800:400 wdth:75:112.5:112.5", "build/MartianMonoMN/MartianMonoMN%5Bwdth%2Cwght%5D.ttf", "MartianMonoMN", "Roman Shamin, Evil Martians"],
+  ["Bona Nova MN", "Bona Nova", "R", 1, "", "build/BonaNovaMN/BonaNovaMN-Regular.ttf", "BonaNovaMN", "Capitalics, Mateusz Machalski, Andrzej Heidrich"],
+  ["Bona Nova SC MN", "Bona Nova SC", "R", 1, "", "build/BonaNovaSCMN/BonaNovaSCMN-Regular.ttf", "BonaNovaSCMN", "Capitalics, Mateusz Machalski, Andrzej Heidrich"],
+  ["Orangerie MN", "Oranienbaum", "R", 1, "", "build/OrangerieMN/OrangerieMN-Regular.ttf", "OrangerieMN", "Oleg Pospelov, Jovanny Lemonad"],
+];
+
 const PAID_LIB = [
   { family: "TypeType", url: "https://typetype.org/fonts/mongolian/", textKey: "paidTypeType" },
   { family: "Rentafont", url: "https://rentafont.com/search/mongolian-cyrillic-language-fonts", textKey: "paidRentafont" },
@@ -912,7 +939,9 @@ const I18N = {
     segNoneT: "Кирилл үсэг байхгүй",
     licSegAll: "Бүх лиценз", licSegAds: "Сурталчилгаанд OK", licSegAdsT: "Нээлттэй лицензтэй эсвэл Windows-тай ирдэг фонт",
     licSegRights: "Лиценз шаардлагатай", licSegPersonal: "Хувийн/Demo", licSegUnknown: "Тодорхойгүй",
-    libFree: "Үнэгүй", libWin: "Windows-тай ирдэг", libPaid: "Төлбөртэй",
+    libFree: "Үнэгүй", libMn: "Монгол хувилбар", libWin: "Windows-тай ирдэг", libPaid: "Төлбөртэй",
+    libMnStatus: n => `Ө ө Ү ү эсвэл ₮ дутуу байсан ${n} нээлттэй фонтод эдгээр үсгийг тухайн фонтын өөрийн хэв маягаар нэмсэн Монгол хувилбарууд. Арилжааны хэрэглээнд үнэгүй (OFL).`,
+    mnBadge: "Монгол хувилбар", mnBadgeT: (b, d) => `${b} (${d}) фонт дээр Ө ө Ү ү ₮ нэмсэн`, mnAdditions: "Монгол үсгийг нэмсэн: Фонт Шүүгч",
     catAll: "Бүгд", catS: "Sans serif", catR: "Serif", catD: "Чимэглэлийн", catH: "Гар бичмэл", catM: "Monospace",
     searchPh: "Фонт хайх", hasTug: "₮ тэмдэгтэй", variable: "Variable", hideInstalled: "Суусныг нуух",
     copyNames: "Нэрсийг хуулах", copyLink: "Хуваалцах холбоос хуулах", addAll: "Миний жагсаалтад нэмэх", closeShared: "Хаах",
@@ -1017,7 +1046,9 @@ const I18N = {
     segNoneT: "No usable Cyrillic",
     licSegAll: "Any license", licSegAds: "OK for ads", licSegAdsT: "Open-license fonts and fonts that come with Windows",
     licSegRights: "License required", licSegPersonal: "Personal/Demo", licSegUnknown: "Unknown",
-    libFree: "Free", libWin: "Comes with Windows", libPaid: "Paid",
+    libFree: "Free", libMn: "MN editions", libWin: "Comes with Windows", libPaid: "Paid",
+    libMnStatus: n => `${n} open-licensed fonts that lacked Ө ө Ү ү or ₮, with those letters added in each font's own style. Free for commercial use (OFL).`,
+    mnBadge: "MN edition", mnBadgeT: (b, d) => `${b} by ${d}, with Ө ө Ү ү ₮ added`, mnAdditions: "Mongolian letters added by Font Shuugch",
     catAll: "All", catS: "Sans serif", catR: "Serif", catD: "Display", catH: "Handwriting", catM: "Monospace",
     searchPh: "Search fonts", hasTug: "Has ₮", variable: "Variable", hideInstalled: "Hide installed",
     copyNames: "Copy names", copyLink: "Copy share link", addAll: "Add to my shortlist", closeShared: "Close",
@@ -1130,10 +1161,16 @@ const LIB = [
   })),
   ...EXTRA_FREE.map(([family, cat, tug, lic, url, ttf]) => ({ kind: "free", family, cat, tug: !!tug, axes: [], lic, url, ttf, preview: ttf ? "url" : "local" })),
   ...WINDOWS_LIB.map(([family, cat, tug, variable, url]) => ({ kind: "windows", family, cat, tug: !!tug, axes: variable ? [{ tag: "wght" }] : [], url, preview: "local" })),
+  ...MN_LIB.map(([family, basedOn, cat, tug, axes, file, zip, designers]) => {
+    const ax = parseAxes(axes);
+    for (const a of ax) if (a.tag === "wght") a.def = Math.min(Math.max(400, a.min), a.max);   // open at Regular, not the file's default
+    return { kind: "mn", family, basedOn, cat, tug: !!tug, axes: ax, lic: "OFL", designers, url: MN_ZIP + zip + ".zip", ttf: MN_CDN + file, preview: "url" };
+  }),
   ...PAID_LIB.map(p => ({ kind: "paid", ...p, axes: [] })),
 ];
 const LIB_BY_NAME = new Map(LIB.filter(e => e.kind !== "paid").map(e => [e.family.toLowerCase(), e]));
 const FREE_COUNT = LIB.filter(e => e.kind === "free").length;
+const MN_COUNT = LIB.filter(e => e.kind === "mn").length;
 const IS_WINDOWS = /Windows/i.test(navigator.userAgentData?.platform || navigator.platform || navigator.userAgent);
 
 const state = {
@@ -1169,9 +1206,9 @@ const sampleText = () => state.sample || PRESETS.sentence;
 const faceSheet = (() => { const s = document.createElement("style"); document.head.append(s); return s.sheet; })();
 let aliasN = 0;
 function cssStr(s) { return '"' + String(s).replace(/[\u0000-\u001f]/g, "").replace(/\\/g, "\\\\").replace(/"/g, '\\"') + '"'; }
-function addFace(src) {
+function addFace(src, descriptors = "") {
   const a = "mnff" + (++aliasN);
-  try { faceSheet.insertRule(`@font-face{font-family:${a};src:${src}}`, faceSheet.cssRules.length); } catch { /* ignore bad names */ }
+  try { faceSheet.insertRule(`@font-face{font-family:${a};src:${src};${descriptors}}`, faceSheet.cssRules.length); } catch { /* ignore bad names */ }
   return a;
 }
 const localAlias = (ps, family) => `${addFace(`local(${cssStr(ps)})`)}, ${cssStr(family)}`;
@@ -1428,7 +1465,8 @@ function fillLibBadges(box, e) {
   box.replaceChildren();
   if (e.kind === "paid") { badge(box, t("notVerified"), "warn"); return; }
   badge(box, t("ok"), "ok", t("okT"));
-  if (e.kind === "free") badge(box, t("licFree", e.lic), "lic-free", t("licFreeT"));
+  if (e.kind === "free" || e.kind === "mn") badge(box, t("licFree", e.lic), "lic-free", t("licFreeT"));
+  if (e.kind === "mn") badge(box, t("mnBadge"), "info", t("mnBadgeT", e.basedOn, e.designers));
   else badge(box, t("licWin"), "info", t("licWinT"));
   if (e.tug) badge(box, "₮", "", t("tugT"));
   if (e.axes.length) badge(box, "Variable · " + e.axes.map(a => a.tag).join(" "), "", t("varT"));
@@ -1503,7 +1541,11 @@ function loadLibFont(e) {
 
 function libSpec(e) {
   if (e.preview === "gf") return { css: cssStr(e.family), has: cp => cp !== 0x20AE || e.tug };
-  if (e.preview === "url") return { css: e.alias || (e.alias = addFace(`url(${cssStr(e.ttf)}) format("truetype")`)), has: cp => cp !== 0x20AE || e.tug };
+  if (e.preview === "url") {
+    const w = e.axes.find(a => a.tag === "wght");
+    e.alias = e.alias || addFace(`url(${cssStr(e.ttf)}) format("truetype")`, w ? `font-weight:${w.min} ${w.max}` : "");
+    return { css: e.alias, has: cp => cp !== 0x20AE || e.tug };
+  }
   if (e.preview === "local") return hasLocalFont(e.family) ? { css: cssStr(e.family), has: cp => cp !== 0x20AE || e.tug } : { css: null, naText: t("notInstalledPreview") };
   return { css: null };
 }
@@ -1569,7 +1611,7 @@ function setView(v) {
 function updateTabs(mnCount) {
   for (const b of $$("#tabs .tab")) b.setAttribute("aria-selected", String(b.dataset.tab === state.view));
   $("#cMine").textContent = state.scanned || state.families.length ? mnCount : "";
-  $("#cLib").textContent = FREE_COUNT;
+  $("#cLib").textContent = FREE_COUNT + MN_COUNT;
   $("#cShort").textContent = state.shortlist.size || "";
   const sharedTab = $('#tabs [data-tab="shared"]');
   sharedTab.hidden = !state.shared;
@@ -1595,7 +1637,7 @@ function libVisible(e, ignore) {
   if (state.q && !e.family.toLowerCase().includes(state.q)) return false;
   if (state.tugrik && !e.tug) return false;
   if (state.variable && !e.axes.length) return false;
-  if (state.hideInstalled && state.scanned && e.kind === "free" && state.installed.has(e.family.toLowerCase())) return false;
+  if (state.hideInstalled && state.scanned && (e.kind === "free" || e.kind === "mn") && state.installed.has(e.family.toLowerCase())) return false;
   return true;
 }
 
@@ -1639,6 +1681,7 @@ function render() {
     if (state.kind === "paid") cards.push(buildSubmitCard());
     const have = state.scanned ? LIB.filter(e => e.kind === "free" && state.installed.has(e.family.toLowerCase())).length : null;
     status = state.kind === "free" ? t("libFreeStatus", FREE_COUNT, have)
+      : state.kind === "mn" ? t("libMnStatus", MN_COUNT)
       : state.kind === "windows" ? t("libWinStatus", LIB.filter(e => e.kind === "windows").length) + (IS_WINDOWS ? "" : t("notWindows"))
       : t("libPaidStatus");
   } else if (v === "short" || v === "shared") {
@@ -1759,7 +1802,9 @@ function openLibDetail(e) {
     styles = e.styles.map(s => [+s.replace("i", ""), s.endsWith("i")]);
   } else {
     css = libSpec(e).css;
-    styles = e.preview === "url" ? [[400, false]] : [[400, false], [400, true], [700, false], [700, true]];
+    const w = e.axes.find(a => a.tag === "wght");
+    styles = w ? [100, 200, 300, 400, 500, 600, 700, 800, 900].filter(x => x >= w.min && x <= w.max).map(x => [x, false])
+      : e.preview === "url" ? [[400, false]] : [[400, false], [400, true], [700, false], [700, true]];
   }
   openDetail({
     name: e.family, source: "lib", status: "mn", missing: [], has, css, tugrik: e.tug, bichig: false,
@@ -1768,6 +1813,8 @@ function openLibDetail(e) {
     licInfo: e.kind === "windows" ? { kind: "windows" } : { kind: "free", name: e.lic },
     libLicense: e.kind === "windows"
       ? { license: "Microsoft Windows", licenseUrl: MS_FAQ, source: e.url }
+      : e.kind === "mn"
+      ? { designer: `${e.designers} · ${t("mnAdditions")}`, license: e.lic, licenseUrl: LICENSE_URLS[e.lic], source: MN_REPO }
       : { designer: e.designers, license: e.lic, licenseUrl: LICENSE_URLS[e.lic], source: e.url },
   });
 }
@@ -1902,9 +1949,9 @@ function openDetail(f) {
 function applyLang() {
   document.documentElement.lang = state.lang;
   document.title = t("docTitle");
-  $('meta[name="description"]').content = t("docDesc", FREE_COUNT);
+  $('meta[name="description"]').content = t("docDesc", FREE_COUNT + MN_COUNT);
   for (const el of $$("[data-i18n]")) el.textContent = t(el.dataset.i18n);
-  for (const el of $$("[data-i18n-html]")) el.innerHTML = t(el.dataset.i18nHtml, FREE_COUNT);
+  for (const el of $$("[data-i18n-html]")) el.innerHTML = t(el.dataset.i18nHtml, FREE_COUNT + MN_COUNT);
   for (const el of $$("[data-i18n-ph]")) el.placeholder = t(el.dataset.i18nPh);
   for (const el of $$("[data-i18n-title]")) el.title = t(el.dataset.i18nTitle);
   for (const el of $$("[data-i18n-aria]")) el.setAttribute("aria-label", t(el.dataset.i18nAria));
