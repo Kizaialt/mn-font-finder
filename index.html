@@ -82,6 +82,10 @@ button, input { font: inherit; color: inherit; }
 button { cursor: pointer; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.skyline { position: fixed; left: 0; right: 0; bottom: 0; height: clamp(150px, 26vh, 280px); z-index: -1; pointer-events: none; color: var(--accent); opacity: .09; -webkit-mask-image: linear-gradient(to top, #000 55%, transparent); mask-image: linear-gradient(to top, #000 55%, transparent); }
+.skyline svg { display: block; width: 100%; height: 100%; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .skyline { opacity: .13; } }
+:root[data-theme="dark"] .skyline { opacity: .13; }
 .wrap { max-width: 1480px; margin-inline: auto; padding-inline: 24px; }
 
 /* Header */
@@ -321,6 +325,7 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
 </style>
 </head>
 <body>
+<div class="skyline" aria-hidden="true"><svg viewBox="0 0 1600 260" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor" fill-opacity=".45"><path d="M0 196L110 160L210 182L370 116L500 168L690 100L850 156L1030 112L1190 168L1370 126L1600 176V260H0Z"/></g><g fill="currentColor"><path d="M44 238Q76 212 108 238Z"/><rect x="50" y="238" width="52" height="22"/><path d="M122 242Q148 220 174 242Z"/><rect x="127" y="242" width="42" height="18"/><rect x="168" y="188" width="30" height="72"/><rect x="200" y="156" width="26" height="104"/><rect x="228" y="176" width="34" height="84"/><rect x="404" y="192" width="34" height="68"/><rect x="440" y="152" width="28" height="108"/><rect x="470" y="178" width="36" height="82"/><rect x="500" y="200" width="30" height="60"/><rect x="1000" y="168" width="36" height="92"/><rect x="1038" y="194" width="28" height="66"/><rect x="1068" y="142" width="34" height="118"/><rect x="1104" y="176" width="30" height="84"/><rect x="1136" y="190" width="38" height="70"/><rect x="1190" y="164" width="30" height="96"/><rect x="1222" y="196" width="36" height="64"/><rect x="1262" y="178" width="28" height="82"/><rect x="300" y="236" width="90" height="24"/><rect x="310" y="96" width="12" height="144"/><rect x="334" y="116" width="12" height="124"/><rect x="358" y="136" width="12" height="104"/><rect x="580" y="214" width="60" height="46"/><rect x="700" y="214" width="60" height="46"/><rect x="636" y="196" width="68" height="64"/><path d="M628 196L670 164L712 196Z"/><path d="M872 260V78Q908 100 938 160V260Z"/><path d="M944 260V150Q956 168 960 196V260Z" fill-opacity=".6"/><path d="M1330 260Q1440 158 1566 260Z"/><rect x="1426" y="150" width="44" height="14"/><path d="M1432 150Q1448 128 1464 150Z"/></g></svg></div>
 <div id="bar" class="bar" hidden><span></span></div>
 
 
