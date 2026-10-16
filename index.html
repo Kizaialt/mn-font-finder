@@ -179,6 +179,7 @@ code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-siz
 
 /* License guide */
 .guide { padding: 4px 0 8px; }
+.dlg-h { margin: 0 0 8px; padding-right: 48px; font-size: clamp(20px, 2.4vw, 26px); letter-spacing: -0.01em; }
 .g-close { position: absolute; top: 16px; right: 16px; z-index: 1; }
 #guideDlg { width: min(1040px, calc(100vw - 32px)); }
 .guide h2 { padding-right: 48px; font-size: clamp(22px, 2.6vw, 30px); letter-spacing: -0.01em; margin: 0 0 8px; }
@@ -248,6 +249,25 @@ button.name:hover { text-decoration: underline; text-underline-offset: 3px; }
 .copy:hover, .get:hover { color: var(--ink); background: var(--muted-bg); }
 .get { color: var(--ink); font-weight: 600; box-shadow: inset 0 0 0 1px var(--line-2); padding: 4px 9px; }
 .empty { color: var(--ink-3); padding-top: 40px; padding-bottom: 72px; text-align: center; }
+
+/* Phone mode: no installed-font scan on phones, so lead with the library */
+#introFile { display: none; }
+.phone #scanBtn, .phone #introScan { display: none; }
+.phone #introFile { display: inline-flex; }
+.phone [data-i18n-html="intro2"] { display: none; }
+
+/* Per-weight downloads, support dialog */
+.dl-note { color: var(--ink-3); font-size: 13px; margin: 0 0 12px; max-width: 72ch; }
+.dl-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.dl-list a { display: inline-flex; align-items: center; gap: 6px; height: 34px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line-2); background: var(--surface); font-size: 13px; font-weight: 600; text-decoration: none; }
+.dl-list a:hover { border-color: var(--ink-3); }
+.dl-list a::after { content: "\2193"; color: var(--ink-3); }
+#supportDlg { width: min(760px, calc(100vw - 32px)); }
+.sup-rows { display: grid; grid-template-columns: max-content 1fr auto; gap: 8px 16px; align-items: center; margin: 18px 0; }
+.sup-rows dt { color: var(--ink-3); font-size: 13px; }
+.sup-rows dd { margin: 0; font-weight: 600; overflow-wrap: anywhere; }
+.sup-qr { display: block; width: min(240px, 100%); border-radius: 12px; border: 1px solid var(--line); margin: 6px 0 16px; background: #fff; }
+.foot .link + .link { margin-left: 14px; }
 
 /* Footer */
 .foot { color: var(--ink-3); font-size: 13px; padding-top: 20px; padding-bottom: 40px; border-top: 1px solid var(--line); }
@@ -431,8 +451,9 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
       <p class="intro-lede" data-i18n-html="tagline"></p>
     </div>
     <div>
-    <p data-i18n-html="intro1"></p>
+    <p id="intro1" data-i18n-html="intro1"></p>
     <button id="introScan" class="btn primary" type="button" data-i18n="scan"></button>
+    <button id="introFile" class="btn primary" type="button" data-i18n="checkFiles"></button>
     <p class="privacy"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.5 12l2.5 2.5 4.5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="privacy"></span></p>
     <p data-i18n-html="intro2"></p>
     <p data-i18n-html="intro3"></p>
@@ -445,7 +466,7 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
 <main id="grid" class="grid wrap"></main>
 <p id="empty" class="empty wrap" hidden></p>
 
-<footer class="foot wrap"><p data-i18n-html="footer"></p></footer>
+<footer class="foot wrap"><p data-i18n-html="footer"></p><p><button id="supportLink" class="link" type="button" hidden data-i18n="supportLink"></button></p></footer>
 
 <dialog id="detail" aria-labelledby="dTitle">
   <div class="d-in">
@@ -469,6 +490,11 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
     <div id="dAbc" class="abc"></div>
     <h3 data-i18n="stylesH"></h3>
     <ul id="dStyles" class="styles"></ul>
+    <div id="dFiles" hidden>
+      <h3 data-i18n="filesH"></h3>
+      <p class="dl-note" data-i18n="filesNote"></p>
+      <ul id="dFilesList" class="dl-list"></ul>
+    </div>
     <details id="dLicBox" class="lic-box">
       <summary><span id="dLicDot"></span><span data-i18n="licenseH"></span><span id="dLicSum" class="lic-sum"></span></summary>
       <div id="dLic"></div>
@@ -482,6 +508,19 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
       <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
     </button>
     <div id="guide" class="guide" data-i18n-html="guideHtml"></div>
+  </div>
+</dialog>
+
+<dialog id="supportDlg" data-i18n-aria="supportTitle">
+  <div class="d-in">
+    <button id="sClose" class="icon-btn g-close" type="button" data-i18n-aria="close">
+      <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <h2 class="dlg-h" data-i18n="supportTitle"></h2>
+    <p class="dl-note" data-i18n="supportLead"></p>
+    <img id="sQr" class="sup-qr" alt="QR" hidden>
+    <dl id="sRows" class="sup-rows"></dl>
+    <p class="dl-note" data-i18n="supportThanks"></p>
   </div>
 </dialog>
 
@@ -957,6 +996,29 @@ const WINDOWS_LIB = [
 const MN_REPO = "https://github.com/Kizaialt/mn-font-editions";
 const MN_CDN = "https://cdn.jsdelivr.net/gh/Kizaialt/mn-font-editions@v1.1/";
 const MN_ZIP = MN_REPO + "/releases/download/v1.1/";
+// Single-weight files for phones and video editors (static/ unless the family has no static folder).
+const MN_STYLES = {
+  UnboundedMN: "ExtraLight Light Regular Medium SemiBold Bold ExtraBold Black",
+  SofiaSansMN: "Thin ExtraLight Light Regular Medium SemiBold Bold ExtraBold Black Italic ThinItalic ExtraLightItalic LightItalic MediumItalic SemiBoldItalic BoldItalic ExtraBoldItalic BlackItalic",
+  YanoneKaffeesatzMN: "ExtraLight Light Regular Medium SemiBold Bold",
+  JuraMN: "Light Regular Medium SemiBold Bold",
+  AlumniSansMN: "Thin ExtraLight Light Regular Medium SemiBold Bold ExtraBold Black Italic ThinItalic ExtraLightItalic LightItalic MediumItalic SemiBoldItalic BoldItalic ExtraBoldItalic BlackItalic",
+  AlumniSansPinstripeMN: "Regular Italic",
+  WixMadeforTextMN: "Regular Medium SemiBold Bold ExtraBold",
+  WixMadeforDisplayMN: "Regular Medium SemiBold Bold ExtraBold",
+  MurechoMN: "Thin ExtraLight Light Regular Medium SemiBold Bold ExtraBold Black",
+  MartianMonoMN: "Thin ExtraLight Light Regular Medium SemiBold Bold ExtraBold",
+  BonaNovaMN: "Regular Bold",
+  BonaNovaSCMN: "Regular Bold",
+  OrangerieMN: "Regular",
+};
+for (const f of ["SofiaSansSemiCondensedMN", "SofiaSansCondensedMN", "SofiaSansExtraCondensedMN"]) MN_STYLES[f] = MN_STYLES.SofiaSansMN;
+MN_STYLES.AlumniSansSCMN = MN_STYLES.AlumniSansMN;
+const MN_ROOT_FILES = new Set(["AlumniSansPinstripeMN", "BonaNovaMN", "BonaNovaSCMN", "OrangerieMN"]);
+
+// Where support goes. Leave empty to hide the "Support" link.
+const DONATE = { bank: "", holder: "", account: "", note: "", qr: "" };
+
 const MN_LIB = [
   ["Unbounded MN", "Unbounded", "S", 1, "wght:200:900:400", "build/UnboundedMN/UnboundedMN%5Bwght%5D.ttf", "UnboundedMN", "NaN"],
   ["Sofia Sans MN", "Sofia Sans", "S", 1, "wght:1:1000:400", "build/SofiaSansMN/SofiaSansMN%5Bwght%5D.ttf", "SofiaSansMN", "Lettersoup, Botio Nikoltchev, Ani Petrova"],
@@ -1012,6 +1074,13 @@ const I18N = {
     licSegAll: "Бүх лиценз", licSegAds: "Сурталчилгаанд OK", licSegAdsT: "Нээлттэй лицензтэй эсвэл Windows-тай ирдэг фонт",
     licSegRights: "Лиценз шаардлагатай", licSegPersonal: "Хувийн/Demo", licSegUnknown: "Тодорхойгүй",
     libFree: "Үнэгүй", libMn: "Монгол хувилбар", libWin: "Windows-тай ирдэг", libPaid: "Төлбөртэй",
+    filesH: "Нэг жингээр татах (.ttf)",
+    filesNote: "Утас болон видео засварлагчид нэг жин бүрт нэг .ttf файл хамгийн тохиромжтой. Татсан файлаа апп-ынхаа текстийн фонт сонгох хэсгээс импортлоно (апп бүрт өөр байж болно).",
+    introPhone: "Утсан дээр суулгасан фонтыг шалгах боломжгүй. <strong>Фонтын сан</strong> хэсгээс фонтоо сонгон татаж авна, эсвэл татсан .ttf файлаа сонгож Монгол үсэг бүрэн эсэхийг шалгана.",
+    supportLink: "♥ Дэмжих", supportTitle: "MonFont-ийг дэмжих",
+    supportLead: "MonFont үнэгүй, ашгийн бус төсөл. Танд хэрэг болсон бол хандив өгч дэмжиж болно. Заавал биш.",
+    supportBank: "Банк", supportHolder: "Хүлээн авагч", supportAccount: "Дансны дугаар", supportNote: "Гүйлгээний утга", supportCopy: "Хуулах", supportCopied: "Хуулагдлаа",
+    supportThanks: "Баярлалаа. Таны дэмжлэг шинэ фонт нэмэх, Монгол үсгийн дутууг засахад очно.",
     licInfo: "Лиценз", licGuideLink: "Лицензийн заавар →", libCount: n => `${n} фонт`, libHave: n => `${n} нь танд суусан`,
     libMnStatus: n => `Ө ө Ү ү, ₮ байгаагүй ${n} нээлттэй фонтод эдгээр үсгийг нэмсэн хувилбарууд. Арилжаанд үнэгүй (OFL).`,
     mnBadge: "Монгол хувилбар", mnBadgeT: (b, d) => `${b} (${d}) фонт дээр Ө ө Ү ү ₮ нэмсэн`, mnAdditions: "Монгол үсгийг нэмсэн: MonFont",
@@ -1121,6 +1190,13 @@ const I18N = {
     licSegAll: "Any license", licSegAds: "OK for ads", licSegAdsT: "Open-license fonts and fonts that come with Windows",
     licSegRights: "License required", licSegPersonal: "Personal/Demo", licSegUnknown: "Unknown",
     libFree: "Free", libMn: "MN editions", libWin: "Comes with Windows", libPaid: "Paid",
+    filesH: "Download one weight (.ttf)",
+    filesNote: "Phones and video editors work best with one .ttf per weight. Import the file from your app's text font picker (the steps differ by app).",
+    introPhone: "Phones can't list the fonts you have installed. Pick and download a font from the <strong>Font library</strong>, or choose a .ttf file you already have to check it for Mongolian letters.",
+    supportLink: "♥ Support", supportTitle: "Support MonFont",
+    supportLead: "MonFont is free and non-profit. If it helped you, you can chip in. It's optional.",
+    supportBank: "Bank", supportHolder: "Account name", supportAccount: "Account number", supportNote: "Payment note", supportCopy: "Copy", supportCopied: "Copied",
+    supportThanks: "Thank you. Support goes toward adding more fonts and fixing missing Mongolian letters.",
     licInfo: "License", licGuideLink: "License guide →", libCount: n => `${n} ${n === 1 ? "font" : "fonts"}`, libHave: n => `${n} already installed`,
     libMnStatus: n => `${n} open-license fonts that were missing Ө ө Ү ү or ₮. We added the letters in each font's own style. Free for commercial use (OFL).`,
     mnBadge: "MN edition", mnBadgeT: (b, d) => `${b} by ${d}, with Ө ө Ү ү ₮ added`, mnAdditions: "Mongolian letters added by MonFont",
@@ -1241,13 +1317,16 @@ const LIB = [
   ...MN_LIB.map(([family, basedOn, cat, tug, axes, file, zip, designers]) => {
     const ax = parseAxes(axes);
     for (const a of ax) if (a.tag === "wght") a.def = Math.min(Math.max(400, a.min), a.max);   // open at Regular, not the file's default
-    return { kind: "mn", family, basedOn, cat, tug: !!tug, axes: ax, lic: "OFL", designers, url: MN_ZIP + zip + ".zip", ttf: MN_CDN + file, preview: "url" };
+    return { kind: "mn", family, basedOn, cat, tug: !!tug, axes: ax, lic: "OFL", designers, url: MN_ZIP + zip + ".zip", zip, ttf: MN_CDN + file, preview: "url" };
   }),
   ...PAID_LIB.map(p => ({ kind: "paid", ...p, axes: [] })),
 ];
 const LIB_BY_NAME = new Map(LIB.filter(e => e.kind !== "paid").map(e => [e.family.toLowerCase(), e]));
 const FREE_COUNT = LIB.filter(e => e.kind === "free").length;
 const MN_COUNT = LIB.filter(e => e.kind === "mn").length;
+// Phones can't list installed fonts, so they start on the library and check font files instead.
+const PHONE = matchMedia("(pointer: coarse)").matches && !("queryLocalFonts" in window);
+document.documentElement.classList.toggle("phone", PHONE);
 const IS_WINDOWS = /Windows/i.test(navigator.userAgentData?.platform || navigator.platform || navigator.userAgent);
 
 const state = {
@@ -1916,6 +1995,7 @@ function openLibDetail(e) {
     axes: e.axes.filter(a => a.max > a.min),
     faces: styles.map(([w, it]) => ({ style: styleLabel(w, it), css, weight: w, italic: it, result })),
     licInfo: e.kind === "windows" ? { kind: "windows" } : { kind: "free", name: e.lic },
+    mnZip: e.kind === "mn" ? e.zip : null,
     libLicense: e.kind === "windows"
       ? { license: "Microsoft Windows", licenseUrl: MS_FAQ, source: e.url }
       : e.kind === "mn"
@@ -1976,6 +2056,23 @@ function fillLicense(box, f) {
   box.append(v, dl, note, g);
 }
 
+function fillFiles(f) {
+  const ul = $("#dFilesList");
+  ul.replaceChildren();
+  const z = f.mnZip;
+  $("#dFiles").hidden = !z || !MN_STYLES[z];
+  if (!z || !MN_STYLES[z]) return;
+  for (const style of MN_STYLES[z].split(" ")) {
+    const li = document.createElement("li"), a = document.createElement("a");
+    a.href = `${MN_CDN}build/${z}/${MN_ROOT_FILES.has(z) ? "" : "static/"}${z}-${style}.ttf`;
+    a.textContent = style.replace(/([a-z])([A-Z])/g, "$1 $2");
+    a.rel = "noopener";
+    a.download = `${z}-${style}.ttf`;
+    li.append(a);
+    ul.append(li);
+  }
+}
+
 function openDetail(f) {
   cur = f;
   const text = sampleText();
@@ -2016,6 +2113,7 @@ function openDetail(f) {
   }
 
   fillLicense($("#dLic"), f);
+  fillFiles(f);
   const lt = licText(f.licInfo || { kind: "unknown" });
   $("#dLicSum").textContent = lt[0];
   $("#dLicDot").replaceChildren(licDot(f.licInfo));
@@ -2071,6 +2169,7 @@ function applyLang() {
   for (const el of $$("[data-i18n-aria]")) el.setAttribute("aria-label", t(el.dataset.i18nAria));
   for (const b of $$("#langSw button")) b.setAttribute("aria-pressed", String(b.dataset.lang === state.lang));
   $("#scanBtn").textContent = t(state.scanned ? "rescan" : "scan");
+  if (PHONE) $("#intro1").innerHTML = t("introPhone");
   if (state.note) showNote(state.note, state.noteErr);
   for (const f of state.families) f.el = null;
   for (const e of LIB) e.el = null;
@@ -2194,6 +2293,40 @@ $("#dStar").addEventListener("click", () => cur && toggleStar(cur.name));
 $("#dCopy").addEventListener("click", () => cur && copyText(cur.name, t("copiedName", cur.name)));
 $("#dCss").addEventListener("click", () => cur && copyText(`font-family: ${cssStr(cur.name)};`, t("copiedCss")));
 
+// ---- Support ----
+const supportDlg = $("#supportDlg");
+const donateOn = !!(DONATE.account || DONATE.qr);
+$("#supportLink").hidden = !donateOn;
+$("#supportLink").addEventListener("click", () => {
+  const rows = $("#sRows");
+  rows.replaceChildren();
+  const add = (label, value, copy) => {
+    if (!value) return;
+    const dt = document.createElement("dt"), dd = document.createElement("dd"), act = document.createElement("dd");
+    dt.textContent = label; dd.textContent = value;
+    if (copy) {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "btn small"; b.textContent = t("supportCopy");
+      b.addEventListener("click", () => copyText(value, t("supportCopied")));
+      act.append(b);
+    }
+    rows.append(dt, dd, act);
+  };
+  add(t("supportBank"), DONATE.bank);
+  add(t("supportHolder"), DONATE.holder);
+  add(t("supportAccount"), DONATE.account, true);
+  add(t("supportNote"), DONATE.note, true);
+  const qr = $("#sQr");
+  qr.hidden = !DONATE.qr;
+  if (DONATE.qr) qr.src = DONATE.qr;
+  supportDlg.showModal();
+});
+$("#sClose").addEventListener("click", () => supportDlg.close());
+supportDlg.addEventListener("click", e => { if (e.target === supportDlg) supportDlg.close(); });
+
+// Phones: the intro button picks font files
+$("#introFile").addEventListener("click", () => $("#fileInput").click());
+
 // Drag and drop font files anywhere
 let dragDepth = 0;
 const hasFiles = e => [...(e.dataTransfer?.types || [])].includes("Files");
@@ -2211,11 +2344,11 @@ window.addEventListener("drop", e => {
 // ---------- start ----------
 state.shared = readShared();
 if (state.shared) state.view = "shared";
-else if (location.hash === "#library") state.view = "lib";
+else if (location.hash === "#library" || PHONE) state.view = "lib";
 applyLang();
 if (location.hash === "#guide") openGuide();
 (async () => {
-  if (!("queryLocalFonts" in window)) { showNote("unsupported"); return; }
+  if (!("queryLocalFonts" in window)) { if (!PHONE) showNote("unsupported"); return; }
   try {
     const p = await navigator.permissions.query({ name: "local-fonts" });
     if (p.state === "granted") scanInstalled();
