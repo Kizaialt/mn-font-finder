@@ -2,6 +2,7 @@
 <html lang="mn">
 <head>
 <meta charset="utf-8">
+<script>if (location.protocol === "http:" && !/^(localhost|127\.|\[::1\])/.test(location.hostname)) location.replace("https://" + location.host + location.pathname + location.search + location.hash);</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>MonFont · Монгол үсэгтэй фонт</title>
 <meta name="description" content="Аль фонт Ө ө Ү ү үсэгтэй, аль нь зарт ашиглагдах вэ гэдгийг шалгана. Монгол үсэг бүрэн, үнэгүй фонтын сан.">
@@ -1159,6 +1160,8 @@ const I18N = {
     notHere: "Таны компьютерт алга.",
     notInFree: "Фонтын санд байхгүй. Илгээсэн хүнээс хаанаас авахыг асуугаарай.",
     noteUnsupported: "Энэ хөтөч суусан фонтыг уншиж чадахгүй. Компьютер дээрээ Chrome эсвэл Edge-ээр нээнэ үү (Firefox, Safari, Brave, утас дээр болохгүй). Фонт файлаа чирж оруулаад шалгаж болно.",
+    noteInsecure: "Хуудас хамгаалалтгүй (http://) хаягаар нээгдсэн тул хөтөч фонт уншихыг зөвшөөрөхгүй. https://monfont.space хаягаар нээнэ үү.",
+    noteUpdate: "Таны хөтөч хуучин хувилбар байна. Chrome, Edge эсвэл Opera-гаа шинэчлээд (103-аас дээш хувилбар) дахин оролдоно уу.",
     noteDenied: "Фонт унших зөвшөөрөл хаалттай байна. Хаягийн мөрний зүүн талд байгаа дүрс дээр дарж Fonts-ыг зөвшөөрөөд дахин шалгаарай.",
     noteError: m => "Фонтын жагсаалтыг уншиж чадсангүй" + (m ? ": " + m : "."),
     axes: { wght: "Зузаан", wdth: "Өргөн", slnt: "Налуу", ital: "Italic", opsz: "Оптик хэмжээ", YEAR: "Он" },
@@ -1275,6 +1278,8 @@ const I18N = {
     notHere: "Not on this computer.",
     notInFree: "Not in the font library. Ask the sender where to get it.",
     noteUnsupported: "This browser can't read installed fonts. Open the page in Chrome or Edge on a computer (not Firefox, Safari, Brave or a phone). You can still drop font files here to check them.",
+    noteInsecure: "This page was opened over an insecure (http://) address, so the browser won't let it read fonts. Open https://monfont.space instead.",
+    noteUpdate: "Your browser is out of date. Update Chrome, Edge or Opera (version 103 or newer) and try again.",
     noteDenied: "Font access is blocked for this page. Click the icon at the left of the address bar, allow Fonts, then scan again.",
     noteError: m => "Couldn't read the font list" + (m ? ": " + m : "."),
     axes: { wght: "Weight", wdth: "Width", slnt: "Slant", ital: "Italic", opsz: "Optical size", YEAR: "Year" },
@@ -1443,11 +1448,20 @@ function licenseFor(f) {
   return licenseOf(r, [f.name, r.nameFamily, r.fullName, r.ps, f.fileName, ...(f.faces || []).map(x => x.full)], r.nameFamily || f.name);
 }
 
+// Why can't we scan? Not a secure page, an old Chromium, or a browser without the feature.
+function scanBlocker() {
+  if ("queryLocalFonts" in window) return "";
+  if (!window.isSecureContext) return "insecure";
+  if (/(Chrome|Chromium|Edg|OPR)\/\d+/.test(navigator.userAgent) && !/Mobile|Android/i.test(navigator.userAgent)) return "update";
+  return "unsupported";
+}
+
 function showNote(kind, err) {
   state.note = kind;
   state.noteErr = err;
   const n = $("#note");
-  n.textContent = kind === "unsupported" ? t("noteUnsupported") : kind === "denied" ? t("noteDenied") : t("noteError", err && err.message);
+  n.textContent = kind === "unsupported" ? t("noteUnsupported") : kind === "insecure" ? t("noteInsecure") : kind === "update" ? t("noteUpdate")
+    : kind === "denied" ? t("noteDenied") : t("noteError", err && err.message);
   n.hidden = false;
 }
 
@@ -1460,7 +1474,7 @@ function setProgress(done, total) {
 
 async function scanInstalled() {
   if (state.scanning) return;
-  if (!("queryLocalFonts" in window)) { showNote("unsupported"); setView("mine"); return; }
+  if (!("queryLocalFonts" in window)) { showNote(scanBlocker()); setView("mine"); return; }
   let list;
   try { list = await window.queryLocalFonts(); }
   catch (e) { showNote(e && (e.name === "SecurityError" || e.name === "NotAllowedError") ? "denied" : "error", e); setView("mine"); return; }
@@ -2409,7 +2423,7 @@ else if (location.hash === "#library" || PHONE) state.view = "lib";
 applyLang();
 if (location.hash === "#guide") openGuide();
 (async () => {
-  if (!("queryLocalFonts" in window)) { if (!PHONE) showNote("unsupported"); return; }
+  if (!("queryLocalFonts" in window)) { if (!PHONE) showNote(scanBlocker()); return; }
   try {
     const p = await navigator.permissions.query({ name: "local-fonts" });
     if (p.state === "granted") scanInstalled();
