@@ -235,8 +235,8 @@ button.name:hover { text-decoration: underline; text-underline-offset: 3px; }
 .spec.text { color: var(--ink-2); }
 .miss { color: var(--bad); text-decoration: underline wavy var(--bad); text-decoration-skip-ink: none; text-underline-offset: .15em; text-decoration-thickness: 2px; }
 .card-f { display: flex; align-items: center; gap: 8px; justify-content: space-between; }
-.badges { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; min-width: 0; }
-.fact { font-size: 12px; color: var(--ink-3); white-space: nowrap; }
+.badges { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; min-width: 0; overflow: hidden; }
+.fact { font-size: 12px; color: var(--ink-3); white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .fact + .fact::before { content: "·"; margin: 0 6px; opacity: .6; }
 .lic-dot { display: inline-block; flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--ink-3); cursor: help; }
 .lic-dot.ok { background: var(--ok); }
@@ -276,9 +276,17 @@ button.name:hover { text-decoration: underline; text-underline-offset: 3px; }
 .sup-qr { display: block; width: min(240px, 100%); border-radius: 12px; border: 1px solid var(--line); margin: 6px 0 16px; background: #fff; }
 .foot .link + .link { margin-left: 14px; }
 
+/* Floating support button, always in reach */
+.donate-fab { position: fixed; right: 18px; bottom: 18px; z-index: 30; display: inline-flex; align-items: center; gap: 7px; height: 44px; padding: 0 18px 0 16px;
+  border: 0; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-size: 14px; font-weight: 700;
+  box-shadow: 0 8px 24px rgb(0 0 0 / .18), 0 1px 3px rgb(0 0 0 / .12); transition: transform .15s ease, box-shadow .15s ease; }
+.donate-fab span:first-child { color: #ff5d5d; font-size: 16px; line-height: 1; }
+.donate-fab:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgb(0 0 0 / .22), 0 1px 3px rgb(0 0 0 / .12); }
+@media (max-width: 640px) { .donate-fab { right: 12px; bottom: 12px; height: 42px; padding: 0 16px 0 14px; } }
+
 /* Footer */
 .foot p { text-shadow: 0 0 4px var(--bg), 0 0 10px var(--bg), 0 0 18px var(--bg); }
-.foot { color: var(--ink-3); font-size: 13px; padding-top: 20px; padding-bottom: 40px; border-top: 1px solid var(--line); }
+.foot { color: var(--ink-3); font-size: 13px; padding-top: 20px; padding-bottom: 80px; border-top: 1px solid var(--line); }
 .foot p { margin: 0; max-width: 90ch; }
 
 /* Detail dialog */
@@ -474,7 +482,8 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
 <main id="grid" class="grid wrap"></main>
 <p id="empty" class="empty wrap" hidden></p>
 
-<footer class="foot wrap"><p data-i18n-html="footer"></p><p><button id="supportLink" class="link" type="button" hidden data-i18n="supportLink"></button></p></footer>
+<footer class="foot wrap"><p data-i18n-html="footer"></p></footer>
+<button id="supportLink" class="donate-fab" type="button" hidden><span aria-hidden="true">♥</span><span data-i18n="supportLink"></span></button>
 
 <dialog id="detail" aria-labelledby="dTitle">
   <div class="d-in">
@@ -1025,7 +1034,7 @@ MN_STYLES.AlumniSansSCMN = MN_STYLES.AlumniSansMN;
 const MN_ROOT_FILES = new Set(["AlumniSansPinstripeMN", "BonaNovaMN", "BonaNovaSCMN", "OrangerieMN"]);
 
 // Where support goes. Leave empty to hide the "Support" link.
-const DONATE = { bank: { mn: "Хаан банк", en: "Khan Bank" }, holder: { mn: "Оргил Амарсайхан", en: "Orgil Amarsaikhan" }, account: "5251817430", iban: "MN88 0005 00 5251817430", note: "MonFont", qr: "" };
+const DONATE = { bank: { mn: "Хаан банк", en: "Khan Bank" }, holder: { mn: "Оргил Амарсайхан", en: "Orgil Amarsaikhan" }, account: "", iban: "MN88 0005 00 5251817430", note: "", qr: "" };
 
 const MN_LIB = [
   ["Unbounded MN", "Unbounded", "S", 1, "wght:200:900:400", "build/UnboundedMN/UnboundedMN%5Bwght%5D.ttf", "UnboundedMN", "NaN"],
@@ -1085,7 +1094,7 @@ const I18N = {
     filesH: "Нэг жингээр татах (.ttf)",
     filesNote: "Утас болон видео засварлагчид нэг жин бүрт нэг .ttf файл хамгийн тохиромжтой. Татсан файлаа апп-ынхаа текстийн фонт сонгох хэсгээс импортлоно (апп бүрт өөр байж болно).",
     introPhone: "Утсан дээр суулгасан фонтыг шалгах боломжгүй. <strong>Фонтын сан</strong> хэсгээс фонтоо сонгон татаж авна, эсвэл татсан .ttf файлаа сонгож Монгол үсэг бүрэн эсэхийг шалгана.",
-    supportLink: "♥ Дэмжих", supportTitle: "MonFont-ийг дэмжих",
+    supportLink: "Дэмжих", supportTitle: "MonFont-ийг дэмжих",
     supportLead: "MonFont үнэгүй, ашгийн бус төсөл. Танд хэрэг болсон бол хандив өгч дэмжиж болно. Заавал биш.",
     supportBank: "Банк", supportHolder: "Хүлээн авагч", supportAccount: "Дансны дугаар", supportNote: "Гүйлгээний утга", supportCopy: "Хуулах", supportCopied: "Хуулагдлаа",
     supportThanks: "Баярлалаа. Таны дэмжлэг шинэ фонт нэмэх, Монгол үсгийн дутууг засахад очно.",
@@ -1203,7 +1212,7 @@ const I18N = {
     filesH: "Download one weight (.ttf)",
     filesNote: "Phones and video editors work best with one .ttf per weight. Import the file from your app's text font picker (the steps differ by app).",
     introPhone: "Phones can't list the fonts you have installed. Pick and download a font from the <strong>Font library</strong>, or choose a .ttf file you already have to check it for Mongolian letters.",
-    supportLink: "♥ Support", supportTitle: "Support MonFont",
+    supportLink: "Support", supportTitle: "Support MonFont",
     supportLead: "MonFont is free and non-profit. If it helped you, you can chip in. It's optional.",
     supportBank: "Bank", supportHolder: "Account name", supportAccount: "Account number", supportNote: "Payment note", supportCopy: "Copy", supportCopied: "Copied",
     supportThanks: "Thank you. Support goes toward adding more fonts and fixing missing Mongolian letters.",
@@ -2368,7 +2377,7 @@ $("#dCss").addEventListener("click", () => cur && copyText(`font-family: ${cssSt
 
 // ---- Support ----
 const supportDlg = $("#supportDlg");
-const donateOn = !!(DONATE.account || DONATE.qr);
+const donateOn = !!(DONATE.account || DONATE.iban || DONATE.qr);
 $("#supportLink").hidden = !donateOn;
 $("#supportLink").addEventListener("click", () => {
   const rows = $("#sRows");
