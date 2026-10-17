@@ -1024,7 +1024,7 @@ MN_STYLES.AlumniSansSCMN = MN_STYLES.AlumniSansMN;
 const MN_ROOT_FILES = new Set(["AlumniSansPinstripeMN", "BonaNovaMN", "BonaNovaSCMN", "OrangerieMN"]);
 
 // Where support goes. Leave empty to hide the "Support" link.
-const DONATE = { bank: "", holder: "", account: "", note: "", qr: "" };
+const DONATE = { bank: { mn: "Хаан банк", en: "Khan Bank" }, holder: "", account: "5251817430", iban: "MN88 0005 00 5251817430", note: "MonFont", qr: "" };
 
 const MN_LIB = [
   ["Unbounded MN", "Unbounded", "S", 1, "wght:200:900:400", "build/UnboundedMN/UnboundedMN%5Bwght%5D.ttf", "UnboundedMN", "NaN"],
@@ -2360,13 +2360,14 @@ $("#supportLink").addEventListener("click", () => {
   const rows = $("#sRows");
   rows.replaceChildren();
   const add = (label, value, copy) => {
+    if (value && typeof value === "object") value = value[state.lang] || value.mn;
     if (!value) return;
     const dt = document.createElement("dt"), dd = document.createElement("dd"), act = document.createElement("dd");
     dt.textContent = label; dd.textContent = value;
     if (copy) {
       const b = document.createElement("button");
       b.type = "button"; b.className = "btn small"; b.textContent = t("supportCopy");
-      b.addEventListener("click", () => copyText(value, t("supportCopied")));
+      b.addEventListener("click", () => copyText(value.replace(/\s+/g, ""), t("supportCopied")));
       act.append(b);
     }
     rows.append(dt, dd, act);
@@ -2374,6 +2375,7 @@ $("#supportLink").addEventListener("click", () => {
   add(t("supportBank"), DONATE.bank);
   add(t("supportHolder"), DONATE.holder);
   add(t("supportAccount"), DONATE.account, true);
+  add("IBAN", DONATE.iban, true);
   add(t("supportNote"), DONATE.note, true);
   const qr = $("#sQr");
   qr.hidden = !DONATE.qr;
