@@ -2329,12 +2329,31 @@ document.querySelector(".presets").addEventListener("click", e => {
 
 const sizeIn = $("#size");
 sizeIn.value = state.size;
-document.documentElement.style.setProperty("--spec-size", state.size + "px");
+// While dragging, resize only the cards on screen (at most once a frame); the rest of the grid
+// catches up once the slider rests. Resizing all ~200 cards on every step made the slider lag.
+const grid = $("#grid");
+grid.style.setProperty("--spec-size", state.size + "px");
+let sizeFrame = 0, sizeRest = 0, sizeLive = [];
+function settleSize() {
+  grid.style.setProperty("--spec-size", state.size + "px");
+  for (const c of sizeLive) c.style.removeProperty("--spec-size");
+  sizeLive = [];
+}
 sizeIn.addEventListener("input", () => {
   state.size = +sizeIn.value;
-  document.documentElement.style.setProperty("--spec-size", state.size + "px");
-  store.set("size", state.size);
+  clearTimeout(sizeRest);
+  sizeRest = setTimeout(settleSize, 180);
+  if (sizeFrame) return;
+  sizeFrame = requestAnimationFrame(() => {
+    sizeFrame = 0;
+    const h = innerHeight;
+    const live = [...grid.children].filter(c => { const r = c.getBoundingClientRect(); return r.bottom > 0 && r.top < h; });
+    for (const c of sizeLive) if (!live.includes(c)) c.style.removeProperty("--spec-size");
+    for (const c of live) c.style.setProperty("--spec-size", state.size + "px");
+    sizeLive = live;
+  });
 });
+sizeIn.addEventListener("change", () => { clearTimeout(sizeRest); settleSize(); store.set("size", state.size); });
 
 setFilter(state.filter);
 setLic("all");
