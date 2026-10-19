@@ -129,10 +129,6 @@ h1 { font-size: 20px; line-height: 1.1; letter-spacing: -0.015em; margin: 0; fon
 .tb-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 .sample { flex: 1 1 360px; min-width: 0; height: 46px; padding: 0 16px; font-size: 19px; border: 1px solid var(--line-2); border-radius: 12px; background: var(--surface); }
 .presets { display: flex; gap: 6px; flex-wrap: wrap; }
-.mnkeys { display: flex; gap: 4px; }
-.mnkeys button { width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--line-2); background: var(--surface); font-size: 19px; line-height: 1; }
-.mnkeys button:hover { border-color: var(--ink-3); }
-.mnkeys button:active { background: var(--muted-bg); }
 .presets button { height: 32px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--line-2); background: transparent; font-size: 13px; font-weight: 500; }
 .presets button:hover { background: var(--surface); border-color: var(--ink-3); }
 .seg { display: inline-flex; flex-wrap: wrap; gap: 2px; padding: 3px; border-radius: 18px; background: var(--muted-bg); }
@@ -238,23 +234,6 @@ button.name:hover { text-decoration: underline; text-underline-offset: 3px; }
 .spec.na, .ghost .spec, .spec.text { font-size: 15px; line-height: 1.5; color: var(--ink-3); -webkit-line-clamp: unset; }
 .spec.text { color: var(--ink-2); }
 .miss { color: var(--bad); text-decoration: underline wavy var(--bad); text-decoration-skip-ink: none; text-underline-offset: .15em; text-decoration-thickness: 2px; }
-/* Compare: one row per font, the sample on the left and base/new letter pairs in aligned columns */
-.grid.cmp { gap: 10px; }
-.crow { content-visibility: visible; }
-.crow-b { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px 24px; align-items: center; }
-.crow .spec { margin: 8px 0 6px; -webkit-line-clamp: 2; }
-.pairs { display: grid; grid-template-columns: repeat(5, 76px); gap: 6px; }
-.pair { display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 0 4px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--line); }
-.pair .g { font-size: 40px; line-height: 1.15; white-space: nowrap; }
-.pair .g .base { color: var(--ink-3); }
-.pair small { font-size: 11px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
-.pair.pending .g { color: transparent; }
-.pair.bad { border-color: var(--bad); background: var(--bad-bg); }
-@media (max-width: 760px) {
-  .crow-b { grid-template-columns: minmax(0, 1fr); }
-  .pairs { grid-template-columns: repeat(5, minmax(0, 1fr)); }
-  .pair .g { font-size: 30px; }
-}
 .card-f { display: flex; align-items: center; gap: 8px; justify-content: space-between; }
 .badges { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 6px; min-width: 0; overflow: hidden; }
 .fact { font-size: 12px; color: var(--ink-3); white-space: nowrap; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
@@ -412,9 +391,6 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
     <div class="tb" data-views="mine lib short shared">
       <div class="tb-row">
         <input id="sample" class="sample" type="text" spellcheck="false" data-i18n-aria="sampleAria">
-        <div class="mnkeys" id="mnKeys" role="group" data-i18n-aria="mnKeysAria" data-i18n-title="mnKeysT">
-          <button type="button">Ө</button><button type="button">ө</button><button type="button">Ү</button><button type="button">ү</button><button type="button">₮</button>
-        </div>
         <div class="presets" role="group">
           <button type="button" data-preset="sentence" data-i18n="presetSentence"></button>
           <button type="button" data-preset="caps" data-i18n="presetCaps"></button>
@@ -463,10 +439,6 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
         <span id="status2"></span>
         <details class="licnote" id="licNote" data-views="lib"><summary data-i18n="licInfo"></summary><p id="licNoteText"></p></details>
         <span class="spacer"></span>
-        <div class="seg" id="modeSeg" role="group" data-views="short shared">
-          <button type="button" data-m="cards" data-i18n="modeCards"></button>
-          <button type="button" data-m="cmp" data-i18n="modeCmp" data-i18n-title="modeCmpT"></button>
-        </div>
         <button id="copyNames" class="link" type="button" data-views="short" data-i18n="copyNames"></button>
         <button id="copyLink" class="link" type="button" data-views="short" data-i18n="copyLink"></button>
       </div>
@@ -1154,15 +1126,11 @@ const I18N = {
     notWindows: " Таны төхөөрөмж Windows биш тул зарим нь харагдахгүй байж магадгүй.",
     libPaidStatus: "Худалдаж авах газрууд. Бид шалгаагүй, мэдээлэл нь худалдагчийнх.",
     shortStatus: n => `Жагсаалтад ${n} фонт`,
-    mnKeysAria: "Монгол үсэг оруулах", mnKeysT: "Орос гарнаас дутуу үсгийг дарж оруулна",
-    modeCards: "Карт", modeCmp: "Харьцуулах", modeCmpT: "Фонтуудыг мөр мөрөөр, Ө Ү ₮ үсгийг суурь үсэгтэй нь зэрэгцүүлж харах",
-    cmpStatus: n => `${n} фонтыг харьцуулж байна` + (n < 2 ? " · ★ дарж дахиад нэмээрэй" : ""),
-    pairMissT: "Энэ фонтод байхгүй, өөр фонтоор харагдана",
     sharedTitle: n => `Танд ${n} фонттой жагсаалт ирлээ`,
     sharedScan: "Аль нь танд суусныг харахын тулд фонтоо шалгаарай.",
     sharedSub: (have, miss) => `${have} нь танд суусан, ${miss} нь суугаагүй.`,
     empty: "Шүүлтүүрт тохирох фонт алга.",
-    emptyShort: "Жагсаалт хоосон байна. Фонт дээрх ★ тэмдгийг дарж нэмээд, энд харьцуулж үзээрэй.",
+    emptyShort: "Жагсаалт хоосон байна. Фонт дээрх ★ тэмдгийг дарж нэмээрэй.",
     emptyQ: "Хайлтад тохирох фонт алга.",
     ok: "Ө ө Ү ү ✓", okT: "Монгол кирилл үсэг бүгд бий",
     missing: c => `Дутуу: ${c}`, missingT: "Эдгээр үсэг өөр фонтоор харагдана",
@@ -1276,15 +1244,11 @@ const I18N = {
     notWindows: " You're not on Windows, so some may not display.",
     libPaidStatus: "Where to buy fonts with Mongolian support. We haven't checked these; the details come from the sellers.",
     shortStatus: n => `${n} font${n === 1 ? "" : "s"} in your shortlist`,
-    mnKeysAria: "Insert Mongolian letters", mnKeysT: "Tap to type the letters a Russian keyboard lacks",
-    modeCards: "Cards", modeCmp: "Compare", modeCmpT: "Fonts in rows, with Ө Ү ₮ next to the letters they're built from",
-    cmpStatus: n => `Comparing ${n} font${n === 1 ? "" : "s"}` + (n < 2 ? " · star another to compare" : ""),
-    pairMissT: "Not in this font; shown in a fallback font",
     sharedTitle: n => `Someone shared a list of ${n} font${n === 1 ? "" : "s"}`,
     sharedScan: "Scan your fonts to see which ones you already have.",
     sharedSub: (have, miss) => `${have} installed, ${miss} missing.`,
     empty: "No fonts match these filters.",
-    emptyShort: "Your shortlist is empty. Click ★ on fonts to add them, then compare them here.",
+    emptyShort: "Your shortlist is empty. Click ★ on a font to add it.",
     emptyQ: "No fonts match your search.",
     ok: "Ө ө Ү ү ✓", okT: "Has every Mongolian Cyrillic letter",
     missing: c => `Missing ${c}`, missingT: "These letters will show in a fallback font",
@@ -1415,7 +1379,6 @@ const state = {
   sample: store.get("sample", PRESETS.sentence),
   size: store.get("size", 48),
   shortlist: new Set(store.get("shortlist", [])),
-  cmp: store.get("cmp", false) === true,
   shared: null,
   note: null,
 };
@@ -1906,59 +1869,6 @@ function resolveName(name) {
   return buildGhostCard(name);
 }
 
-// ---------- compare ----------
-// Base letter next to the Mongolian letter made from it, so a mismatch in weight or height is easy to see.
-const PAIRS = [["О", "Ө"], ["о", "ө"], ["У", "Ү"], ["у", "ү"], ["Т", "₮"]];
-let cmpRows = [];   // [{ spec, pairs, src }] for refreshSpecs; src() gives the font for fillSpec
-
-function fillPairs(box, f) {
-  box.replaceChildren();
-  for (const [base, mn] of PAIRS) {
-    const cell = document.createElement("div"), g = document.createElement("span"), cap = document.createElement("small");
-    const miss = !f.css || (f.has && !f.has(mn.codePointAt(0)));
-    cell.className = "pair" + (miss ? " bad" : "");
-    if (miss) cell.title = t("pairMissT");
-    g.className = "g";
-    if (f.css) g.style.fontFamily = f.css;
-    const b = document.createElement("span");
-    b.className = "base"; b.textContent = base;
-    g.append(b, mn);
-    cap.textContent = "U+" + mn.codePointAt(0).toString(16).toUpperCase().padStart(4, "0");
-    cell.append(g, cap);
-    box.append(cell);
-  }
-}
-
-function buildCompareRow(name) {
-  const lc = name.toLowerCase();
-  const f = state.families.find(x => x.status !== "pending" && x.name.toLowerCase() === lc);
-  const e = f ? null : LIB_BY_NAME.get(lc);
-  if (!f && !e) return buildGhostCard(name);
-  const el = cardShell(name, f ? (f.source === "file" ? "" : t("styles", f.faces.length)) : t(CAT_KEY[e.cat]));
-  el.classList.add("crow");
-  const btn = document.createElement("button");
-  btn.className = "name"; btn.type = "button"; btn.textContent = name;
-  $(".name", el).replaceWith(btn);
-  const body = document.createElement("div"), pairs = document.createElement("div");
-  body.className = "crow-b"; pairs.className = "pairs";
-  const spec = $(".spec", el);
-  spec.replaceWith(body);
-  body.append(spec, pairs);
-  $(".card-f", el).remove();
-  const src = f ? () => f : () => libSpec(e);
-  fillSpec(spec, src(), sampleText());
-  fillPairs(pairs, src());
-  if (e) {
-    loadLibFont(e);
-    for (const x of [spec, ...pairs.children]) x.classList.add("pending");
-    fontReady(e).then(() => { spec.classList.remove("pending"); for (const x of pairs.children) x.classList.remove("pending"); });
-    cardRef.set(el, { kind: "lib", e });
-  } else cardRef.set(el, { kind: "local", f });
-  if (f ? f.css : true) spec.classList.add("click");
-  cmpRows.push({ spec, src });
-  return el;
-}
-
 // ---------- views ----------
 function setView(v) {
   state.view = v;
@@ -2050,10 +1960,9 @@ function render() {
     status = state.kind === "paid" ? "" : t("libCount", list.length) + (have === null || state.kind !== "free" ? "" : " · " + t("libHave", have));
   } else if (v === "short" || v === "shared") {
     const names = (v === "short" ? [...state.shortlist] : state.shared || []).filter(n => !state.q || n.toLowerCase().includes(state.q));
-    cmpRows = [];
-    cards = names.map(state.cmp ? buildCompareRow : resolveName);
+    cards = names.map(resolveName);
     if (v === "short") {
-      status = state.cmp && state.shortlist.size ? t("cmpStatus", cmpRows.length) : t("shortStatus", state.shortlist.size);
+      status = t("shortStatus", state.shortlist.size);
       empty = state.q ? t("emptyQ") : t("emptyShort");
       $("#copyNames").hidden = $("#copyLink").hidden = !state.shortlist.size;
     } else {
@@ -2070,7 +1979,6 @@ function render() {
   const grid = $("#grid");
   grid.dataset.view = v;
   grid.classList.toggle("list", v === "short" || v === "shared");
-  grid.classList.toggle("cmp", state.cmp && (v === "short" || v === "shared"));
   grid.replaceChildren(...cards);
   const emptyEl = $("#empty");
   emptyEl.hidden = cards.length > 0 || state.scanning || !empty;
@@ -2084,7 +1992,6 @@ function refreshSpecs() {
   gfNeed(text);
   for (const f of state.families) if (f.el) fillSpec($(".spec", f.el), f, text);
   for (const e of LIB) if (e.el && e.kind !== "paid") fillSpec($(".spec", e.el), libSpec(e), text);
-  for (const r of cmpRows) fillSpec(r.spec, r.src(), text);
   if ($("#detail").open && cur) {
     fillSpec($("#dSpec"), cur, text);
     for (const face of cur.faces) if (face.li && face.result) fillSpec(face.li.sp, { css: face.css, has: face.result.has }, text);
@@ -2407,19 +2314,6 @@ document.querySelector(".presets").addEventListener("click", e => {
   refreshSpecs();
 });
 
-// Russian keyboards have no Ө ө Ү ү ₮: these keys type them at the caret.
-const mnKeys = $("#mnKeys");
-mnKeys.addEventListener("pointerdown", e => { if (e.target.closest("button")) e.preventDefault(); });   // keep the caret in the box
-mnKeys.addEventListener("click", e => {
-  const b = e.target.closest("button");
-  if (!b) return;
-  const focused = document.activeElement === sampleIn;
-  const end = sampleIn.value.length;
-  sampleIn.setRangeText(b.textContent, focused ? sampleIn.selectionStart : end, focused ? sampleIn.selectionEnd : end, "end");
-  sampleIn.focus();
-  sampleIn.dispatchEvent(new Event("input"));
-});
-
 const sizeIn = $("#size");
 sizeIn.value = state.size;
 document.documentElement.style.setProperty("--spec-size", state.size + "px");
@@ -2441,9 +2335,6 @@ segClick("#seg", "f", setFilter);
 segClick("#licSeg", "l", setLic);
 segClick("#kindSeg", "k", setKind);
 segClick("#catSeg", "c", setCat);
-function setMode(m) { state.cmp = m === "cmp"; store.set("cmp", state.cmp); setSeg("#modeSeg", "m", state.cmp ? "cmp" : "cards"); }
-setMode(state.cmp ? "cmp" : "cards");
-segClick("#modeSeg", "m", setMode);
 $("#search").addEventListener("input", e => { state.q = e.target.value.trim().toLowerCase(); render(); });
 $("#fTug").addEventListener("change", e => { state.tugrik = e.target.checked; render(); });
 $("#fVar").addEventListener("change", e => { state.variable = e.target.checked; render(); });
