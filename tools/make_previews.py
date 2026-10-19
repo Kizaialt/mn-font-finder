@@ -31,6 +31,14 @@ FILES = {
     "BonaNovaMN": "BonaNovaMN-Regular.ttf",
     "BonaNovaSCMN": "BonaNovaSCMN-Regular.ttf",
     "OrangerieMN": "OrangerieMN-Regular.ttf",
+    "JostMN": "JostMN[wght].ttf",
+    "TuulOneMN": "TuulOneMN-Regular.ttf",
+    "AltoSansMN": "AltoSansMN-Regular.ttf",
+    "DelaGothicOneMN": "DelaGothicOneMN-Regular.ttf",
+    "GidoleMN": "GidoleMN-Regular.ttf",
+    "ElMessiriMN": "ElMessiriMN[wght].ttf",
+    "PlainOneMN": "PlainOneMN-Regular.ttf",
+    "SelengeSansMN": "SelengeSansMN-Regular.ttf",
 }
 # Basic Latin, Latin-1 punctuation, Cyrillic, the tugrik and numero signs, general punctuation, minus
 UNICODES = "U+0020-007E,U+00A0,U+00AB,U+00BB,U+0400-04FF,U+2010-2027,U+2030,U+20AE,U+2116,U+2212"

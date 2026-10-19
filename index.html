@@ -1039,7 +1039,8 @@ const WINDOWS_LIB = [
 // each font's style. Built in github.com/Kizaialt/mn-font-editions (release v1.1).
 // [family, based on, category, has ₮, axes "tag:min:max:default", preview file, release zip, original designers]
 const MN_REPO = "https://github.com/Kizaialt/mn-font-editions";
-const MN_CDN = "https://cdn.jsdelivr.net/gh/Kizaialt/mn-font-editions@v1.1/";
+// Pinned to a commit so the files never change under the site; v1.1 files are byte-identical there.
+const MN_CDN = "https://cdn.jsdelivr.net/gh/Kizaialt/mn-font-editions@de7978c999b9db0b4da98dbb7aeb922d9ceb4b14/";
 const MN_ZIP = MN_REPO + "/releases/download/v1.1/";
 // Single-weight files for phones and video editors (static/ unless the family has no static folder).
 const MN_STYLES = {
@@ -1082,6 +1083,15 @@ const MN_LIB = [
   ["Bona Nova MN", "Bona Nova", "R", 1, "", "build/BonaNovaMN/BonaNovaMN-Regular.ttf", "BonaNovaMN", "Capitalics, Mateusz Machalski, Andrzej Heidrich"],
   ["Bona Nova SC MN", "Bona Nova SC", "R", 1, "", "build/BonaNovaSCMN/BonaNovaSCMN-Regular.ttf", "BonaNovaSCMN", "Capitalics, Mateusz Machalski, Andrzej Heidrich"],
   ["Orangerie MN", "Oranienbaum", "R", 1, "", "build/OrangerieMN/OrangerieMN-Regular.ttf", "OrangerieMN", "Oleg Pospelov, Jovanny Lemonad"],
+  // Batch 3: no release zip yet, so "Get font" opens the family's folder (last field)
+  ["Jost MN", "Jost", "S", 1, "wght:100:900:400", "build/JostMN/JostMN%5Bwght%5D.ttf", "JostMN", "Owen Earl", MN_REPO + "/tree/main/build/JostMN"],
+  ["Tuul One MN", "Russo One", "D", 1, "", "build/TuulOneMN/TuulOneMN-Regular.ttf", "TuulOneMN", "Jovanny Lemonad", MN_REPO + "/tree/main/build/TuulOneMN"],
+  ["Alto Sans MN", "Tenor Sans", "S", 1, "", "build/AltoSansMN/AltoSansMN-Regular.ttf", "AltoSansMN", "Denis Masharov", MN_REPO + "/tree/main/build/AltoSansMN"],
+  ["Dela Gothic One MN", "Dela Gothic One", "D", 1, "", "build/DelaGothicOneMN/DelaGothicOneMN-Regular.ttf", "DelaGothicOneMN", "artakana", MN_REPO + "/tree/main/build/DelaGothicOneMN"],
+  ["Gidole MN", "Gidole", "S", 1, "", "build/GidoleMN/GidoleMN-Regular.ttf", "GidoleMN", "Andreas Larsen", MN_REPO + "/tree/main/build/GidoleMN"],
+  ["El Messiri MN", "El Messiri", "S", 1, "wght:400:700:400", "build/ElMessiriMN/ElMessiriMN%5Bwght%5D.ttf", "ElMessiriMN", "Mohamed Gaber, Jovanny Lemonad", MN_REPO + "/tree/main/build/ElMessiriMN"],
+  ["Plain One MN", "Prosto One", "D", 1, "", "build/PlainOneMN/PlainOneMN-Regular.ttf", "PlainOneMN", "Jovanny Lemonad, Pavel Emelyanov", MN_REPO + "/tree/main/build/PlainOneMN"],
+  ["Selenge Sans MN", "Sansation", "S", 1, "", "build/SelengeSansMN/SelengeSansMN-Regular.ttf", "SelengeSansMN", "Bernd Montag", MN_REPO + "/tree/main/build/SelengeSansMN"],
 ];
 
 const PAID_LIB = [
@@ -1371,10 +1381,10 @@ const LIB = [
   })),
   ...EXTRA_FREE.map(([family, cat, tug, lic, url, ttf]) => ({ kind: "free", family, cat, tug: !!tug, axes: [], lic, url, ttf, pv: ttf ? `previews/${ttf.split("/").pop().replace(".ttf", ".woff2")}` : null, preview: ttf ? "url" : "local" })),
   ...WINDOWS_LIB.map(([family, cat, tug, variable, url]) => ({ kind: "windows", family, cat, tug: !!tug, axes: variable ? [{ tag: "wght" }] : [], url, preview: "local" })),
-  ...MN_LIB.map(([family, basedOn, cat, tug, axes, file, zip, designers]) => {
+  ...MN_LIB.map(([family, basedOn, cat, tug, axes, file, zip, designers, get]) => {
     const ax = parseAxes(axes);
     for (const a of ax) if (a.tag === "wght") a.def = Math.min(Math.max(400, a.min), a.max);   // open at Regular, not the file's default
-    return { kind: "mn", family, basedOn, cat, tug: !!tug, axes: ax, lic: "OFL", designers, url: MN_ZIP + zip + ".zip", zip, ttf: MN_CDN + file, pv: `previews/${zip}.woff2`, preview: "url" };
+    return { kind: "mn", family, basedOn, cat, tug: !!tug, axes: ax, lic: "OFL", designers, url: get || MN_ZIP + zip + ".zip", zip, ttf: MN_CDN + file, pv: `previews/${zip}.woff2`, preview: "url" };
   }),
   ...PAID_LIB.map(p => ({ kind: "paid", ...p, axes: [] })),
 ];
