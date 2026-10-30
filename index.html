@@ -278,17 +278,16 @@ button.name:hover { text-decoration: underline; text-underline-offset: 3px; }
 .sup-qr { display: block; width: min(240px, 100%); border-radius: 12px; border: 1px solid var(--line); margin: 6px 0 16px; background: #fff; }
 .foot .link + .link { margin-left: 14px; }
 
-/* Floating support button, always in reach */
-.donate-fab { position: fixed; right: 18px; bottom: 18px; z-index: 30; display: inline-flex; align-items: center; gap: 7px; height: 44px; padding: 0 18px 0 16px;
-  border: 0; border-radius: 999px; background: var(--accent); color: var(--accent-ink); font-size: 14px; font-weight: 700;
-  box-shadow: 0 8px 24px rgb(0 0 0 / .18), 0 1px 3px rgb(0 0 0 / .12); transition: transform .15s ease, box-shadow .15s ease; }
-.donate-fab span:first-child { color: #ff5d5d; font-size: 16px; line-height: 1; }
-.donate-fab:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgb(0 0 0 / .22), 0 1px 3px rgb(0 0 0 / .12); }
-@media (max-width: 640px) { .donate-fab { right: 12px; bottom: 12px; height: 42px; padding: 0 16px 0 14px; } }
+/* Support button, at the end of the footer */
+.foot-row { display: flex; align-items: center; justify-content: space-between; gap: 14px 32px; flex-wrap: wrap; }
+.donate-btn { flex: none; display: inline-flex; align-items: center; gap: 7px; height: 38px; padding: 0 16px 0 14px; border: 1px solid var(--line-2);
+  border-radius: 999px; background: var(--surface); color: var(--ink); font-size: 14px; font-weight: 700; transition: border-color .15s ease, transform .15s ease; }
+.donate-btn span:first-child { color: #e5484d; font-size: 15px; line-height: 1; }
+.donate-btn:hover { border-color: var(--ink-3); transform: translateY(-1px); }
 
 /* Footer */
 .foot p { text-shadow: 0 0 4px var(--bg), 0 0 10px var(--bg), 0 0 18px var(--bg); }
-.foot { color: var(--ink-3); font-size: 13px; padding-top: 20px; padding-bottom: 80px; border-top: 1px solid var(--line); }
+.foot { color: var(--ink-3); font-size: 13px; padding-top: 20px; padding-bottom: 40px; border-top: 1px solid var(--line); }
 .foot p { margin: 0; max-width: 90ch; }
 
 /* Detail dialog */
@@ -482,8 +481,7 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
 <main id="grid" class="grid wrap"></main>
 <p id="empty" class="empty wrap" hidden></p>
 
-<footer class="foot wrap"><p data-i18n-html="footer"></p></footer>
-<button id="supportLink" class="donate-fab" type="button" hidden><span aria-hidden="true">♥</span><span data-i18n="supportLink"></span></button>
+<footer class="foot wrap"><div class="foot-row"><p data-i18n-html="footer"></p><button id="supportLink" class="donate-btn" type="button" hidden><span aria-hidden="true">♥</span><span data-i18n="supportLink"></span></button></div></footer>
 
 <dialog id="detail" aria-labelledby="dTitle">
   <div class="d-in">
