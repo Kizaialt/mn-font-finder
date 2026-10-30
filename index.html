@@ -428,6 +428,7 @@ h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: v
           <button type="button" data-k="mn"><span data-i18n="libMn"></span><b></b></button>
           <button type="button" data-k="windows"><span data-i18n="libWin"></span><b></b></button>
           <button type="button" data-k="paid"><span data-i18n="libPaid"></span></button>
+          <button type="button" data-k="mogul"><span data-i18n="libMogul"></span><b></b></button>
         </div>
         <div class="seg" id="catSeg" role="group" data-views="lib">
           <button type="button" data-c="all"><span data-i18n="catAll"></span><b></b></button>
@@ -1171,6 +1172,11 @@ const I18N = {
     mOy: { y: "Бий", n: "Байхгүй" },
     mogulMeta: "Mogul фонт", mogulInstead: "Орлуулна:",
     mogulCard: (o, m) => `Жинхэнэ нь ${o}${m ? " · " + m : ""}.`, mogulCardNone: "Жинхэнэ гарал нь олдоогүй.",
+    libMogul: "Mogul",
+    libMogulNote: "Mogul бол Монголд түгээмэл фонтын багц: бусдын фонтуудын нэрийг сольж, Ө Ү нэмсэн хуулбарууд. Файлуудыг нь энд тавихгүй; таны компьютерт суусан бол жишээ нь харагдана. Карт бүр жинхэнэ нэр, эх фонтын лиценз, үнэгүй орлуулагчийг харуулна.",
+    libMogulCount: (n, k) => `${n} Mogul фонт` + (k ? ` · ${k} нь энэ компьютерт суусан` : ""),
+    mogulNoPreview: "Энэ компьютерт суугаагүй тул жишээ харагдахгүй.",
+    mogulLicNote: "Эх фонтыг бидний судалгаагаар тогтоосон. Хуулийн зөвлөгөө биш.",
     mogulAltText: "Үнэгүй орлуулагч:", mogulCount: (n, all) => `${n} Mogul фонт` + (all > n ? ` (${all}-аас; нэрийг нь бүтэн бичээрэй)` : ""),
     vPersonal: "Файлд хувийн хэрэглээнд, demo эсвэл trial гэж бичсэн байна. Зар сурталчилгаа, захиалгат ажилд ашиглахгүй.",
     vUnknown: "Файлд лицензийн мэдээлэл алга. Фонтыг хаанаас татсанаа шалгаарай.",
@@ -1302,6 +1308,11 @@ const I18N = {
     mOy: { y: "Yes", n: "No" },
     mogulMeta: "Mogul font", mogulInstead: "Replaces:",
     mogulCard: (o, m) => `Really ${o}${m ? " · " + m : ""}.`, mogulCardNone: "Original not found yet.",
+    libMogul: "Mogul",
+    libMogulNote: "Mogul is a font pack common in Mongolia: other people's fonts, renamed with Ө and Ү added. We don't host the files; if one is installed on your computer, you'll see its preview. Each card shows the real name, the original's license and a free look-alike.",
+    libMogulCount: (n, k) => `${n} Mogul font${n === 1 ? "" : "s"}` + (k ? ` · ${k} installed on this computer` : ""),
+    mogulNoPreview: "Not installed on this computer, so no preview.",
+    mogulLicNote: "Original identified by our research. Not legal advice.",
     mogulAltText: "Free look-alike:", mogulCount: (n, all) => `${n} Mogul font${n === 1 ? "" : "s"}` + (all > n ? ` (of ${all}; type more of the name)` : ""),
     vPersonal: "The file says personal use, demo or trial. Don't use it in ads or client work.",
     vUnknown: "The file has no license info. Check where you downloaded it.",
@@ -1825,6 +1836,54 @@ function openAlt(name) {
   if ($("#detail").open) $("#detail").close();
   openLibDetail(e);
 }
+function mogulLicBadge(box, r) {
+  if (r[1]) badge(box, t("mLic")[r[4]], r[4] === "fc" || r[4] === "o" ? "lic-free" : r[4] === "fp" ? "bad" : r[4] === "c" ? "warn" : r[4] === "w" ? "info" : "");
+}
+// The Mogul tab: every Mogul font as a library card. We never host the files, so the preview uses the
+// visitor's own installed copy when there is one (like the Windows tab).
+function mogulTabRows() {
+  if (!MOGUL.rows) return [];
+  const q = state.q, qq = q.replace(/^mogul\s*/, "");
+  const rows = MOGUL.rows.filter(r => !q || ("mogul " + r[0]).toLowerCase().includes(q) || (qq && (r[0].toLowerCase().includes(qq) || r[1].toLowerCase().includes(qq))));
+  for (const r of rows) if (r.local === undefined) r.local = hasLocalFont("Mogul " + r[0]);
+  return rows.sort((a, b) => (b.local - a.local) || a[0].localeCompare(b[0]));
+}
+function buildMogulLibCard(r) {
+  const name = "Mogul " + r[0];
+  const el = cardShell(name, t("mogulMeta"), false);
+  const btn = document.createElement("button");
+  btn.className = "name"; btn.type = "button"; btn.textContent = name;
+  $(".name", el).replaceWith(btn);
+  $(".card-h", el).after(mogulLine(r));
+  const spec = $(".spec", el);
+  if (r.local) {
+    spec.classList.add("click");
+    fillSpec(spec, { css: cssStr(name) }, sampleText());
+  } else {
+    spec.classList.add("text");
+    spec.append(t("mogulNoPreview"));
+    if (r[7]) spec.append(" " + t("mogulAltText") + " ", altButton(r[7]));
+  }
+  const box = $(".badges", el);
+  mogulLicBadge(box, r);
+  if (r.local) badge(box, t("installed"), "have", t("installedT"));
+  if (r[5]) addLink(el, r[5], t("info"), t("mfSource"));
+  cardRef.set(el, { kind: "moglib", r });
+  return el;
+}
+function openMogulDetail(r) {
+  const name = "Mogul " + r[0];
+  const scanned = state.families.find(f => f.source === "installed" && f.status !== "pending" && f.name.toLowerCase() === name.toLowerCase());
+  if (scanned) { openDetail(scanned); return; }
+  const css = r.local ? cssStr(name) : null;
+  const result = { status: "mn", missing: [], has: null };
+  openDetail({
+    name, source: "lib", status: "mn", missing: [], css, has: null, axes: [], tugrik: false, bichig: false,
+    faces: [{ style: styleLabel(400, false), css, weight: 400, italic: false, result }],
+    licInfo: { kind: "rights", mogul: true, owner: "Mogul" },
+    libLicense: { designer: r[2], license: t("mLic")[r[4]], source: r[5] }, licNoteKey: "mogulLicNote",
+  });
+}
 // Library search hit for a Mogul name we may not have installed
 function buildMogulCard(r) {
   const el = cardShell("Mogul " + r[0], t("mogulMeta"), false);
@@ -1833,7 +1892,7 @@ function buildMogulCard(r) {
   spec.append(r[1] ? t("mogulCard", r[9] || r[1], r[10]) + (r[8] === "l" ? " (" + t("mogulGuess") + ")" : "") : t("mogulCardNone"));
   if (r[7]) spec.append(" " + t("mogulAltText") + " ", altButton(r[7]));
   const box = $(".badges", el);
-  if (r[1]) badge(box, t("mLic")[r[4]], r[4] === "fc" || r[4] === "o" ? "lic-free" : r[4] === "fp" ? "bad" : r[4] === "c" ? "warn" : r[4] === "w" ? "info" : "");
+  mogulLicBadge(box, r);
   if (r[6] === "y") badge(box, t("mfOy") + " ✓", "ok");
   if (r[5]) addLink(el, r[5], t("info"), t("mfSource"));
   cardRef.set(el, { kind: "mogul", r });
@@ -1845,7 +1904,7 @@ function fillMogul(f) {
   box.replaceChildren();
   box.hidden = true;
   if (!MOGUL.rows) return;
-  if (f.source !== "lib" && isMogulName(f.name)) {
+  if (isMogulName(f.name)) {
     const r = mogulFor(f.name);
     const h = document.createElement("h3");
     h.textContent = t("mogulH");
@@ -2087,7 +2146,7 @@ function render() {
   const v = state.view;
   for (const el of $$("[data-views]")) el.hidden = !el.dataset.views.split(" ").includes(v);
   if (!state.scanned || state.kind !== "free") $("#hideInstLabel").hidden = true;
-  if (v === "lib" && state.kind === "paid") for (const el of $$("#catSeg, #filterRow .chk")) el.hidden = true;
+  if (v === "lib" && (state.kind === "paid" || state.kind === "mogul")) for (const el of $$("#catSeg, #filterRow .chk")) el.hidden = true;
 
   const ready = state.families.filter(f => f.status !== "pending");
   const counts = { mn: 0, ru: 0, none: 0, all: 0 };
@@ -2110,7 +2169,7 @@ function render() {
   } else if (v === "lib") {
     for (const b of $("#kindSeg").children) {
       const bb = b.querySelector("b");
-      if (bb) bb.textContent = LIB.filter(e => e.kind === b.dataset.k && libVisible(e, "kind")).length;
+      if (bb) bb.textContent = b.dataset.k === "mogul" ? (MOGUL.rows ? mogulTabRows().length : "") : LIB.filter(e => e.kind === b.dataset.k && libVisible(e, "kind")).length;
     }
     for (const b of $("#catSeg").children) {
       const c = b.dataset.c;
@@ -2118,7 +2177,7 @@ function render() {
       b.querySelector("b").textContent = n;
       b.hidden = n === 0 && c !== "all" && state.cat !== c;
     }
-    const list = LIB.filter(e => libVisible(e));
+    const list = state.kind === "mogul" ? [] : LIB.filter(e => libVisible(e));
     cards = list.map(e => e.el || (e.el = buildLibCard(e)));
     for (const e of list) {   // "Replaces: Mogul Kudriashov" when a Mogul search found this font
       const a = $(".alias", e.el);
@@ -2127,12 +2186,15 @@ function render() {
       a.textContent = m.length ? t("mogulInstead") + " " + m.map(n => "Mogul " + n).join(", ") : "";
     }
     if (state.kind === "paid") cards.push(buildSubmitCard());
-    const mog = mogulMatches(state.q);
+    const mogRows = state.kind === "mogul" ? mogulTabRows() : null;
+    if (mogRows) cards = mogRows.map(r => r.el || (r.el = buildMogulLibCard(r)));
+    const mog = mogRows ? [] : mogulMatches(state.q);   // on the other tabs, Mogul names still find their cards
     if (mog.length) cards.unshift(...mog.slice(0, 60).map(buildMogulCard));
     const have = state.scanned ? LIB.filter(e => e.kind === "free" && state.installed.has(e.family.toLowerCase())).length : null;
     const note = state.kind === "free" ? t("libFreeStatus", FREE_COUNT, null)
       : state.kind === "mn" ? t("libMnStatus", MN_COUNT)
       : state.kind === "windows" ? t("libWinStatus", LIB.filter(e => e.kind === "windows").length) + (IS_WINDOWS ? "" : t("notWindows"))
+      : state.kind === "mogul" ? t("libMogulNote")
       : t("libPaidStatus");
     $("#licNoteText").replaceChildren(note + " ");
     const more = document.createElement("a");
@@ -2141,6 +2203,7 @@ function render() {
     $("#licNoteText").append(more);
     status = state.kind === "paid" ? "" : t("libCount", list.length) + (have === null || state.kind !== "free" ? "" : " · " + t("libHave", have));
     if (mog.length) status = t("mogulCount", Math.min(mog.length, 60), mog.length) + (status ? " · " + status : "");
+    if (mogRows) status = MOGUL.rows ? t("libMogulCount", mogRows.length, mogRows.filter(r => r.local).length) : "";
   } else if (v === "short" || v === "shared") {
     const names = (v === "short" ? [...state.shortlist] : state.shared || []).filter(n => !state.q || n.toLowerCase().includes(state.q));
     cards = names.map(resolveName);
@@ -2175,6 +2238,7 @@ function refreshSpecs() {
   gfNeed(text);
   for (const f of state.families) if (f.el) fillSpec($(".spec", f.el), f, text);
   for (const e of LIB) if (e.el && e.kind !== "paid") fillSpec($(".spec", e.el), libSpec(e), text);
+  if (MOGUL.rows) for (const r of MOGUL.rows) if (r.el && r.local) fillSpec($(".spec", r.el), { css: cssStr("Mogul " + r[0]) }, text);
   if ($("#detail").open && cur) {
     fillSpec($("#dSpec"), cur, text);
     for (const face of cur.faces) if (face.li && face.result) fillSpec(face.li.sp, { css: face.css, has: face.result.has }, text);
@@ -2322,7 +2386,7 @@ function fillLicense(box, f) {
   }
   const note = document.createElement("p");
   note.className = "lic-note";
-  note.textContent = t(f.libLicense ? "libLicNote" : "licNote");
+  note.textContent = t(f.licNoteKey || (f.libLicense ? "libLicNote" : "licNote"));
   const g = document.createElement("p");
   g.className = "lic-guide";
   const gb = document.createElement("button");
@@ -2449,6 +2513,7 @@ function applyLang() {
   if (state.note) showNote(state.note, state.noteErr);
   for (const f of state.families) f.el = null;
   for (const e of LIB) e.el = null;
+  if (MOGUL.rows) for (const r of MOGUL.rows) r.el = null;
   if ($("#detail").open) $("#detail").close();
   render();
 }
@@ -2585,6 +2650,10 @@ $("#grid").addEventListener("click", e => {
   if (star) { toggleStar(star.dataset.name); return; }
   if (ref && ref.kind === "lib") {
     if (e.target.closest(".name") || e.target.closest(".spec")) openLibDetail(ref.e);
+    return;
+  }
+  if (ref && ref.kind === "moglib") {
+    if (e.target.closest(".name") || e.target.closest(".spec.click")) openMogulDetail(ref.r);
     return;
   }
   if (!ref || ref.kind !== "local") return;
