@@ -25,7 +25,7 @@ pip install fonttools brotli
 python tools/update_gallery.py
 ```
 
-The script checks every Google Font with an extended-Cyrillic subset against the full Mongolian alphabet, looks up each family's license in the google/fonts repository, and rewrites the list in `index.html`. The non-Google free fonts, the Windows list and the paid sources are maintained by hand in `index.html` (`EXTRA_FREE`, `WINDOWS_LIB`, `PAID_LIB`).
+The script checks every Google Font with an extended-Cyrillic subset against the full Mongolian alphabet, looks up each family's license in the google/fonts repository, and rewrites the list in `index.html`. The non-Google free fonts, the Windows list and the paid sources are maintained by hand in `index.html` (`EXTRA_FREE`, `WINDOWS_LIB`, `PAID_LIB`). Card previews for `EXTRA_FREE` come from `previews/`; rebuild them with `python tools/make_extra_previews.py` after adding a font there.
 
 ## Suggesting a font
 

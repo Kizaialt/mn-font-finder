@@ -9,4 +9,11 @@ They are not meant for download.
 - `DejaVu*.woff2`: subsets of DejaVu fonts (Bitstream Vera and public domain changes,
   https://dejavu-fonts.github.io/License.html). Copyright Bitstream, Inc. and the DejaVu authors.
 
-Regenerate with `python tools/make_previews.py`.
+- The other non-Google free fonts in the library (DM Sans MN, Adwaita, CMU, Libra, Iosevka and the rest of
+  `EXTRA_FREE` in `index.html`): subsets of each font's official file, renamed **"MonFont Preview NN"** inside the
+  font. Under the SIL Open Font License a subset is a Modified Version, which may not use a Reserved Font Name, so the
+  subsets carry a neutral name. Each keeps its original copyright and licence records (OFL 1.1, MIT for Hack, the
+  Bitstream Vera licence for Fungal). The full fonts are at the official links on each library card.
+
+Regenerate with `python tools/make_previews.py` (MN editions + DejaVu) and `python tools/make_extra_previews.py`
+(the other free fonts).

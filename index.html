@@ -984,15 +984,49 @@ const GALLERY_DATA = [
 ];
 // ==GALLERY END==
 
-// Other free fonts, checked by hand from their official releases (Oct 2026).
-// [family, category, has ₮, license, homepage, preview file on a CDN or ""]
+// Other free fonts, checked by hand from their official releases (Oct 2026; sweep of free catalogues 2026-10-31).
+// [family, category, has ₮, license, homepage, preview in previews/ (tools/make_*previews.py) or "" for local-only, designers]
 const EXTRA_FREE = [
-  ["DejaVu Sans", "S", 1, "DejaVu", "https://dejavu-fonts.github.io/", "https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSans.ttf"],
-  ["DejaVu Serif", "R", 0, "DejaVu", "https://dejavu-fonts.github.io/", "https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSerif.ttf"],
-  ["DejaVu Sans Mono", "M", 1, "DejaVu", "https://dejavu-fonts.github.io/", "https://cdn.jsdelivr.net/npm/dejavu-fonts-ttf@2.37.3/ttf/DejaVuSansMono.ttf"],
-  ["Liberation Sans", "S", 1, "OFL", "https://github.com/liberationfonts/liberation-fonts", ""],
-  ["Liberation Serif", "R", 1, "OFL", "https://github.com/liberationfonts/liberation-fonts", ""],
-  ["Liberation Mono", "M", 1, "OFL", "https://github.com/liberationfonts/liberation-fonts", ""],
+  ["DejaVu Sans", "S", 1, "DejaVu", "https://dejavu-fonts.github.io/", "DejaVuSans", "Bitstream, DejaVu fonts team"],
+  ["DejaVu Serif", "R", 0, "DejaVu", "https://dejavu-fonts.github.io/", "DejaVuSerif", "Bitstream, DejaVu fonts team"],
+  ["DejaVu Sans Mono", "M", 1, "DejaVu", "https://dejavu-fonts.github.io/", "DejaVuSansMono", "Bitstream, DejaVu fonts team"],
+  ["Liberation Sans", "S", 1, "OFL", "https://github.com/liberationfonts/liberation-fonts", "", "Steve Matteson"],
+  ["Liberation Serif", "R", 1, "OFL", "https://github.com/liberationfonts/liberation-fonts", "", "Steve Matteson"],
+  ["Liberation Mono", "M", 1, "OFL", "https://github.com/liberationfonts/liberation-fonts", "", "Steve Matteson"],
+  ["DM Sans MN", "S", 1, "OFL", "https://github.com/gege-mn/dm-sans-mn", "DMSansMN", "Colophon Foundry (DM Sans); Mongolian letters by gege-mn"],
+  ["Adwaita Sans", "S", 1, "OFL", "https://gitlab.gnome.org/GNOME/adwaita-fonts", "AdwaitaSans", "Rasmus Andersson (Inter), GNOME"],
+  ["Argentum Sans", "S", 1, "OFL", "https://github.com/cssobral2013/Argentum-Sans", "ArgentumSans", "Julieta Ulanovsky (Montserrat), Cristiano Sobral"],
+  ["FiraGO", "S", 0, "OFL", "https://github.com/bBoxType/FiraGO", "FiraGO", "Carrois Apostrophe, bBox Type"],
+  ["Hauora Sans", "S", 1, "OFL", "https://github.com/WCYS-Co/Hauora-Sans", "HauoraSans", "Wayne Shih (WCYS)"],
+  ["Open Runde", "S", 1, "OFL", "https://github.com/lauridskern/open-runde", "OpenRunde", "Laurids Kern"],
+  ["OpenDyslexic", "S", 1, "OFL", "https://opendyslexic.org/", "OpenDyslexic", "Abbie Gonzalez"],
+  ["iA Writer Quattro", "S", 1, "OFL", "https://github.com/iaolo/iA-Fonts", "iAWriterQuattro", "Information Architects, from IBM Plex"],
+  ["DINish", "S", 0, "OFL", "https://github.com/playbeing/dinish", "DINish", "Bert Driehuis"],
+  ["Libra Sans", "S", 1, "OFL", "https://fontlibrary.org/en/font/libra-sans", "LibraSans", "Stefan Peev, Context Ltd"],
+  ["Libra Sans Modern", "S", 1, "OFL", "https://fontlibrary.org/en/font/libra-sans-modern", "LibraSansModern", "Stefan Peev, Context Ltd"],
+  ["CMU Sans Serif", "S", 0, "OFL", "https://fontlibrary.org/en/font/cmu-sans-serif", "CMUSansSerif", "Andrey V. Panov, after Donald Knuth"],
+  ["CMU Bright", "S", 0, "OFL", "https://fontlibrary.org/en/font/cmu-bright", "CMUBright", "Andrey V. Panov, after Donald Knuth"],
+  ["Pfennig", "S", 0, "OFL", "https://fontlibrary.org/en/font/pfennig", "Pfennig", "Daniel Johnson"],
+  ["Xolonium", "S", 0, "OFL", "https://fontlibrary.org/en/font/xolonium", "Xolonium", "Severin Meyer"],
+  ["CMU Serif", "R", 0, "OFL", "https://fontlibrary.org/en/font/cmu-serif", "CMUSerif", "Andrey V. Panov, after Donald Knuth"],
+  ["CMU Concrete", "R", 0, "OFL", "https://fontlibrary.org/en/font/cmu-concrete", "CMUConcrete", "Andrey V. Panov, after Donald Knuth"],
+  ["Libra Serif Modern", "R", 1, "OFL", "https://fontlibrary.org/en/font/libra-serif-modern", "LibraSerifModern", "Stefan Peev, Context Ltd"],
+  ["Veleka", "R", 1, "OFL", "https://fontlibrary.org/en/font/veleka", "Veleka", "Stefan Peev, Context Ltd"],
+  ["Coelacanth", "R", 0, "OFL", "https://fontlibrary.org/en/font/coelacanth", "Coelacanth", "Ben Whitmore"],
+  ["Doulos SIL", "R", 1, "OFL", "https://software.sil.org/doulos/", "DoulosSIL", "SIL International"],
+  ["Iosevka", "M", 1, "OFL", "https://typeof.net/Iosevka/", "Iosevka", "Belleve Invis"],
+  ["Adwaita Mono", "M", 1, "OFL", "https://gitlab.gnome.org/GNOME/adwaita-fonts", "AdwaitaMono", "Belleve Invis (Iosevka), GNOME"],
+  ["iA Writer Mono", "M", 1, "OFL", "https://github.com/iaolo/iA-Fonts", "iAWriterMono", "Information Architects, from IBM Plex"],
+  ["iA Writer Duo", "M", 1, "OFL", "https://github.com/iaolo/iA-Fonts", "iAWriterDuo", "Information Architects, from IBM Plex"],
+  ["Pitagon Sans Mono", "M", 1, "OFL", "https://github.com/ThePitagon/pitagon-sans-mono", "PitagonSansMono", "Travis Tran"],
+  ["Maple Mono", "M", 0, "OFL", "https://github.com/subframe7536/maple-font", "MapleMono", "subframe7536"],
+  ["Fantasque Sans Mono", "M", 0, "OFL", "https://github.com/belluzj/fantasque-sans", "FantasqueSansMono", "Jany Belluz"],
+  ["Hack", "M", 1, "MIT", "https://sourcefoundry.org/hack/", "Hack", "Source Foundry, from DejaVu Sans Mono"],
+  ["IBM 3270", "M", 0, "OFL", "https://github.com/rbanffy/3270font", "IBM3270", "Ricardo Bánffy"],
+  ["CMU Typewriter", "M", 0, "OFL", "https://fontlibrary.org/en/font/cmu-typewriter", "CMUTypewriter", "Andrey V. Panov, after Donald Knuth"],
+  ["Fungal", "D", 1, "Bitstream Vera", "https://gitlab.com/velvetyne/fungal", "Fungal", "Jérémy Landes, Raphaël Bastide (Velvetyne)"],
+  ["Miama Nueva", "H", 0, "OFL", "https://fontlibrary.org/en/font/miama-nueva", "MiamaNueva", "Linus Romer"],
+  ["Pecita", "H", 0, "OFL", "https://pecita.eu/", "Pecita", "Philippe Cochy"],
 ];
 
 // Fonts that ship with Windows 11 and pass the full Mongolian check (every style).
@@ -1215,7 +1249,7 @@ const I18N = {
 <p class="lead">Фонт бол программ шиг лицензтэй бүтээл. Үнэгүй татаж авсан ч зар сурталчилгаанд ашиглаж болно гэсэн үг биш.</p>
 <p class="legend"><span class="lg"><span class="lic-dot ok"></span> Нээлттэй лиценз</span> <span class="lg"><span class="lic-dot ok ring"></span> Windows-той ирдэг</span> <span class="lg"><span class="lic-dot warn"></span> Лиценз хэрэгтэй</span> <span class="lg"><span class="lic-dot bad"></span> Зөвхөн хувийн / Demo</span> <span class="lg"><span class="lic-dot"></span> Тодорхойгүй</span><br><small>Фонтын карт дээрх жижиг цэг ийм утгатай. Хулганаа дээр нь аваачвал тайлбар гарна.</small></p>
 <div class="rules">
-<article class="rule ok"><h3><span>✓</span> Нээлттэй лицензтэй фонт</h3><p><b>OFL, Apache, Ubuntu Font Licence, DejaVu.</b> Зар сурталчилгаа, лого, хэвлэл, видео, вэб, апп, бүгдэд үнэгүй. Фонтын файлыг дангаар нь зарж болохгүй. Бусдад дамжуулбал лицензийн файлыг хамт өгнө. <button type="button" class="link" data-go="lib">Фонтын сангийн</button> «Үнэгүй» хэсгийн бүх фонт ийм.</p></article>
+<article class="rule ok"><h3><span>✓</span> Нээлттэй лицензтэй фонт</h3><p><b>OFL, Apache, MIT, Ubuntu Font Licence, DejaVu / Bitstream Vera.</b> Зар сурталчилгаа, лого, хэвлэл, видео, вэб, апп, бүгдэд үнэгүй. Фонтын файлыг дангаар нь зарж болохгүй. Бусдад дамжуулбал лицензийн файлыг хамт өгнө. <button type="button" class="link" data-go="lib">Фонтын сангийн</button> «Үнэгүй» хэсгийн бүх фонт ийм.</p></article>
 <article class="rule ok"><h3><span>✓</span> Windows-той хамт ирдэг фонт</h3><p>Зар сурталчилгаа, лого, постер, хэвлэмэл бүтээгдэхүүн, видеонд ашиглаж болно. Харин фонтын файлыг бусдад өгөх, вэб сайтад байршуулах, апп-д оруулахыг хориглоно. Office-ийн «Home &amp; Student» зэрэг арилжааны бус хувилбараар хийсэн ажилд энэ эрх хамаарахгүй.</p></article>
 <article class="rule info"><h3><span>✓</span> Төлбөртэй фонт</h3><p>Лицензийн төрлөө шалгаарай: компьютерт (хэвлэл, зураг), вэбэд, апп-д тус тусад нь зардаг. Хэдэн хүн, хэдэн компьютерт ашиглахыг ч лицензэд заадаг.</p></article>
 <article class="rule bad"><h3><span>✗</span> «Personal use», «Demo», «Trial» фонт</h3><p>Зөвхөн хувийн хэрэглээнд. Зар сурталчилгаа, лого, захиалгат ажилд ашиглаж болохгүй. Үнэгүй фонтын сайтуудаас татсан гоё фонтуудын ихэнх нь ийм байдаг.</p></article>
@@ -1351,7 +1385,7 @@ const I18N = {
 <p class="lead">Fonts are licensed like software. A free download doesn't mean you can use it in an ad.</p>
 <p class="legend"><span class="lg"><span class="lic-dot ok"></span> Open license</span> <span class="lg"><span class="lic-dot ok ring"></span> Comes with Windows</span> <span class="lg"><span class="lic-dot warn"></span> License needed</span> <span class="lg"><span class="lic-dot bad"></span> Personal use / demo</span> <span class="lg"><span class="lic-dot"></span> Unknown</span><br><small>This is what the small dot on each font card means. Hover it for the explanation.</small></p>
 <div class="rules">
-<article class="rule ok"><h3><span>✓</span> Open-license fonts</h3><p><b>OFL, Apache, Ubuntu Font Licence, DejaVu.</b> Free for ads, logos, print, video, web and apps. You can't sell the font file on its own, and if you pass the font on, include its license file. Every font in the <button type="button" class="link" data-go="lib">Font library</button>'s Free section is like this.</p></article>
+<article class="rule ok"><h3><span>✓</span> Open-license fonts</h3><p><b>OFL, Apache, MIT, Ubuntu Font Licence, DejaVu / Bitstream Vera.</b> Free for ads, logos, print, video, web and apps. You can't sell the font file on its own, and if you pass the font on, include its license file. Every font in the <button type="button" class="link" data-go="lib">Font library</button>'s Free section is like this.</p></article>
 <article class="rule ok"><h3><span>✓</span> Fonts that come with Windows</h3><p>OK for ads, logos, posters, printed products and video captions. You may not give the font files to others, host them on your website or put them in an app. These rights don't apply to work made with software licensed for non-commercial use, such as Home &amp; Student editions.</p></article>
 <article class="rule info"><h3><span>✓</span> Paid fonts</h3><p>Check which license you bought: desktop (print and images), web and app licenses are sold separately, and licenses also limit how many people or computers can use the font.</p></article>
 <article class="rule bad"><h3><span>✗</span> "Personal use", "Demo", "Trial" fonts</h3><p>Personal use only. Not for ads, logos or client work. Most of the eye-catching fonts on free-font sites are like this.</p></article>
@@ -1381,7 +1415,7 @@ const STAR = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"
 const STYLE_ORDER = ["hairline", "thin", "extralight", "ultralight", "light", "book", "regular", "normal", "roman", "", "medium", "semibold", "demibold", "bold", "extrabold", "ultrabold", "black", "heavy", "ultra"];
 const CAT_KEY = { S: "catS", R: "catR", D: "catD", H: "catH", M: "catM" };
 const GF_LICENSE = { O: "OFL", A: "Apache", U: "Ubuntu Font Licence" };
-const LICENSE_URLS = { OFL: OFL_URL, Apache: "https://www.apache.org/licenses/LICENSE-2.0", "Ubuntu Font Licence": "https://ubuntu.com/legal/font-licence", DejaVu: "https://dejavu-fonts.github.io/License.html" };
+const LICENSE_URLS = { OFL: OFL_URL, Apache: "https://www.apache.org/licenses/LICENSE-2.0", "Ubuntu Font Licence": "https://ubuntu.com/legal/font-licence", DejaVu: "https://dejavu-fonts.github.io/License.html", MIT: "https://github.com/source-foundry/Hack/blob/master/LICENSE.md", "Bitstream Vera": "https://dejavu-fonts.github.io/License.html" };
 const parseAxes = s => s ? s.split(" ").map(x => { const [tag, min, max, def] = x.split(":"); return { tag, min: +min, max: +max, def: +def, hidden: false }; }) : [];
 
 // One list for the whole library: free (Google Fonts + others), Windows, paid.
@@ -1391,7 +1425,7 @@ const LIB = [
     designers, styles: styles ? styles.split(" ") : ["400"],
     url: "https://fonts.google.com/specimen/" + family.replace(/ /g, "+"), preview: "gf",
   })),
-  ...EXTRA_FREE.map(([family, cat, tug, lic, url, ttf]) => ({ kind: "free", family, cat, tug: !!tug, axes: [], lic, url, ttf, pv: ttf ? `previews/${ttf.split("/").pop().replace(".ttf", ".woff2")}` : null, preview: ttf ? "url" : "local" })),
+  ...EXTRA_FREE.map(([family, cat, tug, lic, url, pv, designers]) => ({ kind: "free", family, cat, tug: !!tug, axes: [], lic, url, designers, pv: pv ? `previews/${pv}.woff2` : null, preview: pv ? "url" : "local" })),
   ...WINDOWS_LIB.map(([family, cat, tug, variable, url]) => ({ kind: "windows", family, cat, tug: !!tug, axes: variable ? [{ tag: "wght" }] : [], url, preview: "local" })),
   ...MN_LIB.map(([family, basedOn, cat, tug, axes, file, zip, designers, get]) => {
     const ax = parseAxes(axes);
